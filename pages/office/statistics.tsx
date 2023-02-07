@@ -1,6 +1,6 @@
 import Button from "@/components/button";
+import Card from "@/components/card";
 import CardAlarmtype from "@/components/card-alarmtype";
-import CardStation from "@/components/card-station";
 import CardSummary from "@/components/card-summary";
 import Filter from "@/components/filter";
 import Layout from "@/components/layout";
@@ -19,8 +19,14 @@ export default function Home() {
 				</div>
 			</div>
 			<CardSummary />
-			<CardStation />
-			<CardAlarmtype />
+			<Card title="로그인 통계 그래프">
+				<div className="p-4">
+					<div className="flex h-52 items-center justify-center bg-gray-100">그래프 이미지</div>
+				</div>
+			</Card>
+			<Card title="검측항목별 알람">
+				<CardAlarmtype />
+			</Card>
 		</Layout>
 	);
 }
