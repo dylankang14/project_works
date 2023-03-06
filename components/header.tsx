@@ -24,7 +24,7 @@ export default function Header({ toggleDrawer }: HeaderProps) {
 						<Icon type="menu" />
 					</div>
 				</div>
-				<Breadcrumbs />
+				{/* <Breadcrumbs /> */}
 			</div>
 			<div className="">
 				<button className="h-12 w-12 p-3" tabIndex={0}>
