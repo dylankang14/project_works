@@ -2,6 +2,7 @@ import Button from "@/components/button";
 import Input from "@/components/input";
 import Head from "next/head";
 import Image from "next/image";
+import { ReactElement } from "react";
 import { useForm } from "react-hook-form";
 import logo from "../public/logo.svg";
 
@@ -14,7 +15,7 @@ interface SignUpForm {
 	re_password: string;
 }
 
-export default function SignUp() {
+function SignUp() {
 	const { register, handleSubmit } = useForm<SignUpForm>();
 	const onValid = (signUpForm: SignUpForm) => {
 		console.log(signUpForm);
@@ -49,10 +50,15 @@ export default function SignUp() {
 							type="password"
 							required
 						/>
-						<Button text="회원가입" />
+						<Button>회원가입</Button>
 					</form>
 				</div>
 			</div>
 		</>
 	);
 }
+
+SignUp.getLayout = function getLayout(page: ReactElement) {
+	return <>{page}</>;
+};
+export default SignUp;

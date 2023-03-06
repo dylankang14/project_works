@@ -3,6 +3,8 @@ import Input from "@/components/input";
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/router";
+import { ReactElement } from "react";
 import { useForm } from "react-hook-form";
 import logo from "../public/logo.svg";
 
@@ -11,10 +13,12 @@ interface LoginForm {
 	password: string;
 }
 
-export default function Login() {
+function Login() {
+	const router = useRouter();
 	const { register, handleSubmit } = useForm<LoginForm>();
 	const onValid = (loginForm: LoginForm) => {
 		console.log(loginForm);
+		router.push("/");
 	};
 	return (
 		<>
@@ -33,7 +37,7 @@ export default function Login() {
 					>
 						<Input register={register("email")} label="이메일" name="email" type="email" required />
 						<Input register={register("password")} label="비밀번호" name="password" type="password" required />
-						<Button text="로그인" />
+						<Button>로그인</Button>
 					</form>
 					<div className="mt-2 flex w-full flex-wrap">
 						<Link
@@ -48,3 +52,9 @@ export default function Login() {
 		</>
 	);
 }
+
+Login.getLayout = function getLayout(page: ReactElement) {
+	return <>{page}</>;
+};
+
+export default Login;

@@ -1,7 +1,6 @@
 import Button from "@/components/button";
-import CardTable from "@/components/table";
+import CardTable from "@/components/card-table";
 import Filter from "@/components/filter";
-import Layout from "@/components/layout";
 
 export default function Facility() {
 	const dataType: string[] = ["순서", "번호", "위치", "내용", "상태"];
@@ -14,16 +13,18 @@ export default function Facility() {
 	}));
 
 	return (
-		<Layout>
+		<>
 			<div className="flex items-center justify-between">
 				<div className="flex gap-1">
 					<Filter type="station" />
 				</div>
 				<div>
-					<Button size="sm" color="slate" text="프린트" icon="print" iconPosition="right" />
+					<Button size="sm" color="slate" icon="print" iconPosition="right">
+						프린트
+					</Button>
 				</div>
 			</div>
-			<CardTable data={data} dataType={dataType} pagination={true} />
-		</Layout>
+			<CardTable hasLink={true} pathname="alarm/detail" data={data} dataType={dataType} pagination={true} />
+		</>
 	);
 }

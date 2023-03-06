@@ -1,3 +1,4 @@
+import { ReactNode } from "react";
 import { cls } from "../libs/client/utility";
 import Icon from "./icon";
 
@@ -6,7 +7,7 @@ interface ButtonProps {
 	color?: string;
 	icon?: string | null;
 	iconPosition?: string | null;
-	text: string;
+	children: ReactNode;
 	onClick?: () => void;
 	hasContentInMobile?: string;
 	isWide?: boolean;
@@ -27,7 +28,7 @@ export default function Button({
 	color = "blue",
 	icon,
 	iconPosition,
-	text,
+	children,
 	onClick,
 	hasContentInMobile,
 	isWide = false,
@@ -63,13 +64,13 @@ export default function Button({
 			}}
 		>
 			{icon ? (
-				<span className={hasContentInMobile === "text" ? "hidden sm:block" : ""}>
+				<span>
 					<Icon type={icon} className="h-5 w-5" />
 				</span>
 			) : (
 				""
 			)}
-			<span className={hasContentInMobile === "icon" ? "hidden sm:block" : ""}>{text}</span>
+			<span>{children}</span>
 		</button>
 	);
 }

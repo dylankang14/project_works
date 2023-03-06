@@ -1,13 +1,14 @@
 import Button from "@/components/button";
 import Card from "@/components/card";
-import CardAlarmtype from "@/components/card-alarmtype";
 import CardSummary from "@/components/card-summary";
 import Filter from "@/components/filter";
-import Layout from "@/components/layout";
+import CardAlarmType from "@/components/card-alarm-type";
+import Title from "@/components/content-title";
 
-export default function Home() {
+export default function OfficeStatistics() {
 	return (
-		<Layout>
+		<>
+			<Title title="서울사업소" />
 			<div className="flex items-center justify-between">
 				<div className="flex gap-1">
 					<Filter type="date" />
@@ -15,7 +16,9 @@ export default function Home() {
 					<Filter type="alarmType" />
 				</div>
 				<div>
-					<Button size="sm" color="slate" text="프린트" icon="print" iconPosition="right" />
+					<Button size="sm" color="slate" icon="print" iconPosition="right">
+						프린트
+					</Button>
 				</div>
 			</div>
 			<CardSummary />
@@ -24,9 +27,7 @@ export default function Home() {
 					<div className="flex h-52 items-center justify-center bg-gray-100">그래프 이미지</div>
 				</div>
 			</Card>
-			<Card title="검측항목별 알람">
-				<CardAlarmtype />
-			</Card>
-		</Layout>
+			<CardAlarmType />
+		</>
 	);
 }

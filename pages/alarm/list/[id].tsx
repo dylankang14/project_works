@@ -1,5 +1,5 @@
 import CardAlarm from "@/components/card-alarm";
-import Layout from "@/components/layout";
+
 import Pagination from "@/components/pagination";
 
 export default function AlarmList() {
@@ -9,14 +9,14 @@ export default function AlarmList() {
 		fixed: i % 3 > 1,
 	}));
 
+	console.log(data);
+
 	return (
-		<Layout>
-			<div className="">
-				{data.map((data) => (
-					<CardAlarm key={data.id} data={data} />
-				))}
-				<Pagination active={1} className="py-2" />
-			</div>
-		</Layout>
+		<div className="">
+			{data.map((data) => (
+				<CardAlarm key={data.id} data={data} />
+			))}
+			<Pagination active={1} className="py-2" />
+		</div>
 	);
 }

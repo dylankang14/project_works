@@ -1,6 +1,6 @@
 import AlarmCriteria from "@/components/alarm-criteria";
 import Button from "@/components/button";
-import Layout from "@/components/layout";
+
 import { cls } from "@/libs/client/utility";
 import Image from "next/image";
 import { useRouter } from "next/router";
@@ -8,7 +8,7 @@ import { useRouter } from "next/router";
 export default function DetailReport() {
 	const router = useRouter();
 	return (
-		<Layout>
+		<>
 			<div
 				id="printContainer"
 				className="mx-auto w-auto max-w-[794px] border border-gray-300 bg-white p-[2.5vw] shadow-md print:p-0 lg:mt-6 lg:py-6 lg:px-0"
@@ -206,14 +206,18 @@ export default function DetailReport() {
 			</div>
 			<div className="mt-4 flex justify-center gap-2 print:hidden">
 				<Button
-					text="뒤로가기"
 					onClick={() => {
 						router.back();
 					}}
-				/>
-				<Button id="savePdf" text="PDF" icon="download" />
-				<Button text="프린트" onClick={() => window.print()} />
+				>
+					뒤로가기
+				</Button>
+				<Button id="savePdf" icon="download">
+					PDF
+				</Button>
+				<Button onClick={() => window.print()}>프린트</Button>
 			</div>
-		</Layout>
+			<div className="fixed">123</div>
+		</>
 	);
 }
