@@ -35,8 +35,15 @@ function Login() {
 						onSubmit={handleSubmit(onValid)}
 						className="flex w-full flex-col gap-4 rounded-md border border-slate-300 bg-gray-50 px-5 pb-3 pt-5"
 					>
-						<Input register={register("email")} label="이메일" name="email" type="email" required />
-						<Input register={register("password")} label="비밀번호" name="password" type="password" required />
+						<Input className="w-full" register={register("email")} label="이메일" name="email" type="email" required />
+						<Input
+							className="w-full"
+							register={register("password")}
+							label="비밀번호"
+							name="password"
+							type="password"
+							required
+						/>
 						<Button>로그인</Button>
 					</form>
 					<div className="mt-2 flex w-full flex-wrap">

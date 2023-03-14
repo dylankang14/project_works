@@ -1,4 +1,4 @@
-import useFilter from "@/libs/client/useFilter";
+import { useFilterAPI, useFilterData } from "@/contexts/filterContext";
 import { useState } from "react";
 import Icon from "./icon";
 import ModalAlarmType from "./modal-alarm-type";
@@ -16,8 +16,9 @@ interface FilterElement {
 
 export default function Filter({ size, type, value, placeholder }: FilterProps) {
 	const [isModalOpen, setIsModalOpen] = useState(false);
-	const [filterProps] = useFilter();
-	console.log(filterProps);
+	const { date, stationRange, alarmType, alarmPriority, routeDirection } = useFilterData();
+	const { onDateChange, onStationRangeChange, onAlarmTypeChange, onAlarmPriorityChange, onRouteDirectionChange } =
+		useFilterAPI();
 	const filters: FilterElement = {
 		date: (
 			<label className="relative cursor-pointer" htmlFor="date">
@@ -49,6 +50,8 @@ export default function Filter({ size, type, value, placeholder }: FilterProps) 
 						type="text"
 						placeholder="station"
 						id="station"
+						value={`${stationRange?.from}역 - ${stationRange?.to}역`}
+						readOnly
 					/>
 				</label>
 				<ModalStation isModalOpen={isModalOpen} closeModal={() => setIsModalOpen(false)} className="w-[801px]" />
@@ -71,6 +74,7 @@ export default function Filter({ size, type, value, placeholder }: FilterProps) 
 						type="text"
 						placeholder="alarmType"
 						id="alarmType"
+						readOnly
 					/>
 				</label>
 				<ModalAlarmType isModalOpen={isModalOpen} closeModal={() => setIsModalOpen(false)} />

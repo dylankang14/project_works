@@ -38,12 +38,27 @@ function SignUp() {
 						onSubmit={handleSubmit(onValid)}
 						className="flex w-full flex-col gap-4 rounded-md border border-slate-300 bg-gray-50 px-5 pb-3 pt-5"
 					>
-						<Input register={register("email")} label="이메일" name="email" type="email" required />
-						<Input register={register("name")} label="이름" name="name" type="text" required />
-						<Input register={register("office")} label="소속" name="office" type="text" required />
-						<Input register={register("phone")} label="전화번호" name="phone" type="number" required />
-						<Input register={register("password")} label="비밀번호" name="password" type="password" required />
+						<Input className="w-full" register={register("email")} label="이메일" name="email" type="email" required />
+						<Input className="w-full" register={register("name")} label="이름" name="name" type="text" required />
+						<Input className="w-full" register={register("office")} label="소속" name="office" type="text" required />
 						<Input
+							className="w-full"
+							register={register("phone")}
+							label="전화번호"
+							name="phone"
+							type="number"
+							required
+						/>
+						<Input
+							className="w-full"
+							register={register("password")}
+							label="비밀번호"
+							name="password"
+							type="password"
+							required
+						/>
+						<Input
+							className="w-full"
 							register={register("re_password")}
 							label="비밀번호 확인"
 							name="re_password"

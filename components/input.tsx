@@ -13,6 +13,7 @@ interface InputProps {
 	value?: string;
 	className?: string;
 	checked?: boolean;
+	[key: string]: any;
 }
 
 export default function Input({
@@ -26,6 +27,7 @@ export default function Input({
 	value,
 	className,
 	checked,
+	...rest
 }: InputProps) {
 	return (
 		<label htmlFor={name} className={cls("relative", type === "checkbox" || type === "radio" ? "cursor-pointer" : "")}>
@@ -51,6 +53,7 @@ export default function Input({
 						className ? className : ""
 					)}
 					checked={checked}
+					{...rest}
 				/>
 				{label && (type === "checkbox" || type === "radio") && <div className="pl-2">{label}</div>}
 			</div>

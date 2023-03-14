@@ -1,3 +1,4 @@
+import { useFilterAPI, useFilterData } from "@/contexts/filterContext";
 import useFilter from "@/libs/client/useFilter";
 import { cls } from "@/libs/client/utility";
 import { useEffect, useRef, useState } from "react";
@@ -10,28 +11,26 @@ interface StationRangeType {
 }
 
 export default function StationRoute() {
-	const [stationRange, setStationRange] = useState<StationRangeType>({ from: null, to: null });
 	const containerRef = useRef<HTMLUListElement>(null);
 	const [numColumns, setNumColumns] = useState<number>(5);
 	const [basisColumns, setBasisColumns] = useState<string>("basis-1/5");
-	const [filters, updateFilters] = useFilter();
+	const { onStationRangeChange } = useFilterAPI();
+	const { stationRange } = useFilterData();
+	const [firstIndex, setFirstIndex] = useState<number | null>();
 
 	const selectStation = (index: number) => {
-		if (!stationRange.from || stationRange.to) {
-			setStationRange((prev) => ({ ...prev, from: index, to: null }));
-		} else if (stationRange.from !== index) {
-			if (stationRange.from > index) {
-				let temp = stationRange.from;
-				setStationRange((prev) => ({ ...prev, from: index, to: temp }));
+		if (!firstIndex) {
+			setFirstIndex(index);
+			onStationRangeChange({ from: index, to: null });
+		} else {
+			if (firstIndex > index) {
+				onStationRangeChange({ from: index, to: firstIndex });
 			} else {
-				setStationRange((prev) => ({ ...prev, to: index }));
+				onStationRangeChange({ from: firstIndex, to: index });
 			}
+			setFirstIndex(null);
 		}
 	};
-
-	useEffect(() => {
-		updateFilters({ stationRange: stationRange });
-	}, [stationRange, updateFilters]);
 
 	const data = Array.from(Array(49), (_, index) => index + 1);
 	useEffect(() => {
@@ -99,9 +98,9 @@ export default function StationRoute() {
 											<div
 												className={cls(
 													"min-w-[64px] flex-1 cursor-pointer select-none truncate rounded px-1.5 py-1.5 text-white hover:bg-blue-600",
-													innerItem === stationRange.from ||
-														innerItem === stationRange.to ||
-														(innerItem > stationRange.from! && innerItem < stationRange.to!)
+													innerItem === stationRange?.from ||
+														innerItem === stationRange?.to ||
+														(innerItem > stationRange?.from! && innerItem < stationRange?.to!)
 														? "bg-blue-500"
 														: "bg-slate-400"
 												)}
@@ -116,7 +115,7 @@ export default function StationRoute() {
 										<div className="relative flex min-w-[80px] flex-1 flex-col items-center justify-center group-last:group-last/row:invisible">
 											<BadgeAlarm
 												className={cls(
-													!stationRange.from || (innerItem >= stationRange.from! && innerItem < stationRange.to!)
+													!stationRange?.from || (innerItem >= stationRange?.from! && innerItem < stationRange?.to!)
 														? ""
 														: "opacity-60"
 												)}
@@ -124,7 +123,7 @@ export default function StationRoute() {
 											<div className="relative my-[5px] h-2 w-full border-t border-b border-slate-600"></div>
 											<BadgeAlarm
 												className={cls(
-													!stationRange.from || (innerItem >= stationRange.from! && innerItem < stationRange.to!)
+													!stationRange?.from || (innerItem >= stationRange?.from! && innerItem < stationRange?.to!)
 														? ""
 														: "opacity-60"
 												)}
