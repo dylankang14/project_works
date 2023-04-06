@@ -1,4 +1,5 @@
 import Layout from "@/components/layout";
+import { FilterProvider } from "@/contexts/filterContext";
 import "@/styles/globals.css";
 import { NextPage } from "next";
 import type { AppProps } from "next/app";
@@ -18,14 +19,16 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
 	const getLayout =
 		Component.getLayout ??
 		((page) => (
-			<SWRConfig value={{ fetcher: (url: string) => fetch(url).then((response) => response.json()) }}>
-				<Layout>
-					<Head>
-						<meta name="viewport" content="width=device-width, initial-scale=1" />
-					</Head>
-					{page}
-				</Layout>
-			</SWRConfig>
+			<FilterProvider>
+				<SWRConfig value={{ fetcher: (url: string) => fetch(url).then((response) => response.json()) }}>
+					<Layout>
+						<Head>
+							<meta name="viewport" content="width=device-width, initial-scale=1" />
+						</Head>
+						{page}
+					</Layout>
+				</SWRConfig>
+			</FilterProvider>
 		));
 	// return (
 	// 	<Layout>

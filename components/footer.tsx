@@ -3,7 +3,7 @@ import logo from "../public/logo.svg";
 
 export default function Footer() {
 	return (
-		<footer className="flex w-full items-center justify-around border-t bg-white py-4 lg:z-0">
+		<footer className="flex w-full items-center justify-around border-t bg-white py-4 print:hidden lg:z-0">
 			<div className="logo">
 				<Image
 					src={logo}

@@ -3,6 +3,7 @@ import Link from "next/link";
 import React from "react";
 import logo from "../public/logo.svg";
 import Breadcrumbs from "./breadcrumbs";
+import DropdownUser from "./dropdown-user";
 import Icon from "./icon";
 
 interface HeaderProps {
@@ -11,7 +12,7 @@ interface HeaderProps {
 
 export default function Header({ toggleDrawer }: HeaderProps) {
 	return (
-		<header className="sticky top-0 z-10 flex w-full items-center justify-between border-b bg-white px-2 py-1 lg:z-20">
+		<header className="sticky top-0 z-10 flex w-full items-center justify-between border-b bg-white px-2 py-1 print:hidden lg:z-20">
 			<div className="flex items-center">
 				<div className="flex w-60 items-center px-2">
 					<Link href="/" className="logo relative flex-1 cursor-pointer select-none px-2">
@@ -28,7 +29,7 @@ export default function Header({ toggleDrawer }: HeaderProps) {
 			</div>
 			<div className="">
 				<button className="h-12 w-12 p-3" tabIndex={0}>
-					<Icon type="userCircle" />
+					<DropdownUser />
 				</button>
 			</div>
 		</header>

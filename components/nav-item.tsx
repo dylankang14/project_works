@@ -8,7 +8,7 @@ import { MenuTypes } from "./nav";
 export default function NavItem({ menuItems }: { menuItems: MenuTypes[] }) {
 	const [openIndex, setOpenIndex] = useState(-1);
 	const router = useRouter();
-	const subElement = useRef<HTMLUListElement>(null);
+	const subElement = useRef<any>([]);
 	const isActive = (href: string): boolean => {
 		return href === "/" ? router.pathname === href : router.pathname.startsWith(href.substring(1), 1);
 	};
@@ -48,9 +48,9 @@ export default function NavItem({ menuItems }: { menuItems: MenuTypes[] }) {
 							</div>
 							{menuItem.submenu ? (
 								<ul
-									ref={subElement}
+									ref={(el) => (subElement.current[index] = el)}
 									className={cls("overflow-hidden transition-[height]")}
-									style={openIndex === index ? { height: subElement.current?.scrollHeight } : { height: "0px" }}
+									style={openIndex === index ? { height: subElement.current[index].scrollHeight } : { height: "0px" }}
 								>
 									{menuItem.submenu.map((subItem, index) => (
 										<li key={index} className="">

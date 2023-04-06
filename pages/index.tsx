@@ -9,19 +9,19 @@ import { FilterProvider, useFilterData } from "@/contexts/filterContext";
 
 export default function Home() {
 	// const { data, error } = useSWR("LJW/LJW");
-	const { date } = useFilterData();
-	console.log(date);
 
 	return (
-		<FilterProvider>
+		<>
 			<div className="flex flex-wrap items-center justify-between">
-				<div className="flex flex-1 gap-1">
-					<Filter type="date" />
+				<div className="flex gap-1">
+					<Filter type="dateRange" />
 					<Filter type="station" />
 					<Filter type="alarmType" />
+					<Filter type="alarmPriority" />
+					<Filter type="routeDirection" />
 				</div>
 				<div>
-					<Button size="sm" color="slate" icon="print" iconPosition="right">
+					<Button size="sm" color="slate" icon="print" iconPosition="right" onClick={() => window.print()}>
 						프린트
 					</Button>
 				</div>
@@ -31,6 +31,6 @@ export default function Home() {
 				<StationRoute />
 			</Card>
 			<CardAlarmType />
-		</FilterProvider>
+		</>
 	);
 }

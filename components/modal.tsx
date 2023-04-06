@@ -8,6 +8,7 @@ export interface ModalProps {
 	closeModal: () => void;
 	className?: string;
 	containerClass?: string;
+	stopPropagation?: boolean;
 }
 
 export default function Modal({
@@ -16,6 +17,7 @@ export default function Modal({
 	closeModal,
 	className,
 	containerClass,
+	stopPropagation = false,
 }: PropsWithChildren<ModalProps>) {
 	// const { height } = useWindowDimensions();
 	// const modalRef = useCallback((node: HTMLDivElement) => {
@@ -51,7 +53,13 @@ export default function Modal({
 					containerClass ? containerClass : "items-center"
 				)}
 			>
-				<div className="fixed inset-0 bg-black/50" onClick={closeModal}></div>
+				<div
+					className="fixed inset-0 bg-black/50"
+					onClick={(e) => {
+						if (stopPropagation) e.stopPropagation();
+						closeModal();
+					}}
+				></div>
 				<div className={cls("relative rounded bg-white", className ? className : "")}>{children}</div>
 			</div>
 		</Portal>

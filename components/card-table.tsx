@@ -1,7 +1,7 @@
-import { cls } from "@/libs/client/utility";
+import { cls, paginate } from "@/libs/client/utility";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { Fragment } from "react";
+import { Fragment, useState } from "react";
 import Card from "./card";
 import Pagination from "./pagination";
 
@@ -16,11 +16,14 @@ interface DataProps {
 	dataType: string[];
 	hasLink?: boolean;
 	pathname?: string;
-	pagination?: boolean;
+	pageSize?: number;
 }
 
-export default function CardTable({ title, data, dataType, hasLink = false, pathname, pagination = false }: DataProps) {
+export default function CardTable({ title, data, dataType, hasLink = false, pathname, pageSize = 15 }: DataProps) {
 	const router = useRouter();
+	const [currentPage, setCurrentPage] = useState(1);
+	const onPageChange = (page: number) => setCurrentPage(page);
+	const paginatedData = paginate(data, currentPage, pageSize);
 	const onLink = (link: any) => {
 		pathname ? router.push(`/${pathname}/${link}`) : router.push(`${router.pathname}/${link}`);
 	};
@@ -38,7 +41,7 @@ export default function CardTable({ title, data, dataType, hasLink = false, path
 						</tr>
 					</thead>
 					<tbody>
-						{data.map((data, index) => (
+						{paginatedData.map((data, index) => (
 							<tr
 								key={index}
 								onClick={() => {
@@ -59,7 +62,13 @@ export default function CardTable({ title, data, dataType, hasLink = false, path
 					</tbody>
 				</table>
 			</div>
-			{pagination && <Pagination active={1} className="pt-1 pb-4" />}
+			<Pagination
+				totalCount={data.length}
+				pageSize={pageSize}
+				currentPage={currentPage}
+				onPageChange={onPageChange}
+				className="pt-1 pb-4"
+			/>
 		</Card>
 	);
 }

@@ -3,11 +3,7 @@ import Icon from "./icon";
 import Modal, { ModalProps } from "./modal";
 import StationRoute from "./station-route";
 
-interface ModalPropsWithClass extends ModalProps {
-	className?: string;
-}
-
-export default function ModalStation({ isModalOpen, closeModal, className }: ModalPropsWithClass) {
+export default function ModalStation({ isModalOpen, closeModal, className }: ModalProps) {
 	return (
 		<Modal isModalOpen={isModalOpen} closeModal={closeModal} containerClass="items-start">
 			<div className={cls("", className ? className : "")}>

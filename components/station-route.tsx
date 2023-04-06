@@ -1,9 +1,9 @@
 import { useFilterAPI, useFilterData } from "@/contexts/filterContext";
-import useFilter from "@/libs/client/useFilter";
 import { cls } from "@/libs/client/utility";
 import { useEffect, useRef, useState } from "react";
 import BadgeAlarm from "./badge-alarm";
 import Icon from "./icon";
+import useSWR from "swr";
 
 interface StationRangeType {
 	from: number | null;
@@ -17,6 +17,8 @@ export default function StationRoute() {
 	const { onStationRangeChange } = useFilterAPI();
 	const { stationRange } = useFilterData();
 	const [firstIndex, setFirstIndex] = useState<number | null>();
+	const { data: fetchData, error } = useSWR("MRKang");
+	console.log(fetchData);
 
 	const selectStation = (index: number) => {
 		if (!firstIndex) {

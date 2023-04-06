@@ -11,7 +11,7 @@ export default function Aside({ isDrawerOpen, toggleDrawer }: AsideProps) {
 	return (
 		<aside
 			className={cls(
-				"relative w-60 min-w-[240px] bg-slate-800 text-sm text-white/70 transition-transform",
+				"relative w-60 min-w-[240px] bg-slate-800 text-sm text-white/70 transition-transform print:hidden",
 				isDrawerOpen ? "-translate-x-0" : "-translate-x-full"
 			)}
 		>

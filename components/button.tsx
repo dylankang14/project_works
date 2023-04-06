@@ -8,9 +8,10 @@ interface ButtonProps {
 	icon?: string | null;
 	iconPosition?: string | null;
 	children: ReactNode;
-	onClick?: () => void;
+	onClick?: (e?: React.MouseEvent<HTMLButtonElement, MouseEvent> | null) => void;
 	hasContentInMobile?: string;
 	isWide?: boolean;
+	preventDefault?: boolean;
 	[key: string]: any;
 }
 interface Sizes {
@@ -32,6 +33,7 @@ export default function Button({
 	onClick,
 	hasContentInMobile,
 	isWide = false,
+	preventDefault = true,
 	className,
 	...rest
 }: ButtonProps) {
@@ -59,6 +61,9 @@ export default function Button({
 				className
 			)}
 			onClick={(e) => {
+				{
+					preventDefault && e.preventDefault();
+				}
 				e.stopPropagation();
 				onClick && onClick();
 			}}

@@ -14,9 +14,12 @@ export default function Facility() {
 
 	return (
 		<>
-			<div className="flex items-center justify-between">
+			<div className="flex flex-wrap items-center justify-between">
 				<div className="flex gap-1">
+					<Filter type="dateRange" />
 					<Filter type="station" />
+					<Filter type="alarmPriority" />
+					<Filter type="routeDirection" />
 				</div>
 				<div>
 					<Button size="sm" color="slate" icon="print" iconPosition="right">

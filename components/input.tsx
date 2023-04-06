@@ -10,7 +10,7 @@ interface InputProps {
 	required?: boolean;
 	disabled?: boolean;
 	icon?: string;
-	value?: string;
+	value?: string | number;
 	className?: string;
 	checked?: boolean;
 	[key: string]: any;
