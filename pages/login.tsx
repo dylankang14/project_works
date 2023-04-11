@@ -7,6 +7,7 @@ import { useRouter } from "next/router";
 import { ReactElement } from "react";
 import { useForm } from "react-hook-form";
 import logo from "../public/logo.svg";
+import useMutation from "@/libs/client/useMutation";
 
 interface LoginForm {
 	email: string;
@@ -16,9 +17,12 @@ interface LoginForm {
 function Login() {
 	const router = useRouter();
 	const { register, handleSubmit } = useForm<LoginForm>();
+	const [login, { loading, data, error }] = useMutation("/api/user/login");
 	const onValid = (loginForm: LoginForm) => {
+		if (loading) return;
+		login(loginForm);
 		console.log(loginForm);
-		router.push("/");
+		// router.push("/");
 	};
 	return (
 		<>
@@ -44,14 +48,14 @@ function Login() {
 							type="password"
 							required
 						/>
-						<Button>로그인</Button>
+						<Button type="submit">로그인</Button>
 					</form>
 					<div className="mt-2 flex w-full flex-wrap">
 						<Link
 							href="/signup"
 							className="flex-1 cursor-pointer rounded-md border border-slate-300 bg-gray-50 p-2 text-center text-blue-700 hover:bg-blue-600 hover:text-white"
 						>
-							<span className="text-sm font-bold">회원가입</span>
+							<span className="text-sm font-bold">회원가입123</span>
 						</Link>
 					</div>
 				</div>
