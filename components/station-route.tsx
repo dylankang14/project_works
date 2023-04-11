@@ -3,7 +3,6 @@ import { cls } from "@/libs/client/utility";
 import { useEffect, useRef, useState } from "react";
 import BadgeAlarm from "./badge-alarm";
 import Icon from "./icon";
-import useSWR from "swr";
 
 interface StationRangeType {
 	from: number | null;
@@ -17,8 +16,6 @@ export default function StationRoute() {
 	const { onStationRangeChange } = useFilterAPI();
 	const { stationRange } = useFilterData();
 	const [firstIndex, setFirstIndex] = useState<number | null>();
-	const { data: fetchData, error } = useSWR("MRKang");
-	console.log(fetchData);
 
 	const selectStation = (index: number) => {
 		if (!firstIndex) {
@@ -34,7 +31,53 @@ export default function StationRoute() {
 		}
 	};
 
-	const data = Array.from(Array(49), (_, index) => index + 1);
+	// const data = Array.from(Array(49), (_, index) => index + 1);
+	const data = [
+		{ id: 1, station: "서울" },
+		{ id: 2, station: "용산" },
+		{ id: 3, station: "영등포" },
+		{ id: 4, station: "안양" },
+		{ id: 5, station: "수원" },
+		{ id: 6, station: "오산" },
+		{ id: 7, station: "서정리" },
+		{ id: 8, station: "평택" },
+		{ id: 9, station: "성환" },
+		{ id: 10, station: "천안" },
+		{ id: 11, station: "소정리" },
+		{ id: 12, station: "전의" },
+		{ id: 13, station: "조치원" },
+		{ id: 14, station: "부강" },
+		{ id: 15, station: "신탄진" },
+		{ id: 16, station: "대전" },
+		{ id: 17, station: "옥천" },
+		{ id: 18, station: "이원" },
+		{ id: 19, station: "지탄" },
+		{ id: 20, station: "심천" },
+		{ id: 21, station: "각계" },
+		{ id: 22, station: "영동" },
+		{ id: 23, station: "황간" },
+		{ id: 24, station: "추풍령" },
+		{ id: 25, station: "김천" },
+		{ id: 26, station: "구미" },
+		{ id: 27, station: "사곡" },
+		{ id: 28, station: "약목" },
+		{ id: 29, station: "왜관" },
+		{ id: 30, station: "신동" },
+		{ id: 31, station: "대구" },
+		{ id: 32, station: "동대구" },
+		{ id: 33, station: "경산" },
+		{ id: 34, station: "남성현" },
+		{ id: 35, station: "청도" },
+		{ id: 36, station: "상동" },
+		{ id: 37, station: "밀양" },
+		{ id: 38, station: "삼랑진" },
+		{ id: 39, station: "원동" },
+		{ id: 40, station: "물금" },
+		{ id: 41, station: "화명" },
+		{ id: 42, station: "구포" },
+		{ id: 43, station: "사상" },
+		{ id: 44, station: "부산" },
+	];
 	useEffect(() => {
 		const observer = new ResizeObserver((entries) => {
 			for (const entry of entries) {
@@ -86,10 +129,10 @@ export default function StationRoute() {
 							<ul className={"flex grow flex-wrap py-1.5 group-even:flex-row-reverse"}>
 								{data.slice(index, index + numColumns).map((innerItem, innerIndex) => (
 									<li
-										key={innerItem}
+										key={innerItem.id}
 										className={cls("group/row flex text-center group-even:flex-row-reverse", basisColumns)}
 										onClick={() => {
-											selectStation(innerItem);
+											selectStation(innerItem.id);
 										}}
 									>
 										<div className="relative flex min-w-0 flex-1 items-center">
@@ -100,14 +143,14 @@ export default function StationRoute() {
 											<div
 												className={cls(
 													"min-w-[64px] flex-1 cursor-pointer select-none truncate rounded px-1.5 py-1.5 text-white hover:bg-blue-600",
-													innerItem === stationRange?.from ||
-														innerItem === stationRange?.to ||
-														(innerItem > stationRange?.from! && innerItem < stationRange?.to!)
+													innerItem.id === stationRange?.from ||
+														innerItem.id === stationRange?.to ||
+														(innerItem.id > stationRange?.from! && innerItem.id < stationRange?.to!)
 														? "bg-blue-500"
 														: "bg-slate-400"
 												)}
 											>
-												{innerItem}역
+												{innerItem.station}역
 											</div>
 											<Icon
 												type="arrowLeft"
@@ -117,7 +160,8 @@ export default function StationRoute() {
 										<div className="relative flex min-w-[80px] flex-1 flex-col items-center justify-center group-last:group-last/row:invisible">
 											<BadgeAlarm
 												className={cls(
-													!stationRange?.from || (innerItem >= stationRange?.from! && innerItem < stationRange?.to!)
+													!stationRange?.from ||
+														(innerItem.id >= stationRange?.from! && innerItem.id < stationRange?.to!)
 														? ""
 														: "opacity-60"
 												)}
@@ -125,7 +169,8 @@ export default function StationRoute() {
 											<div className="relative my-[5px] h-2 w-full border-t border-b border-slate-600"></div>
 											<BadgeAlarm
 												className={cls(
-													!stationRange?.from || (innerItem >= stationRange?.from! && innerItem < stationRange?.to!)
+													!stationRange?.from ||
+														(innerItem.id >= stationRange?.from! && innerItem.id < stationRange?.to!)
 														? ""
 														: "opacity-60"
 												)}

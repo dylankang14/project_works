@@ -4,15 +4,11 @@ import Filter from "@/components/filter";
 import CardAlarmType from "@/components/card-alarm-type";
 import Card from "@/components/card";
 import StationRoute from "@/components/station-route";
-import useSWR from "swr";
-import { FilterProvider, useFilterData } from "@/contexts/filterContext";
 
 export default function Home() {
-	// const { data, error } = useSWR("LJW/LJW");
-
 	return (
 		<>
-			<div className="flex flex-wrap items-center justify-between">
+			<div className="flex flex-wrap items-center justify-between print:hidden">
 				<div className="flex gap-1">
 					<Filter type="dateRange" />
 					<Filter type="station" />

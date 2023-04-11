@@ -13,7 +13,7 @@ export default function Facility() {
 
 	return (
 		<>
-			<div className="flex flex-wrap items-center justify-between">
+			<div className="flex flex-wrap items-center justify-between print:hidden">
 				<div className="flex gap-1">
 					<Filter type="dateRange" />
 					<Filter type="station" />
@@ -22,7 +22,7 @@ export default function Facility() {
 					<Filter type="routeDirection" />
 				</div>
 				<div>
-					<Button size="sm" color="slate" icon="print" iconPosition="right">
+					<Button size="sm" color="slate" icon="print" iconPosition="right" onClick={() => window.print()}>
 						프린트
 					</Button>
 				</div>

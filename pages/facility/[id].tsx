@@ -5,9 +5,9 @@ import Filter from "@/components/filter";
 export default function Facility() {
 	const dataType: string[] = ["순서", "번호", "위치", "내용", "상태"];
 	const data = Array.from(Array(15).keys()).map((i) => ({
-		id: i,
-		no: i,
-		location: `전철주-1${i}`,
+		id: i + 1,
+		no: i + 1,
+		location: `전철주-${i + 1}`,
 		alarmDetail: "-",
 		alarmType: "양호",
 	}));
@@ -27,7 +27,7 @@ export default function Facility() {
 					</Button>
 				</div>
 			</div>
-			<CardTable hasLink={true} pathname="alarm/detail" data={data} dataType={dataType} pagination={true} />
+			<CardTable hasLink={true} pathname="alarm/detail" data={data} dataType={dataType} />
 		</>
 	);
 }

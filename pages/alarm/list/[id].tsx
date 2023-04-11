@@ -1,7 +1,6 @@
 import Button from "@/components/button";
 import CardAlarm, { AlarmProps } from "@/components/card-alarm";
 import Filter from "@/components/filter";
-
 import Pagination from "@/components/pagination";
 import { paginate } from "@/libs/client/utility";
 import { useState } from "react";

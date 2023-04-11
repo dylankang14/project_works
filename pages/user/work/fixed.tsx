@@ -6,13 +6,19 @@ import Title from "@/components/content-title";
 import Filter from "@/components/filter";
 
 import Pagination from "@/components/pagination";
+import { paginate } from "@/libs/client/utility";
+import { useState } from "react";
 
 export default function Fixed() {
-	const data = Array.from(Array(5).keys()).map((i) => ({
+	const [currentPage, setCurrentPage] = useState(1);
+	const onPageChange = (page: number) => setCurrentPage(page);
+	const pageSize = 10;
+	const data = Array.from(Array(55).keys()).map((i) => ({
 		id: i,
 		priority: i % 2,
 		fixed: i % 3 > 1,
 	}));
+	const paginatedData = paginate(data, currentPage, pageSize);
 	return (
 		<>
 			<Title title="홍길동 님의 조치완료 리스트" />
@@ -35,10 +41,16 @@ export default function Fixed() {
 				</div>
 			</Card>
 			<div className="">
-				{data.map((data) => (
+				{paginatedData.map((data) => (
 					<CardAlarm key={data.id} data={data} />
 				))}
-				<Pagination active={1} className="py-2" />
+				<Pagination
+					totalCount={data.length}
+					pageSize={pageSize}
+					currentPage={currentPage}
+					onPageChange={onPageChange}
+					className="py-2"
+				/>
 			</div>
 		</>
 	);

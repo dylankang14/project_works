@@ -47,7 +47,8 @@ export default function Filter({ size, type, value, placeholder }: FilterProps) 
 						<div className="text-slate-700">
 							<Icon type="station" className="mr-1.5 h-5 w-5 text-slate-600" />
 						</div>
-						<span id="station">{`${stationRange?.from}역 - ${stationRange?.to}역`}</span>
+						{/* <span id="station">{`${stationRange?.from}역 - ${stationRange?.to}역`}</span> */}
+						<span id="station">{`서울역 - 부산역`}</span>
 					</div>
 					<ModalStation isModalOpen={isModalOpen} closeModal={() => setIsModalOpen(false)} className="w-[801px]" />
 				</>

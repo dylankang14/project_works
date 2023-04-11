@@ -23,11 +23,11 @@ export default function DetailReport() {
 					<div className="flex h-full w-full flex-col flex-wrap gap-3">
 						<div className="relative text-center">
 							<span className="text-2xl font-semibold">알람보고서</span>
-							<div className="absolute right-0 bottom-0">2022년 09월 28일</div>
+							<div className="absolute right-0 bottom-0">2024년 04월 06일</div>
 						</div>
 						<div className="grid grid-cols-[1fr_max-content] gap-2">
 							<div className="flex flex-col items-center justify-center border border-black px-2 py-3.5">
-								<div className="text-lg font-bold">전차선 높이, 편위 보고서</div>
+								<div className="text-lg font-bold">선로변형 레일마모 보고서</div>
 								<div className="font-bold">검지구건 : 서울역 - 부산 (하선)</div>
 							</div>
 							<table className="h-full border-separate border-spacing-0 border-t border-l border-black text-center">
@@ -55,40 +55,45 @@ export default function DetailReport() {
 							</table>
 						</div>
 						<div>
-							<div className="mb-1 font-bold">■ 전차선 높이, 편위 알람정보</div>
+							<div className="mb-1 font-bold">■ 선로변형 레일마모 알람정보</div>
 							<div className="grid grid-cols-[max-content_1fr] gap-2">
 								<div className="border border-black">
 									<div className="grid grid-cols-[max-content_1fr] gap-x-2 px-2 py-1">
 										<div>검측일</div>
-										<div className="font-bold">2022년 12월 24일</div>
+										<div className="font-bold">2023년 04월 06일</div>
 										<div>검측시간</div>
-										<div className="font-bold">09:23:14</div>
+										<div className="font-bold">09:50:12</div>
 										<div>전철주 번호</div>
-										<div className="font-bold">20-22A</div>
+										<div className="font-bold">20-13</div>
 										<div>알람위치</div>
-										<div className="font-bold">20.114km</div>
+										<div className="font-bold">109.321km</div>
+										<div>알람타입</div>
+										<div className="font-bold">일반 알람</div>
 									</div>
 								</div>
 								<div className="border border-black">
 									<div className="grid grid-cols-[max-content_1fr] gap-x-2 px-2 py-1">
-										<div>검측항목</div>
-										<div className="font-bold">전차선 편위</div>
-										<div>알람내용</div>
-										<div className="flex justify-between font-bold">
-											252mm (AV)
-											<AlarmCriteria />
-										</div>
+										<div className="font-[500]">좌측 편마모</div>
+										<div>9.96 mm</div>
+										<div className="font-[500]">좌측 수직마모</div>
+										<div>8.88 mm</div>
+										<div className="font-[500]">우측 편마모</div>
+										<div>6.59 mm</div>
+										<div className="font-[500]">우측 수직마모</div>
+										<div>5.85 mm</div>
+										<div className="font-[500]">조치상태</div>
+										<div>조치전</div>
 									</div>
 								</div>
 							</div>
 						</div>
 						<div className="flex min-h-0 flex-1 flex-col gap-2">
 							<div className="flex max-h-full min-h-0 min-w-0 max-w-full flex-col">
-								<div className="mb-1 font-bold">■ 전차선 높이, 편위 그래프</div>
+								<div className="mb-1 font-bold">■ 선로변형 레일마모 프로파일</div>
 								<div className="flex min-h-0 flex-wrap justify-center gap-1 border border-black p-1">
 									<div className="flex max-h-full min-h-0 flex-1 justify-center">
 										<Image
-											src="/test.jpg"
+											src="/rail_left.png"
 											alt="line height image"
 											width="759"
 											height="300"
@@ -100,7 +105,7 @@ export default function DetailReport() {
 									</div>
 									<div className="flex max-h-full min-h-0 flex-1 justify-center">
 										<Image
-											src="/test.jpg"
+											src="/rail_right.png"
 											alt="line height image"
 											width="759"
 											height="300"
@@ -113,11 +118,11 @@ export default function DetailReport() {
 								</div>
 							</div>
 							<div className="flex max-h-full min-h-0 min-w-0 max-w-full flex-col">
-								<div className="mb-1 font-bold">■ 전차선 높이, 편위 그래프</div>
+								<div className="mb-1 font-bold">■ 좌측 레일마모 검측 그래프</div>
 								<div className="flex min-h-0 flex-wrap justify-center gap-1 border border-black p-1">
 									<div className="flex max-h-full min-h-0 w-auto flex-1 justify-center">
 										<Image
-											src="/test.jpg"
+											src="/rail_left_profile.png"
 											alt="line height image"
 											width="759"
 											height="300"
@@ -130,47 +135,11 @@ export default function DetailReport() {
 								</div>
 							</div>
 							<div className="flex max-h-full min-h-0 min-w-0 max-w-full flex-col">
-								<div className="mb-1 font-bold">■ 전차선 높이, 편위 그래프</div>
+								<div className="mb-1 font-bold">■ 우측 레일마모 검측 그래프</div>
 								<div className="flex min-h-0 flex-wrap justify-center gap-1 border border-black p-1">
 									<div className="flex max-h-full min-h-0 w-auto flex-1 justify-center">
 										<Image
-											src="/test-portrait.jpg"
-											alt="line height image"
-											width="759"
-											height="300"
-											quality="100"
-											sizes="100vw"
-											priority
-											className="max-h-full w-auto"
-										/>
-									</div>
-									<div className="flex max-h-full min-h-0 w-auto flex-1 justify-center">
-										<Image
-											src="/test-portrait.jpg"
-											alt="line height image"
-											width="759"
-											height="300"
-											quality="100"
-											sizes="100vw"
-											priority
-											className="max-h-full w-auto"
-										/>
-									</div>
-									<div className="flex max-h-full min-h-0 w-auto flex-1 justify-center">
-										<Image
-											src="/test-portrait.jpg"
-											alt="line height image"
-											width="759"
-											height="300"
-											quality="100"
-											sizes="100vw"
-											priority
-											className="max-h-full w-auto"
-										/>
-									</div>
-									<div className="flex max-h-full min-h-0 w-auto flex-1 justify-center">
-										<Image
-											src="/test-portrait.jpg"
+											src="/rail_right_profile.png"
 											alt="line height image"
 											width="759"
 											height="300"

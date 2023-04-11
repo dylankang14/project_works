@@ -7,10 +7,10 @@ type Data = {
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
 	// res.status(200).json({ name: "John Doe" });
-	const response = await (await fetch("http://192.168.0.166:7131/MRKang")).json();
-	console.log(response);
-	res.json({
-		ok: true,
-		...response,
-	});
+	// const response = await (await fetch("http://192.168.0.166:7131/MRKang")).json();
+	// console.log(response);
+	// res.json({
+	// 	ok: true,
+	// 	...response,
+	// });
 }
