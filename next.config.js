@@ -4,8 +4,8 @@ const nextConfig = {
 	// async rewrites() {
 	// 	return [
 	// 		{
-	// 			source: "/:path*",
-	// 			destination: `http://192.168.0.168:7131/:path*`,
+	// 			source: "/api/:path*",
+	// 			destination: "http://192.168.0.166:8080/api/:path*",
 	// 		},
 	// 	];
 	// },

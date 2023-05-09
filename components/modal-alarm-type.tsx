@@ -1,11 +1,12 @@
-import { useFilterAPI, useFilterData } from "@/contexts/filterContext";
+import { useDefaultData, useFilterAPI, useFilterData } from "@/contexts/filterContext";
 import { cls } from "@/libs/client/utility";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import Icon from "./icon";
 import Input from "./input";
 import Modal, { ModalProps } from "./modal";
 import useSWR from "swr";
+import useMutation from "@/libs/client/useMutation";
 
 interface ModalPropsWithClass extends ModalProps {
 	className?: string;
@@ -14,24 +15,24 @@ interface ModalPropsWithClass extends ModalProps {
 export default function ModalAlarmType({ isModalOpen, closeModal, className }: ModalPropsWithClass) {
 	const { alarmType } = useFilterData();
 	const { onAlarmTypeChange } = useFilterAPI();
+	const { alarmType: defaultAlarmType } = useDefaultData();
 	const { register } = useForm();
 	const [isAllChecked, setIsAllChecked] = useState(true);
-	// const { data: alarmTypes, error } = useSWR("http://192.168.0.168:7131/api/alarmtype");
 
-	const alarmTypes = [
-		{ id: 1, name: "검측항목-01" },
-		{ id: 2, name: "검측항목-02" },
-		{ id: 3, name: "검측항목-03" },
-		{ id: 4, name: "검측항목-04" },
-		{ id: 5, name: "검측항목-05" },
-		{ id: 6, name: "검측항목-06" },
-		{ id: 7, name: "검측항목-07" },
-		{ id: 8, name: "검측항목-08" },
-		{ id: 9, name: "검측항목-09" },
-		{ id: 10, name: "검측항목-10" },
-		{ id: 11, name: "검측항목-11" },
-		{ id: 12, name: "검측항목-12" },
-	];
+	// const alarmTypes = [
+	// 	{ id: 1, name: "검측항목-01" },
+	// 	{ id: 2, name: "검측항목-02" },
+	// 	{ id: 3, name: "검측항목-03" },
+	// 	{ id: 4, name: "검측항목-04" },
+	// 	{ id: 5, name: "검측항목-05" },
+	// 	{ id: 6, name: "검측항목-06" },
+	// 	{ id: 7, name: "검측항목-07" },
+	// 	{ id: 8, name: "검측항목-08" },
+	// 	{ id: 9, name: "검측항목-09" },
+	// 	{ id: 10, name: "검측항목-10" },
+	// 	{ id: 11, name: "검측항목-11" },
+	// 	{ id: 12, name: "검측항목-12" },
+	// ];
 	const handleCheck = (checkedId: number) => {
 		const newIds = alarmType?.includes(checkedId)
 			? alarmType?.filter((id) => id !== checkedId)
@@ -40,13 +41,15 @@ export default function ModalAlarmType({ isModalOpen, closeModal, className }: M
 		// handleSubmit(onValid)();
 	};
 	const toggleAllCheckbox = () => {
-		if (!isAllChecked) {
-			const allIds = alarmTypes.map((item: any) => item.id);
-			onAlarmTypeChange(allIds);
-			setIsAllChecked(!isAllChecked);
-		} else {
-			onAlarmTypeChange([]);
-			setIsAllChecked(!isAllChecked);
+		if (defaultAlarmType) {
+			if (!isAllChecked) {
+				const allIds = defaultAlarmType.map((item: any) => item.ALARMTYPE_ID);
+				onAlarmTypeChange(allIds);
+				setIsAllChecked(!isAllChecked);
+			} else {
+				onAlarmTypeChange([]);
+				setIsAllChecked(!isAllChecked);
+			}
 		}
 	};
 
@@ -68,17 +71,16 @@ export default function ModalAlarmType({ isModalOpen, closeModal, className }: M
 						className="my-1 select-none font-bold"
 						checked={isAllChecked}
 					/>
-					{alarmTypes?.map((alarmTypeItem: any) => (
+					{defaultAlarmType?.map((alarmTypeItem: any) => (
 						<Input
-							key={alarmTypeItem.id}
-							register={register("selectedAlarmTypes")}
-							label={alarmTypeItem.name}
+							key={alarmTypeItem.ALARMTYPE_ID}
+							label={alarmTypeItem.DESCRIPTION}
 							type="checkbox"
-							value={alarmTypeItem.id}
-							name={alarmTypeItem.name}
+							value={alarmTypeItem.ALARMTYPE_ID}
+							name={alarmTypeItem.DESCRIPTION}
 							className="my-1 ml-3 select-none"
-							onChange={() => handleCheck(alarmTypeItem.id)}
-							checked={alarmType.includes(alarmTypeItem.id)}
+							onChange={() => handleCheck(alarmTypeItem.ALARMTYPE_ID)}
+							checked={alarmType?.includes(alarmTypeItem.ALARMTYPE_ID)}
 						/>
 					))}
 				</div>

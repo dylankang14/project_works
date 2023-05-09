@@ -1,4 +1,4 @@
-import { useFilterAPI, useFilterData } from "@/contexts/filterContext";
+import { DefaultTrainStation, useDefaultData, useFilterAPI, useFilterData } from "@/contexts/filterContext";
 import { cls } from "@/libs/client/utility";
 import { useEffect, useRef, useState } from "react";
 import BadgeAlarm from "./badge-alarm";
@@ -13,8 +13,10 @@ export default function StationRoute() {
 	const containerRef = useRef<HTMLUListElement>(null);
 	const [numColumns, setNumColumns] = useState<number>(5);
 	const [basisColumns, setBasisColumns] = useState<string>("basis-1/5");
+	const [trainRouteStations, setTrainRouteStations] = useState<DefaultTrainStation[]>();
 	const { onStationRangeChange } = useFilterAPI();
-	const { stationRange } = useFilterData();
+	const { stationRange, trainRoute } = useFilterData();
+	const { trainStations, trainRoutes } = useDefaultData();
 	const [firstIndex, setFirstIndex] = useState<number | null>();
 
 	const selectStation = (index: number) => {
@@ -31,53 +33,6 @@ export default function StationRoute() {
 		}
 	};
 
-	// const data = Array.from(Array(49), (_, index) => index + 1);
-	const data = [
-		{ id: 1, station: "서울" },
-		{ id: 2, station: "용산" },
-		{ id: 3, station: "영등포" },
-		{ id: 4, station: "안양" },
-		{ id: 5, station: "수원" },
-		{ id: 6, station: "오산" },
-		{ id: 7, station: "서정리" },
-		{ id: 8, station: "평택" },
-		{ id: 9, station: "성환" },
-		{ id: 10, station: "천안" },
-		{ id: 11, station: "소정리" },
-		{ id: 12, station: "전의" },
-		{ id: 13, station: "조치원" },
-		{ id: 14, station: "부강" },
-		{ id: 15, station: "신탄진" },
-		{ id: 16, station: "대전" },
-		{ id: 17, station: "옥천" },
-		{ id: 18, station: "이원" },
-		{ id: 19, station: "지탄" },
-		{ id: 20, station: "심천" },
-		{ id: 21, station: "각계" },
-		{ id: 22, station: "영동" },
-		{ id: 23, station: "황간" },
-		{ id: 24, station: "추풍령" },
-		{ id: 25, station: "김천" },
-		{ id: 26, station: "구미" },
-		{ id: 27, station: "사곡" },
-		{ id: 28, station: "약목" },
-		{ id: 29, station: "왜관" },
-		{ id: 30, station: "신동" },
-		{ id: 31, station: "대구" },
-		{ id: 32, station: "동대구" },
-		{ id: 33, station: "경산" },
-		{ id: 34, station: "남성현" },
-		{ id: 35, station: "청도" },
-		{ id: 36, station: "상동" },
-		{ id: 37, station: "밀양" },
-		{ id: 38, station: "삼랑진" },
-		{ id: 39, station: "원동" },
-		{ id: 40, station: "물금" },
-		{ id: 41, station: "화명" },
-		{ id: 42, station: "구포" },
-		{ id: 43, station: "사상" },
-		{ id: 44, station: "부산" },
-	];
 	useEffect(() => {
 		const observer = new ResizeObserver((entries) => {
 			for (const entry of entries) {
@@ -113,9 +68,16 @@ export default function StationRoute() {
 			}
 		};
 	}, []);
+
+	useEffect(() => {
+		if (trainRoute && trainRoutes && trainStations) {
+			const trainRouteIds = trainRoutes[trainRoute].edgeIds.split(",").map((i) => parseInt(i));
+			setTrainRouteStations(trainStations.filter((station) => trainRouteIds.includes(station.id)));
+		}
+	}, [trainRoute, trainRoutes, trainStations]);
 	return (
 		<ul className="flex flex-col" ref={containerRef}>
-			{data.map((i, index) => {
+			{trainRouteStations?.map((i, index) => {
 				if (index % numColumns === 0) {
 					return (
 						<li key={index} className="group relative flex flex-1 items-stretch">
@@ -127,7 +89,7 @@ export default function StationRoute() {
 							</div>
 							{/* <ul className={cls("flex flex-1 flex-wrap", (i / 5) % 2 ? "flex-row-reverse" : "")}> */}
 							<ul className={"flex grow flex-wrap py-1.5 group-even:flex-row-reverse"}>
-								{data.slice(index, index + numColumns).map((innerItem, innerIndex) => (
+								{trainRouteStations.slice(index, index + numColumns).map((innerItem, innerIndex) => (
 									<li
 										key={innerItem.id}
 										className={cls("group/row flex text-center group-even:flex-row-reverse", basisColumns)}
@@ -150,7 +112,7 @@ export default function StationRoute() {
 														: "bg-slate-400"
 												)}
 											>
-												{innerItem.station}역
+												{innerItem.name}역
 											</div>
 											<Icon
 												type="arrowLeft"

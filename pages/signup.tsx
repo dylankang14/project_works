@@ -5,6 +5,7 @@ import Image from "next/image";
 import { ReactElement } from "react";
 import { useForm } from "react-hook-form";
 import logo from "../public/logo.svg";
+import useMutation from "@/libs/client/useMutation";
 
 interface SignUpForm {
 	email: string;
@@ -17,8 +18,10 @@ interface SignUpForm {
 
 function SignUp() {
 	const { register, handleSubmit } = useForm<SignUpForm>();
+	const [signUp, { loading, data, error }] = useMutation("/api/signup");
 	const onValid = (signUpForm: SignUpForm) => {
-		console.log(signUpForm);
+		signUp(signUpForm);
+		// console.log(signUpForm);
 	};
 	return (
 		<>
@@ -65,7 +68,9 @@ function SignUp() {
 							type="password"
 							required
 						/>
-						<Button>회원가입</Button>
+						<Button preventDefault={false} type="submit">
+							회원가입
+						</Button>
 					</form>
 				</div>
 			</div>

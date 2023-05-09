@@ -1,3 +1,3 @@
 export default function useUser() {
-	return { user: { group: "office" }, isLoading: false };
+	return { user: { group: "admin" }, isLoading: false };
 }

@@ -11,17 +11,25 @@ function getWindowDimensions() {
 
 export default function useWindowDimensions() {
 	const [windowDimensions, setWindowDimensions] = useState<WindowDimensionsType>({ width: null, height: null });
+	const [device, setDevice] = useState({ device: "mobile" });
 
 	useEffect(() => {
 		function handleResize() {
 			setWindowDimensions(getWindowDimensions());
+			if (windowDimensions.width !== null && windowDimensions.width >= 1024) {
+				setDevice({ device: "pc" });
+			} else if (windowDimensions.width !== null && windowDimensions.width >= 640) {
+				setDevice({ device: "tablet" });
+			} else {
+				setDevice({ device: "mobile" });
+			}
 		}
-		window.addEventListener("resize", handleResize);
 		handleResize();
+		window.addEventListener("resize", handleResize);
 		return () => {
 			window.removeEventListener("resize", handleResize);
 		};
-	}, []);
+	}, [windowDimensions.width]);
 
-	return windowDimensions;
+	return { ...windowDimensions, ...device };
 }

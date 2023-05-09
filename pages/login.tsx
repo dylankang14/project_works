@@ -48,14 +48,16 @@ function Login() {
 							type="password"
 							required
 						/>
-						<Button type="submit">로그인</Button>
+						<Button preventDefault={false} type="submit">
+							로그인
+						</Button>
 					</form>
 					<div className="mt-2 flex w-full flex-wrap">
 						<Link
 							href="/signup"
 							className="flex-1 cursor-pointer rounded-md border border-slate-300 bg-gray-50 p-2 text-center text-blue-700 hover:bg-blue-600 hover:text-white"
 						>
-							<span className="text-sm font-bold">회원가입123</span>
+							<span className="text-sm font-bold">회원가입</span>
 						</Link>
 					</div>
 				</div>

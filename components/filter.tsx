@@ -1,5 +1,5 @@
-import { useFilterAPI, useFilterData } from "@/contexts/filterContext";
-import { useState } from "react";
+import { useDefaultData, useFilterAPI, useFilterData } from "@/contexts/filterContext";
+import { useEffect, useState } from "react";
 import DateRangePicker from "./date-range-picker";
 import DropdownAlarmPriority from "./dropdown-alarm-priority";
 import DropdownRouteDirection from "./dropdown-route-direction";
@@ -16,9 +16,11 @@ interface FilterProps {
 
 export default function Filter({ size, type, value, placeholder }: FilterProps) {
 	const [isModalOpen, setIsModalOpen] = useState(false);
+	const { trainStations } = useDefaultData();
 	const { dateRange, stationRange, alarmType, alarmPriority, routeDirection } = useFilterData();
 	// const { onDateRangeChange, onStationRangeChange, onAlarmTypeChange, onAlarmPriorityChange, onRouteDirectionChange } =
 	// useFilterAPI();
+	useEffect(() => {}, []);
 	switch (type) {
 		case "dateRange":
 			return (
@@ -47,8 +49,10 @@ export default function Filter({ size, type, value, placeholder }: FilterProps) 
 						<div className="text-slate-700">
 							<Icon type="station" className="mr-1.5 h-5 w-5 text-slate-600" />
 						</div>
-						{/* <span id="station">{`${stationRange?.from}역 - ${stationRange?.to}역`}</span> */}
-						<span id="station">{`서울역 - 부산역`}</span>
+						<span id="station">
+							{`${trainStations?.find((station) => station.id === stationRange?.from)?.name}역 - 
+							${trainStations?.find((station) => station.id === stationRange?.to)?.name}역`}
+						</span>
 					</div>
 					<ModalStation isModalOpen={isModalOpen} closeModal={() => setIsModalOpen(false)} className="w-[801px]" />
 				</>

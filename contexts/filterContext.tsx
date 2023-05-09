@@ -1,11 +1,44 @@
+import useFetchDefault from "@/libs/client/useFetchDefault";
 import { createContext, ReactNode, useContext, useMemo, useReducer } from "react";
+import useSWR from "swr";
 
+export interface DefaultTrainStation {
+	IsEndPoint: string;
+	name: string;
+	id: number;
+	type: number;
+}
+interface DefaultAlarmType {
+	WORKCLASSTYPE_FK: number;
+	ALARMTYPE_ID: number;
+	DESCRIPTION: string;
+	NAME: string;
+}
+interface TrainRouteType {
+	arrival: string;
+	stationIds: number;
+	name: string;
+	id: number;
+	departure: string;
+	trainNumber: string;
+	type: string;
+	direction: string;
+	edgeIds: string;
+}
+interface DefaultData {
+	dateRange: Date[];
+	trainStations?: DefaultTrainStation[];
+	alarmType?: DefaultAlarmType[];
+	alarmPriority?: number[];
+	trainRoutes?: TrainRouteType[];
+}
 interface FilterData {
 	dateRange: Date[];
 	stationRange?: { from: number | null; to: number | null };
 	alarmType: number[];
 	alarmPriority?: number[];
 	routeDirection?: number[];
+	trainRoute: number;
 }
 
 interface FilterAPI {
@@ -23,6 +56,7 @@ type Actions =
 	| { type: "updateAlarmPriority"; alarmPriority: number[] }
 	| { type: "updateRouteDirection"; routeDirection: number[] };
 
+export const DefaultDataContext = createContext<DefaultData>({} as DefaultData);
 export const FilterDataContext = createContext<FilterData>({} as FilterData);
 export const FilterAPIContext = createContext<FilterAPI>({} as FilterAPI);
 
@@ -46,15 +80,51 @@ const reducer = (state: FilterData, action: Actions): FilterData => {
 export function FilterProvider({ children }: { children: ReactNode }) {
 	const defaultDate = new Date();
 	defaultDate.setDate(defaultDate.getDate() - 1);
+	const fetcher = (url: string) => fetch(url).then((response) => response.json());
+	const { data: defaultAlarmType } = useSWR<DefaultAlarmType[]>(
+		"http://192.168.0.168:22080/API/Master/CommonProcedureResult?procedureName=proc_getAlarmType",
+		fetcher,
+		{
+			onSuccess: (data) => {
+				const alarmTypeIds = data.map((i) => i.ALARMTYPE_ID);
+				dispatch({ type: "updateAlarmType", alarmType: alarmTypeIds });
+			},
+		}
+	);
+	const { data: defaultTrainStations } = useSWR<DefaultTrainStation[]>(
+		"http://192.168.0.168:22080/API/Master/CommonProcedureResult?procedureName=proc_getTrainStation",
+		fetcher
+	);
+	const { data: trainRoutes } = useSWR<TrainRouteType[]>(
+		"http://192.168.0.168:22080/API/Master/CommonProcedureResult?procedureName=proc_getTrainRoute",
+		fetcher,
+		{
+			onSuccess: (data) => {
+				const selectedRouteIds = data[state.trainRoute].edgeIds
+					.split(",")
+					.map((i) => parseInt(i))
+					.sort();
+				const [first, last] = [selectedRouteIds[0], selectedRouteIds[selectedRouteIds.length - 1]];
+				dispatch({ type: "updateStationRange", stationRange: { from: first, to: last } });
+			},
+		}
+	);
+
+	const defaultData: DefaultData = {
+		dateRange: [defaultDate, defaultDate],
+		trainStations: defaultTrainStations,
+		alarmType: defaultAlarmType,
+		alarmPriority: [1, 2, 3],
+		trainRoutes: trainRoutes,
+	};
 
 	const [state, dispatch] = useReducer(reducer, {
-		dateRange: [defaultDate, defaultDate],
-		stationRange: { from: 1, to: 49 },
-		alarmType: [
-			1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29,
-		],
+		dateRange: defaultData.dateRange,
+		stationRange: { from: null, to: null },
+		alarmType: [],
 		alarmPriority: [1, 2, 3],
 		routeDirection: [1, 2],
+		trainRoute: 1,
 	} as FilterData);
 	const api = useMemo(() => {
 		const onDateRangeChange = (dateRange: Date[]) => {
@@ -83,10 +153,13 @@ export function FilterProvider({ children }: { children: ReactNode }) {
 
 	return (
 		<FilterAPIContext.Provider value={api}>
-			<FilterDataContext.Provider value={state}>{children}</FilterDataContext.Provider>
+			<FilterDataContext.Provider value={state}>
+				<DefaultDataContext.Provider value={defaultData}>{children}</DefaultDataContext.Provider>
+			</FilterDataContext.Provider>
 		</FilterAPIContext.Provider>
 	);
 }
 
 export const useFilterAPI = () => useContext(FilterAPIContext);
 export const useFilterData = () => useContext(FilterDataContext);
+export const useDefaultData = () => useContext(DefaultDataContext);

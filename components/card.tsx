@@ -1,8 +1,9 @@
 import { cls } from "@/libs/client/utility";
+import { ReactElement } from "react";
 
 interface CardProps {
 	children: React.ReactNode;
-	title?: string;
+	title?: string | ReactElement;
 	className?: string;
 }
 
