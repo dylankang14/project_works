@@ -1,4 +1,4 @@
-import { PropsWithChildren, useLayoutEffect, useState } from "react";
+import { PropsWithChildren, useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 
 interface PortalProps {
@@ -14,7 +14,7 @@ function createWrapperAndAppendToBody(wrapperId: string) {
 export default function Portal({ children, wrapperId = "portalWrapper" }: PropsWithChildren<PortalProps>) {
 	const [wrapperElement, setWrapperElement] = useState<HTMLElement | null>(null);
 
-	useLayoutEffect(() => {
+	useEffect(() => {
 		let element = document.getElementById(wrapperId);
 		let systemCreated = false;
 		if (!element) {
