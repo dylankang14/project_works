@@ -10,20 +10,22 @@ import logo from "../public/logo.svg";
 import useMutation from "@/libs/client/useMutation";
 
 interface LoginForm {
-	email: string;
+	id: string;
 	password: string;
 }
 
 function Login() {
 	const router = useRouter();
 	const { register, handleSubmit } = useForm<LoginForm>();
-	const [login, { loading, data, error }] = useMutation("/api/user/login");
+	const [login, { loading, data, error }] = useMutation("http://192.168.0.166:22080/API/Login/login");
 	const onValid = (loginForm: LoginForm) => {
 		if (loading) return;
 		login(loginForm);
 		console.log(loginForm);
 		// router.push("/");
 	};
+	console.log(data);
+
 	return (
 		<>
 			<Head>
@@ -39,7 +41,7 @@ function Login() {
 						onSubmit={handleSubmit(onValid)}
 						className="flex w-full flex-col gap-4 rounded-md border border-slate-300 bg-gray-50 px-5 pb-3 pt-5"
 					>
-						<Input className="w-full" register={register("email")} label="이메일" name="email" type="email" required />
+						<Input className="w-full" register={register("id")} label="이메일" name="id" type="text" required />
 						<Input
 							className="w-full"
 							register={register("password")}

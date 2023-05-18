@@ -32,7 +32,7 @@ export default function ModalVertical({
 		<Portal wrapperId="modal-vertical">
 			<div
 				className={cls(
-					"fixed top-0 left-0 flex h-full w-full justify-center overflow-y-auto text-sm",
+					"fixed top-0 left-0 flex h-full w-full overflow-y-auto text-sm",
 					containerClass ? containerClass : "items-center"
 				)}
 			>
@@ -43,7 +43,7 @@ export default function ModalVertical({
 						closeModal();
 					}}
 				></div>
-				<div className={cls("relative", className ? className : "")}>{children}</div>
+				<div className={cls("relative h-full bg-slate-800", className ? className : "")}>{children}</div>
 			</div>
 		</Portal>
 	);

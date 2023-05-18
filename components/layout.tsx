@@ -22,7 +22,12 @@ export default function Layout({ children }: ChildrenProp) {
 				) : (
 					<ModalAside isModalOpen={isDrawerOpen} closeModal={() => setIsDrawerOpen(!isDrawerOpen)} />
 				)}
-				<main className={cls("flex-1 px-4 py-3 transition-[margin] print:p-0", isDrawerOpen ? "-ml-0" : "-ml-60")}>
+				<main
+					className={cls(
+						"flex-1 px-4 py-3 transition-[margin] print:p-0",
+						device === "pc" ? (isDrawerOpen ? "-ml-0" : "-ml-60") : ""
+					)}
+				>
 					<section className="container mx-auto print:w-[794px] xl:max-w-[1000px]">{children}</section>
 				</main>
 			</div>

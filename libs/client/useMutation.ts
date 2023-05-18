@@ -13,7 +13,7 @@ export default function useMutation<T = any>(url: string): UseMutationResult<T> 
 	});
 	function mutation(data: any) {
 		setState((prev) => ({ ...prev, loading: true }));
-		console.log("mutation : ", data);
+		console.log("mutation : ", JSON.stringify(data));
 
 		fetch(url, {
 			method: "POST",
