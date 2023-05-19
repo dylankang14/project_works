@@ -1,23 +1,16 @@
 import { cls } from "@/libs/client/utility";
 import { ModalProps } from "./modal";
 import ModalVertical from "./modal-vertical";
-import Nav from "./nav";
 import Filter from "./filter";
 import Button from "./button";
 import Icon from "./icon";
 
 export default function ModalFilter({ isModalOpen, closeModal }: ModalProps) {
 	return (
-		<ModalVertical
-			isModalOpen={isModalOpen}
-			closeModal={closeModal}
-			className="min-w-[200px]"
-			containerClass="justify-end"
-		>
+		<ModalVertical isModalOpen={isModalOpen} closeModal={closeModal} className="rtl right-0 min-w-[200px]">
 			<aside
 				className={cls(
-					"relative h-full w-60 min-w-[300px] space-y-2 bg-slate-800 p-2 text-sm transition-transform print:hidden",
-					isModalOpen ? "-translate-x-0" : "-translate-x-full"
+					"relative h-full w-60 min-w-[300px] space-y-2 bg-slate-800 p-2 text-sm transition-transform print:hidden"
 				)}
 			>
 				<div className="mb-3 flex justify-between border-b border-white/30 p-2 text-white">

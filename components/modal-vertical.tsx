@@ -1,7 +1,8 @@
 import useWindowDimensions from "@/libs/client/useWindowDimensions";
 import { cls } from "@/libs/client/utility";
-import { PropsWithChildren, useEffect } from "react";
+import { PropsWithChildren, useEffect, useRef } from "react";
 import Portal from "./portal";
+import { CSSTransition } from "react-transition-group";
 
 export interface ModalProps {
 	isModalOpen: boolean;
@@ -19,6 +20,7 @@ export default function ModalVertical({
 	containerClass,
 	stopPropagation = false,
 }: PropsWithChildren<ModalProps>) {
+	const nodeRef = useRef(null);
 	useEffect(() => {
 		const closeOnEscapeKey = (e: KeyboardEvent) => (e.key === "Escape" ? closeModal() : null);
 		document.body.addEventListener("keydown", closeOnEscapeKey);
@@ -27,24 +29,27 @@ export default function ModalVertical({
 		};
 	}, [closeModal]);
 
-	if (!isModalOpen) return null;
+	// if (!isModalOpen) return null;
 	return (
 		<Portal wrapperId="modal-vertical">
-			<div
-				className={cls(
-					"fixed top-0 left-0 flex h-full w-full overflow-y-auto text-sm",
-					containerClass ? containerClass : "items-center"
-				)}
-			>
+			<CSSTransition in={isModalOpen} nodeRef={nodeRef} classNames="modal-vertical" timeout={200} unmountOnExit>
 				<div
-					className="fixed inset-0 bg-black/50"
-					onClick={(e) => {
-						if (stopPropagation) e.stopPropagation();
-						closeModal();
-					}}
-				></div>
-				<div className={cls("relative h-full bg-slate-800", className ? className : "")}>{children}</div>
-			</div>
+					ref={nodeRef}
+					className={cls(
+						"fixed inset-0 h-full w-full overflow-hidden overflow-y-auto text-sm",
+						containerClass ? containerClass : "items-center"
+					)}
+				>
+					<div
+						className="fixed inset-0 bg-black/50"
+						onClick={(e) => {
+							if (stopPropagation) e.stopPropagation();
+							closeModal();
+						}}
+					></div>
+					<div className={cls("absolute h-full bg-slate-800", className ? className : "")}>{children}</div>
+				</div>
+			</CSSTransition>
 		</Portal>
 	);
 }

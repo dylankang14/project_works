@@ -1,5 +1,5 @@
 import { cls } from "@/libs/client/utility";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Aside from "./aside";
 import Footer from "./footer";
 import Header from "./header";
@@ -13,6 +13,9 @@ export interface ChildrenProp {
 export default function Layout({ children }: ChildrenProp) {
 	const [isDrawerOpen, setIsDrawerOpen] = useState(true);
 	const { device } = useWindowDimensions();
+	useEffect(() => {
+		if (device === "mobile") setIsDrawerOpen(false);
+	}, [device]);
 	return (
 		<div id="wrap" className="relative z-0 flex min-h-screen flex-col bg-slate-50 text-sm print:bg-white">
 			<Header toggleDrawer={() => setIsDrawerOpen(!isDrawerOpen)} />
@@ -20,7 +23,7 @@ export default function Layout({ children }: ChildrenProp) {
 				{device === "pc" ? (
 					<Aside isDrawerOpen={isDrawerOpen} toggleDrawer={() => setIsDrawerOpen(!isDrawerOpen)} />
 				) : (
-					<ModalAside isModalOpen={isDrawerOpen} closeModal={() => setIsDrawerOpen(!isDrawerOpen)} />
+					<ModalAside isModalOpen={isDrawerOpen} closeModal={() => setIsDrawerOpen(false)} />
 				)}
 				<main
 					className={cls(

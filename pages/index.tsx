@@ -42,7 +42,7 @@ export default function Home() {
 						<Button size="sm" color="blue" icon="filter" onClick={() => setIsDrawerOpen(true)}>
 							필터옵션
 						</Button>
-						<ModalFilter isModalOpen={isDrawerOpen} closeModal={() => setIsDrawerOpen(!isDrawerOpen)} />
+						<ModalFilter isModalOpen={isDrawerOpen} closeModal={() => setIsDrawerOpen(false)} />
 					</div>
 				)}
 				<div>
