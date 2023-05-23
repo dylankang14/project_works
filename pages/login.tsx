@@ -8,6 +8,7 @@ import { ReactElement } from "react";
 import { useForm } from "react-hook-form";
 import logo from "../public/logo.svg";
 import useMutation from "@/libs/client/useMutation";
+import { useLangData } from "@/contexts/langContext";
 
 interface LoginForm {
 	id: string;
@@ -25,6 +26,8 @@ function Login() {
 		// router.push("/");
 	};
 	console.log(data);
+	const { common } = useLangData();
+	console.log(common?.get("c1134"));
 
 	return (
 		<>
@@ -35,7 +38,7 @@ function Login() {
 				<div className="container flex max-w-xs flex-col items-center gap-1">
 					<div className="mb-3 text-center">
 						<Image src={logo} alt="Logo" priority={true} />
-						<div className="py-2 text-lg font-medium">ITX 알람 웹서비스 로그인</div>
+						<div className="py-2 text-lg font-medium">ITX {common?.get("C4702")} 웹서비스 로그인</div>
 					</div>
 					<form
 						onSubmit={handleSubmit(onValid)}
@@ -51,7 +54,7 @@ function Login() {
 							required
 						/>
 						<Button preventDefault={false} type="submit">
-							로그인
+							로그인{common?.get("c1134")}
 						</Button>
 					</form>
 					<div className="mt-2 flex w-full flex-wrap">

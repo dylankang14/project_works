@@ -1,5 +1,6 @@
 import useUser from "@/libs/client/useUser";
 import NavItem from "./nav-item";
+import { useLangData } from "@/contexts/langContext";
 
 export interface MenuTypes {
 	href: string | null;
@@ -13,10 +14,11 @@ export interface MenuTypes {
 
 export default function Nav() {
 	const { user } = useUser();
+	const { common } = useLangData();
 	const menuItemsForUser: MenuTypes[] = [
 		{
 			href: "/",
-			title: "검측 알람",
+			title: `검측 ${common?.get("C4702")}`,
 			icon: "alarm",
 		},
 		{
@@ -31,7 +33,7 @@ export default function Nav() {
 			submenu: [
 				{ href: "/user/info", title: "계정 정보" },
 				{ href: "/user/activity", title: "로그인 내역" },
-				{ href: "/user/work/fixed", title: "조치완료 내역" },
+				{ href: "/user/work/fixed", title: `${common?.get("C0080")} 내역` },
 				{ href: "/user/security", title: "비밀번호 변경" },
 			],
 		},
@@ -39,12 +41,12 @@ export default function Nav() {
 	const menuItemsForOffice: MenuTypes[] = [
 		{
 			href: null,
-			title: "사업소 관리",
+			title: `${common?.get("C6301")} 관리`,
 			icon: "office",
 			submenu: [
-				{ href: "/office/statistics", title: "사업소 현황/통계" },
+				{ href: "/office/statistics", title: `${common?.get("C6301")} 현황/통계` },
 				{ href: "/office/user/list", title: "유저리스트" },
-				{ href: "/office/info", title: "사업소 정보" },
+				{ href: "/office/info", title: `${common?.get("C6301")} 정보` },
 			],
 		},
 	];
@@ -54,9 +56,9 @@ export default function Nav() {
 			title: "최고관리자",
 			icon: "admin",
 			submenu: [
-				{ href: `/admin/office/${1}/statistics`, title: "사업소 현황/통계" },
+				{ href: `/admin/office/${1}/statistics`, title: `${common?.get("C6301")} 현황/통계` },
 				{ href: `/admin/user/${1}/statistics`, title: "유저 현황/통계" },
-				{ href: "/admin/manage/office", title: "전체 사업소 관리" },
+				{ href: "/admin/manage/office", title: `전체 ${common?.get("C6301")} 관리` },
 				{ href: "/admin/manage/user", title: "전체 유저 관리" },
 			],
 		},

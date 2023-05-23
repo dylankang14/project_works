@@ -28,7 +28,7 @@ export default function AlarmList() {
 				</div>
 				<div>
 					<Button size="sm" color="slate" icon="print" iconPosition="right" onClick={() => window.print()}>
-						프린트
+						Print
 					</Button>
 				</div>
 			</div>

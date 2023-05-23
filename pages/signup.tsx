@@ -6,6 +6,7 @@ import { ReactElement } from "react";
 import { useForm } from "react-hook-form";
 import logo from "../public/logo.svg";
 import useMutation from "@/libs/client/useMutation";
+import { useLangData } from "@/contexts/langContext";
 
 interface SignUpForm {
 	email: string;
@@ -23,6 +24,7 @@ function SignUp() {
 		signUp(signUpForm);
 		// console.log(signUpForm);
 	};
+	const { common } = useLangData();
 	return (
 		<>
 			<Head>
@@ -35,7 +37,7 @@ function SignUp() {
 				<div className="container flex max-w-md flex-col items-center gap-1">
 					<div className="mb-3 text-center">
 						<Image src={logo} alt="Logo" priority={true} />
-						<div className="py-2 text-lg font-medium">ITX 알람 웹서비스 회원가입</div>
+						<div className="py-2 text-lg font-medium">ITX {common?.get("C4702")} 웹서비스 회원가입</div>
 					</div>
 					<form
 						onSubmit={handleSubmit(onValid)}

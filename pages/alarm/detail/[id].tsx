@@ -1,5 +1,6 @@
 import AlarmCriteria from "@/components/alarm-criteria";
 import Button from "@/components/button";
+import { useLangData } from "@/contexts/langContext";
 
 import { cls } from "@/libs/client/utility";
 import Image from "next/image";
@@ -7,6 +8,7 @@ import { useRouter } from "next/router";
 
 export default function DetailReport() {
 	const router = useRouter();
+	const { common } = useLangData();
 	return (
 		<>
 			<div
@@ -22,7 +24,7 @@ export default function DetailReport() {
 				>
 					<div className="flex h-full w-full flex-col flex-wrap gap-3">
 						<div className="relative text-center">
-							<span className="text-2xl font-semibold">알람보고서</span>
+							<span className="text-2xl font-semibold">{common?.get("C4702")}보고서</span>
 							<div className="absolute right-0 bottom-0">2024년 04월 06일</div>
 						</div>
 						<div className="grid grid-cols-[1fr_max-content] gap-2">
@@ -55,7 +57,7 @@ export default function DetailReport() {
 							</table>
 						</div>
 						<div>
-							<div className="mb-1 font-bold">■ 선로변형 레일마모 알람정보</div>
+							<div className="mb-1 font-bold">■ 선로변형 레일마모 {common?.get("C4852")}</div>
 							<div className="grid grid-cols-[max-content_1fr] gap-2">
 								<div className="border border-black">
 									<div className="grid grid-cols-[max-content_1fr] gap-x-2 px-2 py-1">
@@ -65,10 +67,10 @@ export default function DetailReport() {
 										<div className="font-bold">09:50:12</div>
 										<div>전철주 번호</div>
 										<div className="font-bold">20-13</div>
-										<div>알람위치</div>
+										<div>{common?.get("C4783")}</div>
 										<div className="font-bold">109.321km</div>
-										<div>알람타입</div>
-										<div className="font-bold">일반 알람</div>
+										<div>{common?.get("C4850")}</div>
+										<div className="font-bold">{common?.get("C4702")}</div>
 									</div>
 								</div>
 								<div className="border border-black">
@@ -184,7 +186,7 @@ export default function DetailReport() {
 				<Button id="savePdf" icon="download">
 					PDF
 				</Button>
-				<Button onClick={() => window.print()}>프린트</Button>
+				<Button onClick={() => window.print()}>Print</Button>
 			</div>
 			<div className="fixed">123</div>
 		</>

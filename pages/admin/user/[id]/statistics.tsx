@@ -2,12 +2,22 @@ import Button from "@/components/button";
 import CardSummary from "@/components/card-summary";
 import CardTable from "@/components/card-table";
 import Filter from "@/components/filter";
+import { useLangData } from "@/contexts/langContext";
 
 export default function UserStatistics() {
-	const dataType: string[] = ["유저", "소속", "직위", "권한", "알람 조치완료", "즉시조치 조치완료", "전체 조치완료"];
+	const { common } = useLangData();
+	const dataType: string[] = [
+		"유저",
+		"소속",
+		"직위",
+		"권한",
+		`${common?.get("C4702")} ${common?.get("C0080")}`,
+		`${common?.get("C0031")} ${common?.get("C0080")}`,
+		`${common?.get("C2305")} ${common?.get("C0080")}`,
+	];
 	const data = Array.from(Array(20).keys()).map((i) => ({
 		name: `유저-${i}`,
-		office: `사업소-${i}`,
+		office: `common?.get("C6301")-${i}`,
 		position: `대리`,
 		permission: `유저`,
 		av: `${i}`,
@@ -25,12 +35,12 @@ export default function UserStatistics() {
 				</div>
 				<div>
 					<Button size="sm" color="slate" icon="print" iconPosition="right">
-						프린트
+						Print
 					</Button>
 				</div>
 			</div>
 			<CardSummary />
-			<CardTable hasLink={true} pathname="admin/user" data={data} dataType={dataType} pagination={true} />
+			<CardTable hasLink={true} pathname="admin/user" data={data} dataType={dataType} />
 		</>
 	);
 }

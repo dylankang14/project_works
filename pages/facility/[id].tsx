@@ -23,7 +23,7 @@ export default function Facility() {
 				</div>
 				<div>
 					<Button size="sm" color="slate" icon="print" iconPosition="right">
-						프린트
+						Print
 					</Button>
 				</div>
 			</div>

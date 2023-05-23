@@ -6,6 +6,7 @@ import Input from "./input";
 import Modal, { ModalProps } from "./modal";
 import SelectBox from "./select";
 import Textarea from "./textarea";
+import { useLangData } from "@/contexts/langContext";
 
 interface ModalPropsWithClass extends ModalProps {
 	className?: string;
@@ -13,12 +14,13 @@ interface ModalPropsWithClass extends ModalProps {
 
 export default function ModalInputRepair({ isModalOpen, closeModal, className }: ModalPropsWithClass) {
 	const { register, handleSubmit } = useForm();
+	const { common } = useLangData();
 	const onValid = (data: any) => {
 		console.log(data);
 	};
 	const options = [
 		{ value: "required", text: "조치요망" },
-		{ value: "complete", text: "조치완료" },
+		{ value: "complete", text: `${common?.get("C0080")}` },
 	];
 	return (
 		<Modal isModalOpen={isModalOpen} closeModal={closeModal} className="w-full max-w-lg">

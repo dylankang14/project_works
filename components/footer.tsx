@@ -1,7 +1,9 @@
 import Image from "next/image";
 import logo from "../public/logo.svg";
+import { useLangData } from "@/contexts/langContext";
 
 export default function Footer() {
+	const { common } = useLangData();
 	return (
 		<footer className="flex w-full items-center justify-around border-t bg-white py-4 print:hidden lg:z-0">
 			<div className="logo">
@@ -14,7 +16,7 @@ export default function Footer() {
 				/>
 			</div>
 			<div className="co-detail flex gap-4 text-sm">
-				<div>2ISYS 검측 알람 웹서비스</div>
+				<div>2ISYS 검측 {common?.get("C4702")} 웹서비스</div>
 			</div>
 		</footer>
 	);

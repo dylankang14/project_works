@@ -5,6 +5,7 @@ import { useState } from "react";
 import Button from "./button";
 import ModalInputRepair from "./modal-input-repair";
 import Image from "next/image";
+import { useLangData } from "@/contexts/langContext";
 
 export interface AlarmProps {
 	id: number;
@@ -15,6 +16,7 @@ export interface AlarmProps {
 export default function CardAlarm({ data: { id, priority, fixed } }: { data: AlarmProps }) {
 	const alarmStyle = useAlarmStyle(priority, fixed);
 	const [isModalOpen, setIsModalOpen] = useState(false);
+	const { common } = useLangData();
 
 	return (
 		<>
@@ -26,14 +28,18 @@ export default function CardAlarm({ data: { id, priority, fixed } }: { data: Ala
 				>
 					<div className={cls("flex items-center justify-between border-b px-3 py-2 text-white", alarmStyle.bg)}>
 						<div className="flex gap-x-2">
-							<span className="rounded border border-white px-1 text-sm">{priority === 0 ? "알람" : "즉시조치"}</span>
+							<span className="rounded border border-white px-1 text-sm">
+								{priority === 0 ? common?.get("C4701") : common?.get("C0031")}
+							</span>
 							<span>
 								검측일시 <span className="font-[500]">2023-04-06 09:5{id}:12</span>
 							</span>
-							<span className="rounded border border-white px-1 text-sm">{fixed ? "조치완료" : "조치전"}</span>
+							<span className="rounded border border-white px-1 text-sm">
+								{fixed ? common?.get("C0080") : "조치전"}
+							</span>
 						</div>
 						<Button color="slate" size="sm" className="py-0.5" onClick={() => setIsModalOpen(true)}>
-							조치입력
+							{common?.get("C6411")}
 						</Button>
 						{/* <div>{isModalOpen ? "true" : "false"}</div> */}
 					</div>
@@ -41,15 +47,15 @@ export default function CardAlarm({ data: { id, priority, fixed } }: { data: Ala
 						{/* <div className="grid auto-rows-max grid-cols-[max-content_1fr] gap-x-2">
 							<div className="font-[500]">검측항목</div>
 							<div>전차선 높이</div>
-							<div className="font-[500]">알람위치</div>
+							<div className="font-[500]">{common?.get('c4115')}</div>
 							<div>전철주-123</div>
-							<div className="font-[500]">알람내용</div>
+							<div className="font-[500]">common?.get("C4702")내용</div>
 							<div>123 mm</div>
 						</div> */}
 						<div className="grid auto-rows-max grid-cols-[max-content_1fr] gap-x-3 gap-y-1">
-							<div className="font-[500]">전철주 번호</div>
+							<div className="font-[500]">{common?.get("c4123")}</div>
 							<div>20-13</div>
-							<div className="font-[500]">알람위치</div>
+							<div className="font-[500]">{common?.get("c4115")}</div>
 							<div>109.321km</div>
 							<div className="font-[500]">좌측 편마모</div>
 							<div>9.96 mm</div>

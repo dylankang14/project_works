@@ -6,6 +6,7 @@ import Title from "@/components/content-title";
 import Filter from "@/components/filter";
 
 import Pagination from "@/components/pagination";
+import { useLangData } from "@/contexts/langContext";
 import { paginate } from "@/libs/client/utility";
 import { useState } from "react";
 
@@ -19,9 +20,10 @@ export default function Fixed() {
 		fixed: i % 3 > 1,
 	}));
 	const paginatedData = paginate(data, currentPage, pageSize);
+	const { common } = useLangData();
 	return (
 		<>
-			<Title title="홍길동 님의 조치완료 리스트" />
+			<Title title={`홍길동 님의 ${common?.get("C0080")} 리스트`} />
 			<div className="flex items-center justify-between">
 				<div className="flex gap-1">
 					<Filter type="date" />
@@ -30,12 +32,12 @@ export default function Fixed() {
 				</div>
 				<div>
 					<Button size="sm" color="slate" icon="print" iconPosition="right">
-						프린트
+						Print
 					</Button>
 				</div>
 			</div>
 			<CardSummary />
-			<Card title="조치완료 통계 그래프">
+			<Card title={`${common?.get("C0080")} 통계 그래프`}>
 				<div className="p-4">
 					<div className="flex h-52 items-center justify-center bg-gray-100">그래프 이미지</div>
 				</div>

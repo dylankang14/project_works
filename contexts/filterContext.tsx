@@ -1,4 +1,3 @@
-import useFetchDefault from "@/libs/client/useFetchDefault";
 import { createContext, ReactNode, useContext, useMemo, useReducer } from "react";
 import useSWR from "swr";
 
@@ -82,7 +81,7 @@ export function FilterProvider({ children }: { children: ReactNode }) {
 	defaultDate.setDate(defaultDate.getDate() - 1);
 	const fetcher = (url: string) => fetch(url).then((response) => response.json());
 	const { data: defaultAlarmType } = useSWR<DefaultAlarmType[]>(
-		"http://192.168.0.166:22080/API/Master/CommonProcedureResult?procedureName=proc_getAlarmType",
+		"http://192.168.0.145:22080/API/Master/CommonProcedureResult?procedureName=proc_getAlarmType",
 		fetcher,
 		{
 			onSuccess: (data) => {
@@ -92,11 +91,11 @@ export function FilterProvider({ children }: { children: ReactNode }) {
 		}
 	);
 	const { data: defaultTrainStations } = useSWR<DefaultTrainStation[]>(
-		"http://192.168.0.166:22080/API/Master/CommonProcedureResult?procedureName=proc_getTrainStation",
+		"http://192.168.0.145:22080/API/Master/CommonProcedureResult?procedureName=proc_getTrainStation",
 		fetcher
 	);
 	const { data: trainRoutes } = useSWR<TrainRouteType[]>(
-		"http://192.168.0.166:22080/API/Master/CommonProcedureResult?procedureName=proc_getTrainRoute",
+		"http://192.168.0.145:22080/API/Master/CommonProcedureResult?procedureName=proc_getTrainRoute",
 		fetcher,
 		{
 			onSuccess: (data) => {

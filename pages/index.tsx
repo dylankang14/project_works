@@ -9,22 +9,24 @@ import useSWR from "swr";
 import { useEffect, useState } from "react";
 import useWindowDimensions from "@/libs/client/useWindowDimensions";
 import ModalFilter from "@/components/modal-filter";
+import { useLangData } from "@/contexts/langContext";
 
 export default function Home() {
 	const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 	const { device } = useWindowDimensions();
-	// const { data, error, isLoading } = useSWR(
-	// 	"http://192.168.0.168:8080/API/Master/CommonProcedureResult?procedureName=getAlarmType"
-	// );
-	// const [test, { data }] = useMutation("http://192.168.0.166:8080/API/Master/CommonProcedureResult");
-	// const test2 = () => {
-	// 	test({ ParamList: ["dfdf"], ProcedureName: "getAlarmCode" });
-	// };
+	// const { data } = useLangData();
+	// console.log(data);
+	// const [lang, { data }] = useMutation("http://192.168.0.145:22080/API/Master/GetProcedureResult");
 	// useEffect(() => {
-	// 	test({ ParamList: ["dfdf"], ProcedureName: "getAlarmType" });
-	// 	return () => {};
-	// }, [test]);
-	const [test, { data }] = useMutation("http://192.168.0.166:22080/API/Master/GetProcedureResult");
+	// 	lang({
+	// 		procedureName: "proc_multi_language_bygroup",
+	// 		param: {
+	// 			language: "taiwanese",
+	// 			group: "common",
+	// 		},
+	// 	});
+	// }, []);
+	// console.log(data);
 
 	return (
 		<>
@@ -48,7 +50,7 @@ export default function Home() {
 				<div>
 					{/* <button onClick={test2}>click</button> */}
 					<Button size="sm" color="slate" icon="print" iconPosition="right" onClick={() => window.print()}>
-						프린트
+						Print
 					</Button>
 				</div>
 			</div>

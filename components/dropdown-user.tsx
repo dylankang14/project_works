@@ -5,9 +5,11 @@ import Link from "next/link";
 import CheckboxGroup from "./checkbox-group";
 import Dropdown from "./dropdown";
 import Icon from "./icon";
+import { useLangData } from "@/contexts/langContext";
 
 export default function DropdownUser() {
 	const { ref, dropdownRef, toggleDropdown, isDropdownOpen, position } = useDropdown();
+	const { common } = useLangData();
 
 	return (
 		<>
@@ -23,7 +25,7 @@ export default function DropdownUser() {
 						<div className="hover:font-bold"> 로그인 내역</div>
 					</Link>
 					<Link href={"/user/work/fixed"}>
-						<div className="hover:font-bold"> 조치완료 내역</div>
+						<div className="hover:font-bold"> {common?.get("C0080")} 내역</div>
 					</Link>
 					<Link href={"/user/security"}>
 						<div className="hover:font-bold"> 비밀번호 변경</div>

@@ -1,9 +1,11 @@
 import Button from "@/components/button";
 import Filter from "@/components/filter";
 import CardTable from "@/components/card-table";
+import { useLangData } from "@/contexts/langContext";
 
 export default function Facility() {
-	const dataType: string[] = ["순서", "시설물명", "전체갯수", "알람갯수"];
+	const { common } = useLangData();
+	const dataType: string[] = ["순서", "시설물명", "전체갯수", `${common?.get("C4702")}`];
 	const data = Array.from(Array(20).keys()).map((i) => ({
 		id: i,
 		name: `시설물-${i}`,
@@ -23,7 +25,7 @@ export default function Facility() {
 				</div>
 				<div>
 					<Button size="sm" color="slate" icon="print" iconPosition="right" onClick={() => window.print()}>
-						프린트
+						Print
 					</Button>
 				</div>
 			</div>

@@ -3,11 +3,18 @@ import Card from "@/components/card";
 import CardSummary from "@/components/card-summary";
 import CardTable from "@/components/card-table";
 import Filter from "@/components/filter";
+import { useLangData } from "@/contexts/langContext";
 
 export default function AllOfficeStatistics() {
-	const dataType: string[] = ["사업소", "알람/조치완료", "즉시조치/조치완료", "전체알람/조치완료"];
+	const { common } = useLangData();
+	const dataType: string[] = [
+		`common?.get("C6301")`,
+		`${common?.get("C4702")}/${common?.get("C0080")}`,
+		`${common?.get("C0031")}/${common?.get("C0080")}`,
+		`${common?.get("C2305")}${common?.get("C4702")}/${common?.get("C0080")}`,
+	];
 	const data = Array.from(Array(10).keys()).map((i) => ({
-		name: `사업소-${i}`,
+		name: `common?.get("C6301")-${i}`,
 		av: `20 / ${i}`,
 		iv: `12 / ${i}`,
 		total: `32 / ${i * 2}`,
@@ -23,7 +30,7 @@ export default function AllOfficeStatistics() {
 				</div>
 				<div>
 					<Button size="sm" color="slate" icon="print" iconPosition="right">
-						프린트
+						Print
 					</Button>
 				</div>
 			</div>

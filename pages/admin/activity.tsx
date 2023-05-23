@@ -18,7 +18,7 @@ export default function Activity() {
 			<div className="flex items-center justify-between">
 				<Filter type="date" />
 				<Button size="sm" color="slate" icon="print" iconPosition="right">
-					프린트
+					Print
 				</Button>
 			</div>
 			<Card title="로그인 통계 그래프">

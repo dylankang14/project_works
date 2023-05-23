@@ -25,7 +25,7 @@ export default function ManageUser() {
 						유저 생성
 					</Button>
 					<Button size="sm" color="slate" icon="print" iconPosition="right">
-						프린트
+						Print
 					</Button>
 				</div>
 			</div>

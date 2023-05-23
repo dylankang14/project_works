@@ -28,7 +28,7 @@ export default function UserList() {
 						검색필터
 					</Button>
 					<Button size="sm" color="slate" icon="print">
-						프린트
+						Print
 					</Button>
 				</div>
 			</div>

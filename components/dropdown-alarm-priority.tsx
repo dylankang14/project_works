@@ -3,15 +3,18 @@ import useDropdown from "@/libs/client/useDropdown";
 import { filterValue } from "@/libs/client/utility";
 import CheckboxGroup from "./checkbox-group";
 import Dropdown from "./dropdown";
+import { useLangData } from "@/contexts/langContext";
 
 export default function DropdownAlarmPriority() {
 	const { ref, dropdownRef, toggleDropdown, isDropdownOpen, position } = useDropdown();
 	const { alarmPriority } = useFilterData();
 	const { onAlarmPriorityChange } = useFilterAPI();
+	const { common } = useLangData();
+
 	const alarmPriorityList = [
-		{ id: 1, name: "알람" },
-		{ id: 2, name: "즉시조치" },
-		{ id: 3, name: "조치완료" },
+		{ id: 1, name: common?.get("C4702") },
+		{ id: 2, name: common?.get("C0031") },
+		{ id: 3, name: common?.get("C0080") },
 	];
 
 	return (

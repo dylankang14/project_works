@@ -4,11 +4,13 @@ import CardSummary from "@/components/card-summary";
 import Filter from "@/components/filter";
 import CardAlarmType from "@/components/card-alarm-type";
 import Title from "@/components/content-title";
+import { useLangData } from "@/contexts/langContext";
 
 export default function OfficeStatistics() {
+	const { common } = useLangData();
 	return (
 		<>
-			<Title title="서울사업소" />
+			<Title title={`서울${common?.get("C6301")}`} />
 			<div className="flex items-center justify-between">
 				<div className="flex gap-1">
 					<Filter type="date" />
@@ -17,7 +19,7 @@ export default function OfficeStatistics() {
 				</div>
 				<div>
 					<Button size="sm" color="slate" icon="print" iconPosition="right">
-						프린트
+						Print
 					</Button>
 				</div>
 			</div>

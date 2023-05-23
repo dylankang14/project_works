@@ -2,11 +2,13 @@ import Button from "@/components/button";
 import Card from "@/components/card";
 import Title from "@/components/content-title";
 import Input from "@/components/input";
+import { useLangData } from "@/contexts/langContext";
 
 export default function OfficeInfo() {
+	const { common } = useLangData();
 	return (
 		<div className="mx-auto py-3 lg:max-w-2xl">
-			<Title title="서울사업소 정보" />
+			<Title title={`서울${common?.get("C6301")} 정보`} />
 			<Card>
 				<div className="grid grid-cols-1 gap-3 p-4">
 					<Input label="이메일" name="email" type="text" required={false} />
