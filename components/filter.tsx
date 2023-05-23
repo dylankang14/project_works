@@ -6,6 +6,7 @@ import DropdownRouteDirection from "./dropdown-route-direction";
 import Icon from "./icon";
 import ModalAlarmType from "./modal-alarm-type";
 import ModalStation from "./modal-station";
+import { useLangData } from "@/contexts/langContext";
 
 interface FilterProps {
 	size?: string;
@@ -16,8 +17,13 @@ interface FilterProps {
 
 export default function Filter({ size, type, value, placeholder }: FilterProps) {
 	const [isModalOpen, setIsModalOpen] = useState(false);
-	const { trainStations } = useDefaultData();
+	// const { trainStations } = useDefaultData();
+	const trainStations = Array.from(Array(14).keys()).map((i) => ({
+		id: i,
+		name: i,
+	}));
 	const { dateRange, stationRange, alarmType, alarmPriority, routeDirection } = useFilterData();
+	const { common } = useLangData();
 	// const { onDateRangeChange, onStationRangeChange, onAlarmTypeChange, onAlarmPriorityChange, onRouteDirectionChange } =
 	// useFilterAPI();
 	useEffect(() => {}, []);
@@ -50,8 +56,8 @@ export default function Filter({ size, type, value, placeholder }: FilterProps) 
 							<Icon type="station" className="mr-1.5 h-5 w-5 text-slate-600" />
 						</div>
 						<span id="station">
-							{`${trainStations?.find((station) => station.id === stationRange?.from)?.name}역 - 
-							${trainStations?.find((station) => station.id === stationRange?.to)?.name}역`}
+							{`${trainStations?.find((station) => station.id === stationRange?.from)?.id}站 - 
+							${trainStations?.find((station) => station.id === stationRange?.to)?.id}站`}
 						</span>
 					</div>
 					<ModalStation isModalOpen={isModalOpen} closeModal={() => setIsModalOpen(false)} className="w-[801px]" />
@@ -69,7 +75,7 @@ export default function Filter({ size, type, value, placeholder }: FilterProps) 
 						<div className="text-slate-700">
 							<Icon type="alarm" className="mr-1.5 h-5 w-5 text-slate-600" />
 						</div>
-						<span id="alarmType">{`${alarmType?.length} 개 항목`}</span>
+						<span id="alarmType">{`${alarmType?.length} ${common?.get("C4712")}`}</span>
 					</div>
 					<ModalAlarmType isModalOpen={isModalOpen} closeModal={() => setIsModalOpen(false)} />
 				</>

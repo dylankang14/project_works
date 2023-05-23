@@ -18,23 +18,23 @@ export default function Nav() {
 	const menuItemsForUser: MenuTypes[] = [
 		{
 			href: "/",
-			title: `검측 ${common?.get("C4702")}`,
+			title: `${common?.get("C4102")}`,
 			icon: "alarm",
 		},
 		{
 			href: "/facility",
-			title: "시설물 관리",
+			title: `${common?.get("C4290")}`,
 			icon: "facility",
 		},
 		{
 			href: null,
-			title: "계정 관리",
+			title: `${common?.get("C0085")}`,
 			icon: "user",
 			submenu: [
-				{ href: "/user/info", title: "계정 정보" },
-				{ href: "/user/activity", title: "로그인 내역" },
-				{ href: "/user/work/fixed", title: `${common?.get("C0080")} 내역` },
-				{ href: "/user/security", title: "비밀번호 변경" },
+				{ href: "/user/info", title: `User ${common?.get("C0021")}` },
+				{ href: "/user/activity", title: `${common?.get("C1133")} ${common?.get("C0021")}` },
+				{ href: "/user/work/fixed", title: `${common?.get("C0080")} ${common?.get("C0021")}` },
+				{ href: "/user/security", title: `${common?.get("C5116")} ${common?.get("C0003")}` },
 			],
 		},
 	];
@@ -44,22 +44,25 @@ export default function Nav() {
 			title: `${common?.get("C6301")} 관리`,
 			icon: "office",
 			submenu: [
-				{ href: "/office/statistics", title: `${common?.get("C6301")} 현황/통계` },
-				{ href: "/office/user/list", title: "유저리스트" },
-				{ href: "/office/info", title: `${common?.get("C6301")} 정보` },
+				{ href: "/office/statistics", title: `${common?.get("C6301")} ${common?.get("C5116")}` },
+				{ href: "/office/user/list", title: `${common?.get("C1121")}` },
+				{ href: "/office/info", title: `${common?.get("C6301")} ${common?.get("C0021")}` },
 			],
 		},
 	];
 	const menuItemsForAdmin: MenuTypes[] = [
 		{
 			href: null,
-			title: "최고관리자",
+			title: `${common?.get("C4286")}`,
 			icon: "admin",
 			submenu: [
-				{ href: `/admin/office/${1}/statistics`, title: `${common?.get("C6301")} 현황/통계` },
-				{ href: `/admin/user/${1}/statistics`, title: "유저 현황/통계" },
-				{ href: "/admin/manage/office", title: `전체 ${common?.get("C6301")} 관리` },
-				{ href: "/admin/manage/user", title: "전체 유저 관리" },
+				{ href: `/admin/office/${1}/statistics`, title: `${common?.get("C6301")} ${common?.get("C5116")}` },
+				{ href: `/admin/user/${1}/statistics`, title: `User ${common?.get("C5116")}` },
+				{
+					href: "/admin/manage/office",
+					title: `${common?.get("C2305")} ${common?.get("C6301")} ${common?.get("C0021")}`,
+				},
+				{ href: "/admin/manage/user", title: `${common?.get("C2305")} ${common?.get("C1121")}` },
 			],
 		},
 	];

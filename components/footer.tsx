@@ -1,5 +1,5 @@
 import Image from "next/image";
-import logo from "../public/logo.svg";
+import logo from "../public/tra_logo.svg";
 import { useLangData } from "@/contexts/langContext";
 
 export default function Footer() {
@@ -16,7 +16,9 @@ export default function Footer() {
 				/>
 			</div>
 			<div className="co-detail flex gap-4 text-sm">
-				<div>2ISYS 검측 {common?.get("C4702")} 웹서비스</div>
+				<div>
+					{common?.get("C4623")} {common?.get("C4702")} Web Service
+				</div>
 			</div>
 		</footer>
 	);

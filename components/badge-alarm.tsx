@@ -8,7 +8,7 @@ export default function BadgeAlarm({ className }: BadgeAlarmProps) {
 	return (
 		// <Link href={`/alarm/list/${1}?from=${"OO역"}&to=${"OO역"}`}>
 		<Link
-			href={{ pathname: "/alarm/list/[id]", query: { id: 1, from: "1역", to: "2역" } }}
+			href={{ pathname: "/alarm/list/[id]", query: { id: 1, from: "1-station", to: "2-station" } }}
 			className={className ? className : ""}
 		>
 			<div className="flex cursor-pointer select-none items-center gap-px overflow-hidden rounded text-sm text-white">

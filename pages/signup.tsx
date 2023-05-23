@@ -4,7 +4,7 @@ import Head from "next/head";
 import Image from "next/image";
 import { ReactElement } from "react";
 import { useForm } from "react-hook-form";
-import logo from "../public/logo.svg";
+import logo from "../public/tra_logo.svg";
 import useMutation from "@/libs/client/useMutation";
 import { useLangData } from "@/contexts/langContext";
 
@@ -37,27 +37,34 @@ function SignUp() {
 				<div className="container flex max-w-md flex-col items-center gap-1">
 					<div className="mb-3 text-center">
 						<Image src={logo} alt="Logo" priority={true} />
-						<div className="py-2 text-lg font-medium">ITX {common?.get("C4702")} 웹서비스 회원가입</div>
+						<div className="py-2 text-lg font-medium">TRA {common?.get("C4702")} Web Service Sign up</div>
 					</div>
 					<form
 						onSubmit={handleSubmit(onValid)}
 						className="flex w-full flex-col gap-4 rounded-md border border-slate-300 bg-gray-50 px-5 pb-3 pt-5"
 					>
-						<Input className="w-full" register={register("email")} label="이메일" name="email" type="email" required />
-						<Input className="w-full" register={register("name")} label="이름" name="name" type="text" required />
-						<Input className="w-full" register={register("office")} label="소속" name="office" type="text" required />
+						<Input className="w-full" register={register("email")} label="Email" name="email" type="email" required />
 						<Input
 							className="w-full"
-							register={register("phone")}
-							label="전화번호"
-							name="phone"
-							type="number"
+							register={register("name")}
+							label={`${common?.get("C2040")}`}
+							name="name"
+							type="text"
 							required
 						/>
 						<Input
 							className="w-full"
+							register={register("office")}
+							label={`${common?.get("C5114")}`}
+							name="office"
+							type="text"
+							required
+						/>
+						<Input className="w-full" register={register("phone")} label="Phone" name="phone" type="number" required />
+						<Input
+							className="w-full"
 							register={register("password")}
-							label="비밀번호"
+							label={`${common?.get("C5116")}`}
 							name="password"
 							type="password"
 							required
@@ -65,13 +72,13 @@ function SignUp() {
 						<Input
 							className="w-full"
 							register={register("re_password")}
-							label="비밀번호 확인"
+							label="Re Password"
 							name="re_password"
 							type="password"
 							required
 						/>
 						<Button preventDefault={false} type="submit">
-							회원가입
+							Sign up
 						</Button>
 					</form>
 				</div>

@@ -3,14 +3,16 @@ import useDropdown from "@/libs/client/useDropdown";
 import { filterValue } from "@/libs/client/utility";
 import CheckboxGroup from "./checkbox-group";
 import Dropdown from "./dropdown";
+import { useLangData } from "@/contexts/langContext";
 
 export default function DropdownRouteDirection() {
 	const { ref, dropdownRef, toggleDropdown, isDropdownOpen, position } = useDropdown();
 	const { routeDirection } = useFilterData();
 	const { onRouteDirectionChange } = useFilterAPI();
+	const { common } = useLangData();
 	const routeDirectionList = [
-		{ id: 1, name: "상행" },
-		{ id: 2, name: "하행" },
+		{ id: 1, name: `${common?.get("C6420")}` },
+		{ id: 2, name: `${common?.get("C6421")}` },
 	];
 
 	return (
@@ -21,7 +23,7 @@ export default function DropdownRouteDirection() {
 				onClick={toggleDropdown}
 			>
 				<span className="" id="alarmPriority">
-					방향 : {filterValue(routeDirectionList, routeDirection!, true)}
+					{common?.get("C4126")} : {filterValue(routeDirectionList, routeDirection!, true)}
 				</span>
 			</div>
 			<Dropdown isDropdownOpen={isDropdownOpen} position={position} dropdownRef={dropdownRef}>

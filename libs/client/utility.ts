@@ -4,9 +4,9 @@ export function cls(...classnames: string[]) {
 
 export function filterValue(list: { id: number; [key: string]: any }[], value: number[], isText = false) {
 	if (list.length === value.length) {
-		return "모두";
+		return "All";
 	} else if (value.length === 0) {
-		return "없음";
+		return "None";
 	} else if (isText) {
 		return list.filter((item) => value.includes(item.id)).map((item) => item.name);
 	} else {

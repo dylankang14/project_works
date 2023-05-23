@@ -25,7 +25,7 @@ export default function DropdownAlarmPriority() {
 				onClick={toggleDropdown}
 			>
 				<span className="" id="alarmPriority">
-					상태 : {filterValue(alarmPriorityList, alarmPriority!)}
+					{common?.get("C4850")} : {filterValue(alarmPriorityList, alarmPriority!)}
 				</span>
 			</div>
 			<Dropdown isDropdownOpen={isDropdownOpen} position={position} dropdownRef={dropdownRef}>

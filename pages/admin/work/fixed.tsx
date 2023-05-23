@@ -3,12 +3,13 @@ import Card from "@/components/card";
 import CardAlarm, { AlarmProps } from "@/components/card-alarm";
 import CardSummary from "@/components/card-summary";
 import Filter from "@/components/filter";
-
 import Pagination from "@/components/pagination";
+import { useLangData } from "@/contexts/langContext";
 import { paginate } from "@/libs/client/utility";
 import { useState } from "react";
 
 export default function Fixed() {
+	const { common } = useLangData();
 	const data = Array.from(Array(5).keys()).map((i) => ({
 		id: i,
 		priority: i % 2,
@@ -35,7 +36,7 @@ export default function Fixed() {
 			<CardSummary />
 			<Card title="로그인 통계 그래프">
 				<div className="p-4">
-					<div className="flex h-52 items-center justify-center bg-gray-100">그래프 이미지</div>
+					<div className="flex h-52 items-center justify-center bg-gray-100">{common?.get("C4116")}</div>
 				</div>
 			</Card>
 			<div className="">

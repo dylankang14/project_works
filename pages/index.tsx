@@ -42,7 +42,7 @@ export default function Home() {
 				) : (
 					<div className="flex gap-1">
 						<Button size="sm" color="blue" icon="filter" onClick={() => setIsDrawerOpen(true)}>
-							필터옵션
+							Filter
 						</Button>
 						<ModalFilter isModalOpen={isDrawerOpen} closeModal={() => setIsDrawerOpen(false)} />
 					</div>

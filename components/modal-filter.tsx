@@ -4,8 +4,10 @@ import ModalVertical from "./modal-vertical";
 import Filter from "./filter";
 import Button from "./button";
 import Icon from "./icon";
+import { useLangData } from "@/contexts/langContext";
 
 export default function ModalFilter({ isModalOpen, closeModal }: ModalProps) {
+	const { common } = useLangData();
 	return (
 		<ModalVertical isModalOpen={isModalOpen} closeModal={closeModal} className="rtl right-0 min-w-[200px]">
 			<aside
@@ -14,7 +16,7 @@ export default function ModalFilter({ isModalOpen, closeModal }: ModalProps) {
 				)}
 			>
 				<div className="mb-3 flex justify-between border-b border-white/30 p-2 text-white">
-					<div>필터 옵션</div>
+					<div>Filter</div>
 					<div onClick={closeModal} className="cursor-pointer">
 						<Icon type="xMark" />
 					</div>
@@ -26,7 +28,7 @@ export default function ModalFilter({ isModalOpen, closeModal }: ModalProps) {
 				<Filter type="routeDirection" />
 				<div className="absolute left-0 bottom-0 w-full p-2">
 					<Button size="sm" className="w-full cursor-pointer" onClick={closeModal}>
-						확인
+						{common?.get("C6350")}
 					</Button>
 				</div>
 			</aside>

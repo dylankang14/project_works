@@ -3,7 +3,7 @@ import { ModalProps } from "./modal";
 import ModalVertical from "./modal-vertical";
 import Nav from "./nav";
 import Image from "next/image";
-import logo from "../public/logo_w.svg";
+import logo from "../public/tra_logo_w.svg";
 
 export default function ModalAside({ isModalOpen, closeModal }: ModalProps) {
 	return (

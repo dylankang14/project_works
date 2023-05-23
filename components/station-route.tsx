@@ -112,7 +112,7 @@ export default function StationRoute() {
 														: "bg-slate-400"
 												)}
 											>
-												{innerItem.name}역
+												{index + innerIndex + 1}-站
 											</div>
 											<Icon
 												type="arrowLeft"

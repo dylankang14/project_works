@@ -19,16 +19,22 @@ export default function DropdownUser() {
 			<Dropdown isDropdownOpen={isDropdownOpen} position={position} dropdownRef={dropdownRef} direction={"left"}>
 				<div className="flex flex-col gap-2">
 					<Link href={"/user/info"}>
-						<div className="hover:font-bold"> 계정 정보</div>
+						<div className="hover:font-bold"> User {common?.get("C0021")}</div>
 					</Link>
 					<Link href={"/user/activity"}>
-						<div className="hover:font-bold"> 로그인 내역</div>
+						<div className="hover:font-bold">
+							{common?.get("C1133")} {common?.get("C0021")}
+						</div>
 					</Link>
 					<Link href={"/user/work/fixed"}>
-						<div className="hover:font-bold"> {common?.get("C0080")} 내역</div>
+						<div className="hover:font-bold">
+							{common?.get("C0080")} {common?.get("C0021")}
+						</div>
 					</Link>
 					<Link href={"/user/security"}>
-						<div className="hover:font-bold"> 비밀번호 변경</div>
+						<div className="hover:font-bold">
+							{common?.get("C5116")} {common?.get("C0003")}
+						</div>
 					</Link>
 				</div>
 			</Dropdown>

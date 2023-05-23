@@ -16,7 +16,10 @@ export default function CardSummary() {
 					</div>
 					<div className="mt-1 justify-between">
 						<div className="text-center font-semibold">
-							{common?.get("C0080")} <span className="text-2xl">18</span>
+							{common?.get("C0080")}
+							<div>
+								<span className="text-2xl">18</span>
+							</div>
 						</div>
 						{/* <div className="text-center font-semibold">
 							조치율 <span className="text-2xl">54.5</span>%
@@ -34,10 +37,13 @@ export default function CardSummary() {
 						</div>
 					</div>
 					<div className="mt-1 justify-between">
-						<div className="text">
-							{common?.get("C0080")} <span className="text-2xl">14</span>
+						<div className="text-center">
+							{common?.get("C0080")}
+							<div>
+								<span className="text-2xl">14</span>
+							</div>
 						</div>
-						{/* <div className="text">
+						{/* <div className="text-center">
 							조치율 <span className="text-2xl">56</span>%
 						</div> */}
 					</div>
@@ -53,10 +59,13 @@ export default function CardSummary() {
 						</div>
 					</div>
 					<div className="mt-1 justify-between">
-						<div className="text">
-							{common?.get("C0080")} <span className="text-2xl">4</span>
+						<div className="text-center">
+							{common?.get("C0080")}
+							<div>
+								<span className="text-2xl">4</span>
+							</div>
 						</div>
-						{/* <div className="text">
+						{/* <div className="text-center">
 							조치율 <span className="text-2xl">50</span>%
 						</div> */}
 					</div>

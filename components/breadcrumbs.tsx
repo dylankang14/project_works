@@ -12,11 +12,11 @@ export default function Breadcrumbs() {
 			<Link href="/" className="px-2">
 				<Icon type="home" className="h-5 w-5 text-slate-600" />
 			</Link>
-			{pathList.map((path, index) => (
+			{/* {pathList.map((path, index) => (
 				<Link key={index} href={`/${pathList.slice(0, index + 1).join("/")}`}>
 					{path} /
 				</Link>
-			))}
+			))} */}
 		</div>
 	);
 }

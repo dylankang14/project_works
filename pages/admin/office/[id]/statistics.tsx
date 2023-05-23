@@ -37,7 +37,7 @@ export default function AllOfficeStatistics() {
 			<CardSummary />
 			<Card title="전체 통계 그래프">
 				<div className="p-4">
-					<div className="flex h-52 items-center justify-center bg-gray-100">그래프 이미지</div>
+					<div className="flex h-52 items-center justify-center bg-gray-100">{common?.get("C4116")}</div>
 				</div>
 			</Card>
 			<CardTable hasLink={true} pathname="admin/office" data={data} dataType={dataType} />

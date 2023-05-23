@@ -30,7 +30,7 @@ export default function DetailReport() {
 						<div className="grid grid-cols-[1fr_max-content] gap-2">
 							<div className="flex flex-col items-center justify-center border border-black px-2 py-3.5">
 								<div className="text-lg font-bold">선로변형 레일마모 보고서</div>
-								<div className="font-bold">검지구건 : 서울역 - 부산 (하선)</div>
+								<div className="font-bold">검지구건 : 서울站 - 부산 (하선)</div>
 							</div>
 							<table className="h-full border-separate border-spacing-0 border-t border-l border-black text-center">
 								<tbody>

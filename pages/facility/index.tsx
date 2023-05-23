@@ -5,12 +5,12 @@ import { useLangData } from "@/contexts/langContext";
 
 export default function Facility() {
 	const { common } = useLangData();
-	const dataType: string[] = ["순서", "시설물명", "전체갯수", `${common?.get("C4702")}`];
+	const dataType: string[] = ["No", `${common?.get("C6401")}`, "Total", `${common?.get("C4702")}`];
 	const data = Array.from(Array(20).keys()).map((i) => ({
-		id: i,
-		name: `시설물-${i}`,
-		count: `2${i}`,
-		alarmCount: `2${i}`,
+		id: i + 1,
+		name: `Facility-${i}`,
+		count: `${i + 1}`,
+		alarmCount: `${i + 1}`,
 	}));
 
 	return (

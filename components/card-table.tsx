@@ -33,8 +33,8 @@ export default function CardTable({ title, data, dataType, hasLink = false, path
 				<table className="w-full table-auto text-slate-500">
 					<thead>
 						<tr>
-							{dataType.map((i) => (
-								<th key={i} className="border-b border-slate-300 p-2 pt-1">
+							{dataType.map((i, index) => (
+								<th key={index} className="border-b border-slate-300 p-2 pt-1">
 									{i}
 								</th>
 							))}

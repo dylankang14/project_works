@@ -6,7 +6,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { ReactElement } from "react";
 import { useForm } from "react-hook-form";
-import logo from "../public/logo.svg";
+import logo from "../public/tra_logo.svg";
 import useMutation from "@/libs/client/useMutation";
 import { useLangData } from "@/contexts/langContext";
 
@@ -38,23 +38,23 @@ function Login() {
 				<div className="container flex max-w-xs flex-col items-center gap-1">
 					<div className="mb-3 text-center">
 						<Image src={logo} alt="Logo" priority={true} />
-						<div className="py-2 text-lg font-medium">ITX {common?.get("C4702")} 웹서비스 로그인</div>
+						<div className="py-2 text-lg font-medium">TRA {common?.get("C4702")} Web Service Login</div>
 					</div>
 					<form
 						onSubmit={handleSubmit(onValid)}
 						className="flex w-full flex-col gap-4 rounded-md border border-slate-300 bg-gray-50 px-5 pb-3 pt-5"
 					>
-						<Input className="w-full" register={register("id")} label="이메일" name="id" type="text" required />
+						<Input className="w-full" register={register("id")} label="Email" name="id" type="text" required />
 						<Input
 							className="w-full"
 							register={register("password")}
-							label="비밀번호"
+							label={`${common?.get("C5116")}`}
 							name="password"
 							type="password"
 							required
 						/>
 						<Button preventDefault={false} type="submit">
-							로그인{common?.get("c1134")}
+							{common?.get("C1133")}
 						</Button>
 					</form>
 					<div className="mt-2 flex w-full flex-wrap">
@@ -62,7 +62,7 @@ function Login() {
 							href="/signup"
 							className="flex-1 cursor-pointer rounded-md border border-slate-300 bg-gray-50 p-2 text-center text-blue-700 hover:bg-blue-600 hover:text-white"
 						>
-							<span className="text-sm font-bold">회원가입</span>
+							<span className="text-sm font-bold">Register</span>
 						</Link>
 					</div>
 				</div>

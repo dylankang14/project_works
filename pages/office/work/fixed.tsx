@@ -29,7 +29,7 @@ export default function Fixed() {
 			<CardSummary />
 			<Card title="로그인 통계 그래프">
 				<div className="p-4">
-					<div className="flex h-52 items-center justify-center bg-gray-100">그래프 이미지</div>
+					<div className="flex h-52 items-center justify-center bg-gray-100">{common?.get("C4116")}</div>
 				</div>
 			</Card>
 			<div className="">

@@ -43,7 +43,7 @@ export default function ModalInputRepair({ isModalOpen, closeModal, className }:
 						<Input name="file" type="file" register={register("repairImage")} />
 					</div>
 					<div className="flex justify-center gap-2 pb-2 pt-4">
-						<Button preventDefault={false}>확인</Button>
+						<Button preventDefault={false}>{common?.get("C6350")}</Button>
 						<Button color="red" onClick={closeModal}>
 							취소
 						</Button>

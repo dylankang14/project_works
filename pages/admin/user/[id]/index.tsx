@@ -7,8 +7,10 @@ import CardAlarm, { AlarmProps } from "@/components/card-alarm";
 import Pagination from "@/components/pagination";
 import { paginate } from "@/libs/client/utility";
 import { useState } from "react";
+import { useLangData } from "@/contexts/langContext";
 
 export default function UserStatistics() {
+	const { common } = useLangData();
 	const data = Array.from(Array(5).keys()).map((i) => ({
 		id: i,
 		priority: i % 2,
@@ -36,7 +38,7 @@ export default function UserStatistics() {
 			<CardSummary />
 			<Card title="조치완료 통계 그래프">
 				<div className="p-4">
-					<div className="flex h-52 items-center justify-center bg-gray-100">그래프 이미지</div>
+					<div className="flex h-52 items-center justify-center bg-gray-100">{common?.get("C4116")}</div>
 				</div>
 			</Card>
 			<div className="">
