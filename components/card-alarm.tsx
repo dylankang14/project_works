@@ -15,6 +15,7 @@ export interface AlarmProps {
 export default function CardAlarm({ data: { id, priority, fixed } }: { data: AlarmProps }) {
 	const alarmStyle = useAlarmStyle(priority, fixed);
 	const [isModalOpen, setIsModalOpen] = useState(false);
+	const [isValModalOpen, setIsValModalOpen] = useState(false);
 
 	return (
 		<>
@@ -32,9 +33,14 @@ export default function CardAlarm({ data: { id, priority, fixed } }: { data: Ala
 							</span>
 							<span className="rounded border border-white px-1 text-sm">{fixed ? "조치완료" : "조치전"}</span>
 						</div>
-						<Button color="slate" size="sm" className="py-0.5" onClick={() => setIsModalOpen(true)}>
-							조치입력
-						</Button>
+						<div className="flex gap-1">
+							<Button color="slate" size="none" className="px-2 py-1 text-sm" onClick={() => setIsValModalOpen(true)}>
+								유효성
+							</Button>
+							<Button color="slate" size="none" className="px-2 py-1 text-sm" onClick={() => setIsModalOpen(true)}>
+								조치입력
+							</Button>
+						</div>
 						{/* <div>{isModalOpen ? "true" : "false"}</div> */}
 					</div>
 					<div className="flex justify-between p-3">
@@ -68,6 +74,7 @@ export default function CardAlarm({ data: { id, priority, fixed } }: { data: Ala
 					</div>
 				</div>
 			</Link>
+			<ModalInputRepair isModalOpen={isModalOpen} closeModal={() => setIsModalOpen(false)} />
 			<ModalInputRepair isModalOpen={isModalOpen} closeModal={() => setIsModalOpen(false)} />
 		</>
 	);

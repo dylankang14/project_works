@@ -21,11 +21,6 @@ export default function Facility() {
 					<Filter type="alarmPriority" />
 					<Filter type="routeDirection" />
 				</div>
-				<div>
-					<Button size="sm" color="slate" icon="print" iconPosition="right">
-						프린트
-					</Button>
-				</div>
 			</div>
 			<CardTable hasLink={true} pathname="alarm/detail" data={data} dataType={dataType} />
 		</>

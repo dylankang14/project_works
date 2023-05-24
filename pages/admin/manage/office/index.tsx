@@ -22,12 +22,9 @@ export default function ManageOffice() {
 					<Button size="sm" color="slate" icon="office">
 						사업소 생성
 					</Button>
-					<Button size="sm" color="slate" icon="print" iconPosition="right">
-						프린트
-					</Button>
 				</div>
 			</div>
-			<CardTable hasLink={true} pathname="admin/manage/office" data={data} dataType={dataType} pagination={true} />
+			<CardTable hasLink={true} pathname="admin/manage/office" data={data} dataType={dataType} />
 		</>
 	);
 }

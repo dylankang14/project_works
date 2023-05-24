@@ -175,16 +175,16 @@ export default function DetailReport() {
 			</div>
 			<div className="mt-4 flex justify-center gap-2 print:hidden">
 				<Button
+					size="md"
 					onClick={() => {
 						router.back();
 					}}
 				>
 					뒤로가기
 				</Button>
-				<Button id="savePdf" icon="download">
+				<Button size="md" id="savePdf" icon="download">
 					PDF
 				</Button>
-				<Button onClick={() => window.print()}>프린트</Button>
 			</div>
 			<div className="fixed">123</div>
 		</>

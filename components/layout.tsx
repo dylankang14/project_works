@@ -5,6 +5,7 @@ import Footer from "./footer";
 import Header from "./header";
 import useWindowDimensions from "@/libs/client/useWindowDimensions";
 import ModalAside from "./modal-aside";
+import Button from "./button";
 
 export interface ChildrenProp {
 	children: React.ReactNode;
@@ -14,7 +15,13 @@ export default function Layout({ children }: ChildrenProp) {
 	const [isDrawerOpen, setIsDrawerOpen] = useState(true);
 	const { device } = useWindowDimensions();
 	useEffect(() => {
-		if (device === "mobile") setIsDrawerOpen(false);
+		console.log(device);
+
+		if (device === "pc") {
+			setIsDrawerOpen(true);
+		} else {
+			setIsDrawerOpen(false);
+		}
 	}, [device]);
 	return (
 		<div id="wrap" className="relative z-0 flex min-h-screen flex-col bg-slate-50 text-sm print:bg-white">
@@ -28,13 +35,23 @@ export default function Layout({ children }: ChildrenProp) {
 				<main
 					className={cls(
 						"flex-1 px-4 py-3 transition-[margin] print:p-0",
-						device === "pc" ? (isDrawerOpen ? "-ml-0" : "-ml-60") : ""
+						device === "pc" ? (isDrawerOpen ? "-ml-0" : "-ml-[200px]") : ""
 					)}
 				>
-					<section className="container mx-auto print:w-[794px] xl:max-w-[1000px]">{children}</section>
+					<section className="mx-auto print:w-[794px] xl:max-w-[1000px]">{children}</section>
 				</main>
 			</div>
 			<Footer />
+			<div className="fixed right-2 bottom-2">
+				<Button
+					size="none"
+					color="slate"
+					icon="print"
+					iconPosition="right"
+					className="h-11 w-11 rounded-full shadow-sm"
+					onClick={() => window.print()}
+				/>
+			</div>
 		</div>
 	);
 }

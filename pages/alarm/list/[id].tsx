@@ -26,11 +26,6 @@ export default function AlarmList() {
 					<Filter type="alarmPriority" />
 					<Filter type="routeDirection" />
 				</div>
-				<div>
-					<Button size="sm" color="slate" icon="print" iconPosition="right" onClick={() => window.print()}>
-						프린트
-					</Button>
-				</div>
 			</div>
 			<div className="print:block">
 				{paginatedData.map((data) => (

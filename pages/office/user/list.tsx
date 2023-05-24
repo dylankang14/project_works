@@ -27,12 +27,9 @@ export default function UserList() {
 					<Button size="sm" color="slate" icon="filter">
 						검색필터
 					</Button>
-					<Button size="sm" color="slate" icon="print">
-						프린트
-					</Button>
 				</div>
 			</div>
-			<CardTable dataType={dataType} data={data} pagination={true} />
+			<CardTable dataType={dataType} data={data} />
 		</>
 	);
 }

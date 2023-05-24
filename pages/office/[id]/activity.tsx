@@ -17,16 +17,13 @@ export default function Activity() {
 			<Title title="로그인 내역" />
 			<div className="flex items-center justify-between">
 				<Filter type="date" />
-				<Button size="sm" color="slate" icon="print" iconPosition="right">
-					프린트
-				</Button>
 			</div>
 			<Card title="로그인 통계 그래프">
 				<div className="p-4">
 					<div className="flex h-52 items-center justify-center bg-gray-100">그래프 이미지</div>
 				</div>
 			</Card>
-			<CardTable title="로그인 내역" data={data} dataType={dataType} pagination={true} />
+			<CardTable title="로그인 내역" data={data} dataType={dataType} />
 		</>
 	);
 }

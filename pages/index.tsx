@@ -12,7 +12,7 @@ import ModalFilter from "@/components/modal-filter";
 
 export default function Home() {
 	const [isDrawerOpen, setIsDrawerOpen] = useState(false);
-	const { device } = useWindowDimensions();
+	const { width } = useWindowDimensions();
 	// const { data, error, isLoading } = useSWR(
 	// 	"http://192.168.0.168:8080/API/Master/CommonProcedureResult?procedureName=getAlarmType"
 	// );
@@ -24,12 +24,11 @@ export default function Home() {
 	// 	test({ ParamList: ["dfdf"], ProcedureName: "getAlarmType" });
 	// 	return () => {};
 	// }, [test]);
-	const [test, { data }] = useMutation("http://192.168.0.166:22080/API/Master/GetProcedureResult");
 
 	return (
 		<>
 			<div className="flex flex-wrap items-center justify-between print:hidden">
-				{device === "pc" ? (
+				{width! >= 768 ? (
 					<div className="flex gap-1">
 						<Filter type="dateRange" />
 						<Filter type="station" />
@@ -45,12 +44,6 @@ export default function Home() {
 						<ModalFilter isModalOpen={isDrawerOpen} closeModal={() => setIsDrawerOpen(false)} />
 					</div>
 				)}
-				<div>
-					{/* <button onClick={test2}>click</button> */}
-					<Button size="sm" color="slate" icon="print" iconPosition="right" onClick={() => window.print()}>
-						프린트
-					</Button>
-				</div>
 			</div>
 			<CardSummary />
 			<Card className="p-4">
