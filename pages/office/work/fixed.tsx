@@ -5,6 +5,9 @@ import CardSummary from "@/components/card-summary";
 import Filter from "@/components/filter";
 
 import Pagination from "@/components/pagination";
+import { useLangData } from "@/contexts/langContext";
+import { paginate } from "@/libs/client/utility";
+import { useState } from "react";
 
 export default function Fixed() {
 	const data = Array.from(Array(5).keys()).map((i) => ({
@@ -12,6 +15,11 @@ export default function Fixed() {
 		priority: i % 2,
 		fixed: i % 3 > 1,
 	}));
+	const pageSize = 15;
+	const [currentPage, setCurrentPage] = useState(1);
+	const onPageChange = (page: number) => setCurrentPage(page);
+	const paginatedData = paginate(data, currentPage, pageSize);
+	const { common } = useLangData();
 	return (
 		<>
 			<div className="flex items-center justify-between">
@@ -20,11 +28,7 @@ export default function Fixed() {
 					<Filter type="station" />
 					<Filter type="alarmType" />
 				</div>
-				<div>
-					<Button size="sm" color="slate" icon="print" iconPosition="right">
-						Print
-					</Button>
-				</div>
+				<div></div>
 			</div>
 			<CardSummary />
 			<Card title="로그인 통계 그래프">
@@ -36,7 +40,13 @@ export default function Fixed() {
 				{data.map((data) => (
 					<CardAlarm key={data.id} data={data} />
 				))}
-				<Pagination active={1} className="py-2" />
+				<Pagination
+					totalCount={data.length}
+					pageSize={pageSize}
+					currentPage={currentPage}
+					onPageChange={onPageChange}
+					className="py-2"
+				/>
 			</div>
 		</>
 	);

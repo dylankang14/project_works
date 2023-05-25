@@ -29,11 +29,7 @@ export default function UserStatistics() {
 					<Filter type="station" />
 					<Filter type="alarmType" />
 				</div>
-				<div>
-					<Button size="sm" color="slate" icon="print" iconPosition="right">
-						Print
-					</Button>
-				</div>
+				<div></div>
 			</div>
 			<CardSummary />
 			<Card title="조치완료 통계 그래프">

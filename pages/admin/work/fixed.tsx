@@ -27,11 +27,7 @@ export default function Fixed() {
 					<Filter type="station" />
 					<Filter type="alarmType" />
 				</div>
-				<div>
-					<Button size="sm" color="slate" icon="print" iconPosition="right">
-						Print
-					</Button>
-				</div>
+				<div></div>
 			</div>
 			<CardSummary />
 			<Card title="로그인 통계 그래프">

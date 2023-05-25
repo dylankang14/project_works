@@ -18,8 +18,8 @@ export default function ManageOffice() {
 		phone: `02-1234-1234`,
 		address: `서울특별시 중구 한강대로 405`,
 		status: `정상`,
-		createdAt: `2023년 2월 1일 14:00`,
-		lastLogin: `2023년 2월 9일 18:00`,
+		createdAt: `2023年 2月 1日 14:00`,
+		lastLogin: `2023年 2月 9日 18:00`,
 	}));
 	return (
 		<>
@@ -30,9 +30,6 @@ export default function ManageOffice() {
 				<div className="flex gap-1">
 					<Button size="sm" color="slate" icon="office">
 						{common?.get("C6301")} 생성
-					</Button>
-					<Button size="sm" color="slate" icon="print" iconPosition="right">
-						Print
 					</Button>
 				</div>
 			</div>

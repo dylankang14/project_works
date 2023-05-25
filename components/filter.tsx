@@ -17,11 +17,11 @@ interface FilterProps {
 
 export default function Filter({ size, type, value, placeholder }: FilterProps) {
 	const [isModalOpen, setIsModalOpen] = useState(false);
-	// const { trainStations } = useDefaultData();
-	const trainStations = Array.from(Array(14).keys()).map((i) => ({
-		id: i,
-		name: i,
-	}));
+	const { trainStations } = useDefaultData();
+	// const trainStations = Array.from(Array(14).keys()).map((i) => ({
+	// 	id: i,
+	// 	name: i,
+	// }));
 	const { dateRange, stationRange, alarmType, alarmPriority, routeDirection } = useFilterData();
 	const { common } = useLangData();
 	// const { onDateRangeChange, onStationRangeChange, onAlarmTypeChange, onAlarmPriorityChange, onRouteDirectionChange } =

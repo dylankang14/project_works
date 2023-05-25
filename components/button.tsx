@@ -7,7 +7,7 @@ interface ButtonProps {
 	color?: string;
 	icon?: string | null;
 	iconPosition?: string | null;
-	children: ReactNode;
+	children?: ReactNode;
 	onClick?: (e?: React.MouseEvent<HTMLButtonElement, MouseEvent> | null) => void;
 	hasContentInMobile?: string;
 	isWide?: boolean;
@@ -38,6 +38,7 @@ export default function Button({
 	...rest
 }: ButtonProps) {
 	const sizes: Sizes = {
+		none: "",
 		xs: "text-xs px-1 py-0.5",
 		sm: "text-sm px-2 py-1.5",
 		md: "text-base px-4 py-2",
@@ -53,11 +54,12 @@ export default function Button({
 		<button
 			{...rest}
 			className={cls(
-				"flex items-center justify-center gap-1 rounded font-[500] text-white",
+				"flex items-center justify-center rounded font-[500] text-white",
 				sizes[size],
 				colors[color],
 				iconPosition === "right" ? "flex-row-reverse" : "",
 				isWide ? "w-full" : "",
+				children ? "gap-1 " : "",
 				className
 			)}
 			onClick={(e) => {

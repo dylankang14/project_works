@@ -16,7 +16,7 @@ export interface AlarmProps {
 export default function CardAlarm({ data: { id, priority, fixed } }: { data: AlarmProps }) {
 	const alarmStyle = useAlarmStyle(priority, fixed);
 	const [isModalOpen, setIsModalOpen] = useState(false);
-	const { common } = useLangData();
+	const { common, alarmcode } = useLangData();
 
 	return (
 		<>
@@ -32,15 +32,12 @@ export default function CardAlarm({ data: { id, priority, fixed } }: { data: Ala
 								{priority === 0 ? common?.get("C4701") : common?.get("C0031")}
 							</span>
 							<span>
-								검측일시 <span className="font-[500]">2023-04-06 09:5{id}:12</span>
+								{common?.get("C5080")} <span className="font-[500]">2023-04-06 09:5{id}:12</span>
 							</span>
 							<span className="rounded border border-white px-1 text-sm">
-								{fixed ? common?.get("C0080") : "조치전"}
+								{fixed ? common?.get("C0080") : common?.get("C0046")}
 							</span>
 						</div>
-						<Button color="slate" size="sm" className="py-0.5" onClick={() => setIsModalOpen(true)}>
-							{common?.get("C6411")}
-						</Button>
 						{/* <div>{isModalOpen ? "true" : "false"}</div> */}
 					</div>
 					<div className="flex justify-between p-3">
@@ -53,23 +50,20 @@ export default function CardAlarm({ data: { id, priority, fixed } }: { data: Ala
 							<div>123 mm</div>
 						</div> */}
 						<div className="grid auto-rows-max grid-cols-[max-content_1fr] gap-x-3 gap-y-1">
-							<div className="font-[500]">{common?.get("c4123")}</div>
+							<div className="font-[500]">{common?.get("C4123")}</div>
 							<div>20-13</div>
-							<div className="font-[500]">{common?.get("c4115")}</div>
+							<div className="font-[500]">{common?.get("C4115")}</div>
 							<div>109.321km</div>
-							<div className="font-[500]">좌측 편마모</div>
-							<div>9.96 mm</div>
-							<div className="font-[500]">좌측 수직마모</div>
-							<div>8.88 mm</div>
-							<div className="font-[500]">우측 편마모</div>
-							<div>6.59 mm</div>
-							<div className="font-[500]">우측 수직마모</div>
-							<div>5.85 mm</div>
+							<div className="font-[500]">{alarmcode?.get("1100")}</div>
+							<div>5300.12 mm</div>
+							<div className="font-[500]">{alarmcode?.get("1101")}</div>
+							<div>9.58 mm</div>
+							<div className="font-[500]">{alarmcode?.get("1200")}</div>
+							<div>1.12 mm</div>
 						</div>
 						{/* <div className="flex h-48 w-80 items-center justify-center bg-slate-300">image</div> */}
 						<div className="flex h-48 items-center justify-center gap-1">
-							<Image alt="rail" width={200} height={200} src="/rail_left.png" />
-							<Image alt="rail" width={200} height={200} src="/rail_right.png" />
+							<Image alt="rail" width={570} height={300} src="/line-height-sample.jpg" />
 						</div>
 					</div>
 				</div>

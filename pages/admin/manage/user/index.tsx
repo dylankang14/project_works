@@ -24,9 +24,6 @@ export default function ManageUser() {
 					<Button size="sm" color="slate" icon="createUser">
 						유저 생성
 					</Button>
-					<Button size="sm" color="slate" icon="print" iconPosition="right">
-						Print
-					</Button>
 				</div>
 			</div>
 			<CardTable hasLink={true} pathname="admin/manage/user" data={data} dataType={dataType} />

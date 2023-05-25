@@ -16,7 +16,7 @@ export default function Home() {
 	const { device } = useWindowDimensions();
 	// const { data } = useLangData();
 	// console.log(data);
-	// const [lang, { data }] = useMutation("http://192.168.0.145:22080/API/Master/GetProcedureResult");
+	// const [lang, { data }] = useMutation("http://121.139.31.25:23002/API/Master/GetProcedureResult");
 	// useEffect(() => {
 	// 	lang({
 	// 		procedureName: "proc_multi_language_bygroup",
@@ -47,12 +47,7 @@ export default function Home() {
 						<ModalFilter isModalOpen={isDrawerOpen} closeModal={() => setIsDrawerOpen(false)} />
 					</div>
 				)}
-				<div>
-					{/* <button onClick={test2}>click</button> */}
-					<Button size="sm" color="slate" icon="print" iconPosition="right" onClick={() => window.print()}>
-						Print
-					</Button>
-				</div>
+				<div>{/* <button onClick={test2}>click</button> */}</div>
 			</div>
 			<CardSummary />
 			<Card className="p-4">

@@ -28,11 +28,7 @@ export default function AllOfficeStatistics() {
 					<Filter type="office" />
 					<Filter type="alarmType" />
 				</div>
-				<div>
-					<Button size="sm" color="slate" icon="print" iconPosition="right">
-						Print
-					</Button>
-				</div>
+				<div></div>
 			</div>
 			<CardSummary />
 			<Card title="전체 통계 그래프">

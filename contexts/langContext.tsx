@@ -41,7 +41,7 @@ export function LangProvider({ children }: { children: ReactNode }) {
 	const lang = "taiwanese";
 	const fetchLang = (lang: string, groups: Groups[]) => {
 		groups.map((group) => {
-			fetch("http://192.168.0.145:22080/API/Master/GetProcedureResult", {
+			fetch("http://121.139.31.25:23002/API/Master/GetProcedureResult", {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json",

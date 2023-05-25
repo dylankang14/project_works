@@ -23,7 +23,7 @@ function Login() {
 		if (loading) return;
 		login(loginForm);
 		console.log(loginForm);
-		// router.push("/");
+		router.push("/");
 	};
 	console.log(data);
 	const { common } = useLangData();
@@ -44,14 +44,13 @@ function Login() {
 						onSubmit={handleSubmit(onValid)}
 						className="flex w-full flex-col gap-4 rounded-md border border-slate-300 bg-gray-50 px-5 pb-3 pt-5"
 					>
-						<Input className="w-full" register={register("id")} label="Email" name="id" type="text" required />
+						<Input className="w-full" register={register("id")} label="Email" name="id" type="text" />
 						<Input
 							className="w-full"
 							register={register("password")}
 							label={`${common?.get("C5116")}`}
 							name="password"
 							type="password"
-							required
 						/>
 						<Button preventDefault={false} type="submit">
 							{common?.get("C1133")}

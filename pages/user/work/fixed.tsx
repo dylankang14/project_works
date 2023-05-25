@@ -23,21 +23,17 @@ export default function Fixed() {
 	const { common } = useLangData();
 	return (
 		<>
-			<Title title={`홍길동 님의 ${common?.get("C0080")} 리스트`} />
+			<Title title={`${common?.get("C0080")} List`} />
 			<div className="flex items-center justify-between">
 				<div className="flex gap-1">
 					<Filter type="date" />
 					<Filter type="station" />
 					<Filter type="alarmType" />
 				</div>
-				<div>
-					<Button size="sm" color="slate" icon="print" iconPosition="right">
-						Print
-					</Button>
-				</div>
+				<div></div>
 			</div>
 			<CardSummary />
-			<Card title={`${common?.get("C0080")} 통계 그래프`}>
+			<Card title={`${common?.get("C0080")} ${common?.get("C3892")}`}>
 				<div className="p-4">
 					<div className="flex h-52 items-center justify-center bg-gray-100">{common?.get("C4116")}</div>
 				</div>

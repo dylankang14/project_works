@@ -22,7 +22,7 @@ export default function User() {
 						disabled={true}
 						className="w-full"
 					/>
-					<Input label="직위" name="position" type="text" required={false} disabled={true} className="w-full" />
+					{/* <Input label="직위" name="position" type="text" required={false} disabled={true} className="w-full" /> */}
 					<Input
 						label={`${common?.get("C5104")}`}
 						name="permission"
@@ -31,7 +31,7 @@ export default function User() {
 						disabled={true}
 						className="w-full"
 					/>
-					<Input
+					{/* <Input
 						label="담당노선"
 						name="allowedStation"
 						type="text"
@@ -39,7 +39,7 @@ export default function User() {
 						disabled={true}
 						className="w-full"
 					/>
-					<Input label="담당분야" name="allowedAlarm" type="text" required={false} disabled={true} className="w-full" />
+					<Input label="담당분야" name="allowedAlarm" type="text" required={false} disabled={true} className="w-full" /> */}
 					<Button className="my-1">Update</Button>
 				</div>
 			</Card>

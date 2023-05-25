@@ -23,11 +23,7 @@ export default function Facility() {
 					<Filter type="alarmPriority" />
 					<Filter type="routeDirection" />
 				</div>
-				<div>
-					<Button size="sm" color="slate" icon="print" iconPosition="right" onClick={() => window.print()}>
-						Print
-					</Button>
-				</div>
+				<div></div>
 			</div>
 			<CardTable hasLink={true} data={data} dataType={dataType} />
 		</>

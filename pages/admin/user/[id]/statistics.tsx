@@ -33,11 +33,7 @@ export default function UserStatistics() {
 					<Filter type="office" />
 					<Filter type="alarmType" />
 				</div>
-				<div>
-					<Button size="sm" color="slate" icon="print" iconPosition="right">
-						Print
-					</Button>
-				</div>
+				<div></div>
 			</div>
 			<CardSummary />
 			<CardTable hasLink={true} pathname="admin/user" data={data} dataType={dataType} />

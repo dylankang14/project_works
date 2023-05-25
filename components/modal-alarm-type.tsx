@@ -22,23 +22,10 @@ export default function ModalAlarmType({ isModalOpen, closeModal, className }: M
 	const { alarmtype: alarmtypeText, common, alarmcode: alarmcodeText } = useLangData();
 
 	const alarmTypeText = [
-		alarmtypeText?.get("C3901"),
-		alarmtypeText?.get("C3902"),
-		alarmtypeText?.get("C3903"),
-		alarmtypeText?.get("C3904"),
-		alarmtypeText?.get("C3905"),
-		alarmtypeText?.get("C3906"),
-		alarmtypeText?.get("C3907"),
-		alarmtypeText?.get("C3908"),
-		common?.get("C4260"),
-		common?.get("C4261"),
-		common?.get("C4190"),
-		alarmcodeText?.get("2200"),
-		common?.get("C4886"),
-		alarmcodeText?.get("2400"),
-		alarmcodeText?.get("2500"),
-		alarmtypeText?.get("C4529"),
-		alarmtypeText?.get("C4530"),
+		alarmtypeText?.get("C3895"),
+		alarmtypeText?.get("C4002"),
+		alarmtypeText?.get("C4003"),
+		alarmtypeText?.get("C3897"),
 	];
 
 	const handleCheck = (checkedId: number) => {

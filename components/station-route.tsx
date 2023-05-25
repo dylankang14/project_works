@@ -16,6 +16,7 @@ export default function StationRoute() {
 	const [trainRouteStations, setTrainRouteStations] = useState<DefaultTrainStation[]>();
 	const { onStationRangeChange } = useFilterAPI();
 	const { stationRange, trainRoute } = useFilterData();
+	// const { trainStations, trainRoutes } = useDefaultData();
 	const { trainStations, trainRoutes } = useDefaultData();
 	const [firstIndex, setFirstIndex] = useState<number | null>();
 
@@ -70,9 +71,13 @@ export default function StationRoute() {
 	}, []);
 
 	useEffect(() => {
+		// if (trainRoute && trainRoutes && trainStations) {
+		// 	const trainRouteIds = trainRoutes[trainRoute].edgeIds.split(",").map((i) => parseInt(i));
+		// 	setTrainRouteStations(trainStations.filter((station) => trainRouteIds.includes(station.id)));
+		// }
 		if (trainRoute && trainRoutes && trainStations) {
-			const trainRouteIds = trainRoutes[trainRoute].edgeIds.split(",").map((i) => parseInt(i));
-			setTrainRouteStations(trainStations.filter((station) => trainRouteIds.includes(station.id)));
+			const trainRouteIds = Array.from(Array(20).keys());
+			setTrainRouteStations(trainStations.filter((station) => trainRouteIds.includes(station.id - 1)));
 		}
 	}, [trainRoute, trainRoutes, trainStations]);
 	return (

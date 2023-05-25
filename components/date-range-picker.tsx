@@ -1,5 +1,5 @@
 import React, { forwardRef, useState } from "react";
-import { ko } from "date-fns/locale";
+import { zhTW } from "date-fns/locale";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.min.css";
 import { addDays, subDays } from "date-fns";
@@ -41,7 +41,7 @@ export default function DateRangePicker() {
 				selectsRange={true}
 				startDate={startDate}
 				endDate={endDate}
-				locale={ko}
+				locale={zhTW}
 				onChange={onChange}
 				dateFormat="yyyy-MM-dd"
 				maxDate={limitRange}

@@ -80,31 +80,57 @@ export function FilterProvider({ children }: { children: ReactNode }) {
 	const defaultDate = new Date();
 	defaultDate.setDate(defaultDate.getDate() - 1);
 	const fetcher = (url: string) => fetch(url).then((response) => response.json());
-	const { data: defaultAlarmType } = useSWR<DefaultAlarmType[]>(
-		"http://192.168.0.145:22080/API/Master/CommonProcedureResult?procedureName=proc_getAlarmType",
-		fetcher,
+	// const { data: defaultAlarmType } = useSWR<DefaultAlarmType[]>(
+	// 	"http://121.139.31.25:23002/API/Master/CommonProcedureResult?procedureName=proc_getAlarmType",
+	// 	fetcher,
+	// 	{
+	// 		onSuccess: (data) => {
+	// 			const alarmTypeIds = data.map((i) => i.ALARMTYPE_ID);
+	// 			dispatch({ type: "updateAlarmType", alarmType: alarmTypeIds });
+	// 		},
+	// 	}
+	// );
+	const defaultAlarmType = [
 		{
-			onSuccess: (data) => {
-				const alarmTypeIds = data.map((i) => i.ALARMTYPE_ID);
-				dispatch({ type: "updateAlarmType", alarmType: alarmTypeIds });
-			},
-		}
-	);
+			WORKCLASSTYPE_FK: 1,
+			ALARMTYPE_ID: 1,
+			DESCRIPTION: "123",
+			NAME: "123",
+		},
+		{
+			WORKCLASSTYPE_FK: 1,
+			ALARMTYPE_ID: 2,
+			DESCRIPTION: "123",
+			NAME: "123",
+		},
+		{
+			WORKCLASSTYPE_FK: 1,
+			ALARMTYPE_ID: 3,
+			DESCRIPTION: "123",
+			NAME: "123",
+		},
+		{
+			WORKCLASSTYPE_FK: 1,
+			ALARMTYPE_ID: 4,
+			DESCRIPTION: "123",
+			NAME: "123",
+		},
+	];
 	const { data: defaultTrainStations } = useSWR<DefaultTrainStation[]>(
-		"http://192.168.0.145:22080/API/Master/CommonProcedureResult?procedureName=proc_getTrainStation",
+		"http://121.139.31.25:23002/API/Master/CommonProcedureResult?procedureName=proc_getTrainStation",
 		fetcher
 	);
 	const { data: trainRoutes } = useSWR<TrainRouteType[]>(
-		"http://192.168.0.145:22080/API/Master/CommonProcedureResult?procedureName=proc_getTrainRoute",
+		"http://121.139.31.25:23002/API/Master/CommonProcedureResult?procedureName=proc_getTrainRoute",
 		fetcher,
 		{
 			onSuccess: (data) => {
 				const selectedRouteIds = data[state.trainRoute].edgeIds
 					.split(",")
 					.map((i) => parseInt(i))
-					.sort();
+					.sort((a, b) => a - b);
 				const [first, last] = [selectedRouteIds[0], selectedRouteIds[selectedRouteIds.length - 1]];
-				dispatch({ type: "updateStationRange", stationRange: { from: first, to: last } });
+				// dispatch({ type: "updateStationRange", stationRange: { from: first, to: last } });
 			},
 		}
 	);
@@ -119,8 +145,9 @@ export function FilterProvider({ children }: { children: ReactNode }) {
 
 	const [state, dispatch] = useReducer(reducer, {
 		dateRange: defaultData.dateRange,
-		stationRange: { from: null, to: null },
-		alarmType: [],
+		// stationRange: { from: null, to: null },
+		stationRange: { from: 1, to: 20 },
+		alarmType: [1, 2, 3, 4],
 		alarmPriority: [1, 2, 3],
 		routeDirection: [1, 2],
 		trainRoute: 1,
