@@ -14,7 +14,11 @@ export default function Layout({ children }: ChildrenProp) {
 	const [isDrawerOpen, setIsDrawerOpen] = useState(true);
 	const { device } = useWindowDimensions();
 	useEffect(() => {
-		if (device === "mobile") setIsDrawerOpen(false);
+		if (device === "pc") {
+			setIsDrawerOpen(true);
+		} else {
+			setIsDrawerOpen(false);
+		}
 	}, [device]);
 	return (
 		<div id="wrap" className="relative z-0 flex min-h-screen flex-col bg-slate-50 text-sm print:bg-white">

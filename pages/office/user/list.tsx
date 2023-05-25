@@ -32,7 +32,7 @@ export default function UserList() {
 					</Button>
 				</div>
 			</div>
-			<CardTable dataType={dataType} data={data} pagination={true} />
+			<CardTable dataType={dataType} data={data} />
 		</>
 	);
 }

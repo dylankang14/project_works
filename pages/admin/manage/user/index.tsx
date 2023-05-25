@@ -29,7 +29,7 @@ export default function ManageUser() {
 					</Button>
 				</div>
 			</div>
-			<CardTable hasLink={true} pathname="admin/manage/user" data={data} dataType={dataType} pagination={true} />
+			<CardTable hasLink={true} pathname="admin/manage/user" data={data} dataType={dataType} />
 		</>
 	);
 }
