@@ -1,5 +1,4 @@
 import { cls } from "@/libs/client/utility";
-import { useState } from "react";
 import Nav from "./nav";
 
 interface AsideProps {

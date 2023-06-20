@@ -9,6 +9,8 @@ import useSWR from "swr";
 import { useEffect, useState } from "react";
 import useWindowDimensions from "@/libs/client/useWindowDimensions";
 import ModalFilter from "@/components/modal-filter";
+import Input from "@/components/input";
+import HeaderFilter from "@/components/header-filter";
 
 export default function Home() {
 	const [isDrawerOpen, setIsDrawerOpen] = useState(false);
@@ -28,22 +30,7 @@ export default function Home() {
 	return (
 		<>
 			<div className="flex flex-wrap items-center justify-between print:hidden">
-				{width! >= 768 ? (
-					<div className="flex gap-1">
-						<Filter type="dateRange" />
-						<Filter type="station" />
-						<Filter type="alarmType" />
-						<Filter type="alarmPriority" />
-						<Filter type="routeDirection" />
-					</div>
-				) : (
-					<div className="flex gap-1">
-						<Button size="sm" color="blue" icon="filter" onClick={() => setIsDrawerOpen(true)}>
-							필터옵션
-						</Button>
-						<ModalFilter isModalOpen={isDrawerOpen} closeModal={() => setIsDrawerOpen(false)} />
-					</div>
-				)}
+				<HeaderFilter />
 			</div>
 			<CardSummary />
 			<Card className="p-4">

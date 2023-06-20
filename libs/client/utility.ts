@@ -18,3 +18,7 @@ export function paginate<T>(items: T[], pageNumber: number, pageSize: number) {
 	const startIndex = (pageNumber - 1) * pageSize;
 	return items.slice(startIndex, startIndex + pageSize);
 }
+
+export function getType(target: any) {
+	return Object.prototype.toString.call(target).slice(8, -1);
+}

@@ -4,8 +4,11 @@ import Card from "./card";
 export default function CardSummary() {
 	return (
 		<Card title="알람 요약정보">
-			<div className="flex gap-x-4 px-4 py-4     text-white">
-				<Link href={`/alarm/list/${1}`} className="flex flex-1 items-end justify-around px-6 py-3 text-black">
+			<div className="flex flex-wrap gap-x-4 gap-y-2 px-4 py-4 text-white">
+				<Link
+					href={`/alarm/list/${1}`}
+					className="flex flex-1 shrink-0 basis-full items-end justify-around px-6 py-3 text-black sm:basis-0"
+				>
 					<div className="text-center font-semibold">
 						전체 알람
 						<div>
@@ -23,7 +26,7 @@ export default function CardSummary() {
 				</Link>
 				<Link
 					href={`/alarm/list/${1}?type=${0}`}
-					className="flex flex-1 items-end justify-around rounded bg-amber-500 px-6 py-3"
+					className="flex flex-1 shrink-0 basis-full items-end justify-around rounded bg-amber-500 px-6 py-3 sm:basis-0"
 				>
 					<div className="text-center">
 						알람
@@ -42,7 +45,7 @@ export default function CardSummary() {
 				</Link>
 				<Link
 					href={`/alarm/list/${1}?type=${1}`}
-					className="flex flex-1 items-end justify-around rounded bg-red-500 px-6 py-3"
+					className="flex flex-1 shrink-0 basis-full items-end justify-around rounded bg-red-500 px-6 py-3 sm:basis-0"
 				>
 					<div className="text-center">
 						즉시조치

@@ -5,6 +5,7 @@ import { useState } from "react";
 import Button from "./button";
 import ModalInputRepair from "./modal-input-repair";
 import Image from "next/image";
+import ModalAlarmValidation from "./modal-alarm-validation";
 
 export interface AlarmProps {
 	id: number;
@@ -25,25 +26,37 @@ export default function CardAlarm({ data: { id, priority, fixed } }: { data: Ala
 						"my-2 cursor-pointer break-inside-avoid overflow-hidden rounded border shadow-sm print:first:mt-0"
 					)}
 				>
-					<div className={cls("flex items-center justify-between border-b px-3 py-2 text-white", alarmStyle.bg)}>
+					<div
+						className={cls(
+							"flex flex-wrap items-center justify-between gap-y-2 border-b px-3 py-2 text-white",
+							alarmStyle.bg
+						)}
+					>
 						<div className="flex gap-x-2">
 							<span className="rounded border border-white px-1 text-sm">{priority === 0 ? "알람" : "즉시조치"}</span>
 							<span>
 								검측일시 <span className="font-[500]">2023-04-06 09:5{id}:12</span>
 							</span>
-							<span className="rounded border border-white px-1 text-sm">{fixed ? "조치완료" : "조치전"}</span>
+							<span className="hidden rounded border border-white px-1 text-sm sm:block">
+								{fixed ? "조치완료" : "조치전"}
+							</span>
 						</div>
-						<div className="flex gap-1">
-							<Button color="slate" size="none" className="px-2 py-1 text-sm" onClick={() => setIsValModalOpen(true)}>
-								유효성
-							</Button>
-							<Button color="slate" size="none" className="px-2 py-1 text-sm" onClick={() => setIsModalOpen(true)}>
-								조치입력
-							</Button>
+						<div className="flex shrink-0 basis-full justify-between gap-1 sm:basis-auto">
+							<span className="flex items-center rounded border border-white px-1 text-sm sm:hidden">
+								{fixed ? "조치완료" : "조치전"}
+							</span>
+							<div className="flex gap-x-2">
+								<Button color="slate" size="none" className="px-2 py-1 text-sm" onClick={() => setIsValModalOpen(true)}>
+									유효성
+								</Button>
+								<Button color="slate" size="none" className="px-2 py-1 text-sm" onClick={() => setIsModalOpen(true)}>
+									조치입력
+								</Button>
+							</div>
 						</div>
 						{/* <div>{isModalOpen ? "true" : "false"}</div> */}
 					</div>
-					<div className="flex justify-between p-3">
+					<div className="grid grid-cols-1 justify-between gap-y-2 p-3 sm:grid-cols-[max-content_1fr]">
 						{/* <div className="grid auto-rows-max grid-cols-[max-content_1fr] gap-x-2">
 							<div className="font-[500]">검측항목</div>
 							<div>전차선 높이</div>
@@ -67,7 +80,7 @@ export default function CardAlarm({ data: { id, priority, fixed } }: { data: Ala
 							<div>5.85 mm</div>
 						</div>
 						{/* <div className="flex h-48 w-80 items-center justify-center bg-slate-300">image</div> */}
-						<div className="flex h-48 items-center justify-center gap-1">
+						<div className="grid grid-cols-2 place-content-end gap-1 sm:grid-cols-[max-content_max-content]">
 							<Image alt="rail" width={200} height={200} src="/rail_left.png" />
 							<Image alt="rail" width={200} height={200} src="/rail_right.png" />
 						</div>
@@ -75,7 +88,7 @@ export default function CardAlarm({ data: { id, priority, fixed } }: { data: Ala
 				</div>
 			</Link>
 			<ModalInputRepair isModalOpen={isModalOpen} closeModal={() => setIsModalOpen(false)} />
-			<ModalInputRepair isModalOpen={isModalOpen} closeModal={() => setIsModalOpen(false)} />
+			<ModalAlarmValidation isModalOpen={isValModalOpen} closeModal={() => setIsValModalOpen(false)} />
 		</>
 	);
 }

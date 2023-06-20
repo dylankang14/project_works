@@ -6,6 +6,7 @@ import Header from "./header";
 import useWindowDimensions from "@/libs/client/useWindowDimensions";
 import ModalAside from "./modal-aside";
 import Button from "./button";
+import { useRouter } from "next/router";
 
 export interface ChildrenProp {
 	children: React.ReactNode;
@@ -14,15 +15,22 @@ export interface ChildrenProp {
 export default function Layout({ children }: ChildrenProp) {
 	const [isDrawerOpen, setIsDrawerOpen] = useState(true);
 	const { device } = useWindowDimensions();
+	const router = useRouter();
+
 	useEffect(() => {
 		console.log(device);
-
 		if (device === "pc") {
 			setIsDrawerOpen(true);
+			router.events.on("routeChangeStart", () => setIsDrawerOpen(true));
 		} else {
+			console.log(device);
 			setIsDrawerOpen(false);
+			router.events.on("routeChangeStart", () => setIsDrawerOpen(false));
 		}
-	}, [device]);
+		return () => {
+			router.events.off("routeChangeStart", () => setIsDrawerOpen(false));
+		};
+	}, [device, router.events]);
 	return (
 		<div id="wrap" className="relative z-0 flex min-h-screen flex-col bg-slate-50 text-sm print:bg-white">
 			<Header toggleDrawer={() => setIsDrawerOpen(!isDrawerOpen)} />

@@ -16,7 +16,7 @@ export default function DetailReport() {
 				<div
 					id="print"
 					className={cls(
-						"mx-auto my-0 h-[1047px] w-[718px] p-0 text-xs print:hidden"
+						"mx-auto my-0 h-[1047px] w-auto p-0 text-xs print:hidden sm:w-[718px]"
 						// !imgSrc || isLoading || device === "pc" ? "" : "hidden"
 					)}
 				>

@@ -5,19 +5,23 @@ import logo from "../public/logo.svg";
 import Breadcrumbs from "./breadcrumbs";
 import DropdownUser from "./dropdown-user";
 import Icon from "./icon";
+import useWindowDimensions from "@/libs/client/useWindowDimensions";
 
 interface HeaderProps {
 	toggleDrawer: () => void;
 }
 
 export default function Header({ toggleDrawer }: HeaderProps) {
+	const { device } = useWindowDimensions();
 	return (
 		<header className="sticky top-0 z-10 flex w-full items-center justify-between border-b bg-white px-2 py-1 print:hidden lg:z-20">
 			<div className="flex items-center">
-				<div className="flex w-60 items-center px-2">
-					<Link href="/" className="logo relative flex-1 cursor-pointer select-none px-2">
-						<Image src={logo} alt="Logo" priority={true} className="h-auto w-28" />
-					</Link>
+				<div className="flex w-auto items-center px-2 lg:w-[200px]">
+					{device !== "mobile" ? (
+						<Link href="/" className="logo relative flex-1 cursor-pointer select-none px-2">
+							<Image src={logo} alt="Logo" priority={true} className="h-auto w-28" />
+						</Link>
+					) : null}
 					<div
 						className="h-12 w-12 cursor-pointer select-none p-3 text-slate-600 hover:text-slate-800"
 						onClick={toggleDrawer}
@@ -25,8 +29,13 @@ export default function Header({ toggleDrawer }: HeaderProps) {
 						<Icon type="menu" />
 					</div>
 				</div>
-				<Breadcrumbs />
+				{device !== "mobile" ? <Breadcrumbs /> : null}
 			</div>
+			{device === "mobile" ? (
+				<Link href="/" className="logo relative cursor-pointer select-none px-2">
+					<Image src={logo} alt="Logo" priority={true} className="h-auto w-28" />
+				</Link>
+			) : null}
 			<div className="">
 				<button className="h-12 w-12 p-3" tabIndex={0}>
 					<DropdownUser />
