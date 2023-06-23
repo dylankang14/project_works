@@ -19,16 +19,19 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
 	const getLayout =
 		Component.getLayout ??
 		((page) => (
-			<FilterProvider>
-				<SWRConfig value={{ fetcher: (url: string) => fetch(url).then((response) => response.json()) }}>
-					<Layout>
-						<Head>
-							<meta name="viewport" content="width=device-width, initial-scale=1" />
-						</Head>
-						{page}
-					</Layout>
-				</SWRConfig>
-			</FilterProvider>
+			<>
+				<Head>
+					<meta charSet="utf-8" />
+					<meta name="viewport" content="width=device-width, initial-scale=1" />
+					<meta name="description" content="Integrated Alarm Web service" />
+					<link rel="icon" href="/favicon.ico" />
+				</Head>
+				<FilterProvider>
+					<SWRConfig value={{ fetcher: (url: string) => fetch(url).then((response) => response.json()) }}>
+						<Layout>{page}</Layout>
+					</SWRConfig>
+				</FilterProvider>
+			</>
 		));
 	// return (
 	// 	<Layout>

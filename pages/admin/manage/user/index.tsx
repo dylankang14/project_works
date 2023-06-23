@@ -1,8 +1,11 @@
 import Button from "@/components/button";
 import CardTable from "@/components/card-table";
 import Filter from "@/components/filter";
+import ModalUserCreate from "@/components/modal-user-create";
+import { useState } from "react";
 
 export default function ManageUser() {
+	const [isModalOpen, setIsModalOpen] = useState(false);
 	const dataType: string[] = ["No", "유저", "직위", "권한", "상태", "계정 생성일", "마지막 로그인"];
 	const data = Array.from(Array(20).keys()).map((i) => ({
 		id: i,
@@ -21,12 +24,13 @@ export default function ManageUser() {
 					<Filter type="search" />
 				</div>
 				<div className="flex gap-1">
-					<Button size="sm" color="slate" icon="createUser">
+					<Button size="sm" color="slate" icon="createUser" onClick={() => setIsModalOpen(true)}>
 						유저 생성
 					</Button>
 				</div>
 			</div>
 			<CardTable hasLink={true} pathname="admin/manage/user" data={data} dataType={dataType} />
+			<ModalUserCreate isModalOpen={isModalOpen} closeModal={() => setIsModalOpen(false)} />
 		</>
 	);
 }

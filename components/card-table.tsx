@@ -98,10 +98,10 @@ export default function CardTable({ title, data, dataType, hasLink = false, path
 															</Fragment>
 														))
 													) : (
-														<>
+														<Fragment key={index}>
 															<span className="font-bold">{dataType[index]}</span>
 															<span>{value as string}</span>
-														</>
+														</Fragment>
 													)
 												)}
 											</div>

@@ -4,6 +4,7 @@ import CardAlarm from "@/components/card-alarm";
 import CardSummary from "@/components/card-summary";
 import Title from "@/components/content-title";
 import Filter from "@/components/filter";
+import HeaderFilter from "@/components/header-filter";
 
 import Pagination from "@/components/pagination";
 import { paginate } from "@/libs/client/utility";
@@ -23,11 +24,7 @@ export default function Fixed() {
 		<>
 			<Title title="홍길동 님의 조치완료 리스트" />
 			<div className="flex items-center justify-between">
-				<div className="flex gap-1">
-					<Filter type="date" />
-					<Filter type="station" />
-					<Filter type="alarmType" />
-				</div>
+				<HeaderFilter />
 			</div>
 			<CardSummary />
 			<Card title="조치완료 통계 그래프">

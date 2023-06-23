@@ -1,8 +1,11 @@
 import Button from "@/components/button";
 import Filter from "@/components/filter";
 import CardTable from "@/components/card-table";
+import ModalUserCreate from "@/components/modal-user-create";
+import { useState } from "react";
 
 export default function UserList() {
+	const [isModalOpen, setIsModalOpen] = useState(false);
 	const dataType: string[] = ["No", "유저", "직위", "권한", "상태", "계정 생성일", "마지막 로그인"];
 	const data = Array.from(Array(20).keys()).map((i) => ({
 		id: i,
@@ -21,15 +24,13 @@ export default function UserList() {
 					<Filter type="search" />
 				</div>
 				<div className="flex gap-1">
-					<Button size="sm" color="slate" icon="createUser">
-						유저생성
-					</Button>
-					<Button size="sm" color="slate" icon="filter">
-						검색필터
+					<Button size="sm" color="slate" icon="createUser" onClick={() => setIsModalOpen(true)}>
+						유저 생성
 					</Button>
 				</div>
 			</div>
-			<CardTable dataType={dataType} data={data} />
+			<CardTable hasLink={true} pathname="office/user" dataType={dataType} data={data} />
+			<ModalUserCreate isModalOpen={isModalOpen} closeModal={() => setIsModalOpen(false)} />
 		</>
 	);
 }

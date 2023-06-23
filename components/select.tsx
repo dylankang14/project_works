@@ -19,7 +19,7 @@ export default function SelectBox({ name, register, className, options }: Select
 			{...register}
 			name={name}
 			id={name}
-			className={cls("w-full appearance-none rounded border-gray-300 shadow-sm ", className ? className : "")}
+			className={cls("w-full appearance-none rounded border-gray-300", className ? className : "")}
 		>
 			{options.map((option, index) => (
 				<option key={index} value={option.value}>

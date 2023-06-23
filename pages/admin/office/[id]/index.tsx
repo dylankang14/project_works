@@ -4,18 +4,14 @@ import CardSummary from "@/components/card-summary";
 import Filter from "@/components/filter";
 import CardAlarmType from "@/components/card-alarm-type";
 import Title from "@/components/content-title";
+import HeaderFilter from "@/components/header-filter";
 
 export default function OfficeStatistics() {
 	return (
 		<>
 			<Title title="서울사업소" />
 			<div className="flex items-center justify-between">
-				<div className="flex gap-1">
-					<Filter type="date" />
-					<Filter type="station" />
-					<Filter type="alarmType" />
-				</div>
-				<div></div>
+				<HeaderFilter />
 			</div>
 			<CardSummary />
 			<Card title="로그인 통계 그래프">

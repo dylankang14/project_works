@@ -6,6 +6,7 @@ import DropdownRouteDirection from "./dropdown-route-direction";
 import Icon from "./icon";
 import ModalAlarmType from "./modal-alarm-type";
 import ModalStation from "./modal-station";
+import DropdownOffice from "./dropdown-office";
 
 interface FilterProps {
 	size?: string;
@@ -94,12 +95,13 @@ export default function Filter({ size, type, value, placeholder }: FilterProps) 
 			);
 		case "office":
 			return (
-				<div className="relative flex cursor-pointer rounded border border-slate-300 bg-white py-1.5 pr-3 pl-2 text-sm">
-					<div className="text-slate-700">
-						<Icon type="office" className="mr-1.5 h-5 w-5 text-slate-600" />
-					</div>
-					<span>office</span>
-				</div>
+				<DropdownOffice />
+				// <div className="relative flex cursor-pointer rounded border border-slate-300 bg-white py-1.5 pr-3 pl-2 text-sm">
+				// 	<div className="text-slate-700">
+				// 		<Icon type="office" className="mr-1.5 h-5 w-5 text-slate-600" />
+				// 	</div>
+				// 	<span>office</span>
+				// </div>
 			);
 	}
 	return null;

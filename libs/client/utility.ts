@@ -22,3 +22,21 @@ export function paginate<T>(items: T[], pageNumber: number, pageSize: number) {
 export function getType(target: any) {
 	return Object.prototype.toString.call(target).slice(8, -1);
 }
+
+export async function saveAsPdf(elementId: string, fileName: string) {
+	const html2pdf = (await import("html2pdf.js" as any)).default;
+	const element = document.getElementById(elementId);
+	const opt = {
+		margin: [10, 10],
+		filename: fileName,
+		image: { type: "jpeg", quality: 0.98 },
+		html2canvas: { scale: 3, scrollY: 0, letterRendering: true },
+		jsPDF: { orientation: "portrait", unit: "mm", format: "a4" },
+		pagebreak: { mode: ["css", "legacy"], avoid: "img" },
+	};
+	try {
+		await html2pdf().set(opt).from(element).save();
+	} catch (error) {
+		console.error(error);
+	}
+}

@@ -18,12 +18,10 @@ export default function Layout({ children }: ChildrenProp) {
 	const router = useRouter();
 
 	useEffect(() => {
-		console.log(device);
 		if (device === "pc") {
 			setIsDrawerOpen(true);
 			router.events.on("routeChangeStart", () => setIsDrawerOpen(true));
 		} else {
-			console.log(device);
 			setIsDrawerOpen(false);
 			router.events.on("routeChangeStart", () => setIsDrawerOpen(false));
 		}
@@ -50,7 +48,7 @@ export default function Layout({ children }: ChildrenProp) {
 				</main>
 			</div>
 			<Footer />
-			<div className="fixed right-2 bottom-2">
+			<div className="fixed right-2 bottom-2 print:hidden">
 				<Button
 					size="none"
 					color="slate"

@@ -17,7 +17,7 @@ interface LoginForm {
 function Login() {
 	const router = useRouter();
 	const { register, handleSubmit } = useForm<LoginForm>();
-	const [login, { loading, data, error }] = useMutation("http://192.168.0.166:22080/API/Login/login");
+	const [login, { loading, data, error }] = useMutation("http://192.168.0.160:22080/API/Login/login");
 	const onValid = (loginForm: LoginForm) => {
 		if (loading) return;
 		login(loginForm);

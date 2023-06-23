@@ -1,7 +1,7 @@
 import { cls } from "@/libs/client/utility";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import Icon from "./icon";
 import { MenuTypes } from "./nav";
 
@@ -9,15 +9,24 @@ export default function NavItem({ menuItems }: { menuItems: MenuTypes[] }) {
 	const [openIndex, setOpenIndex] = useState(-1);
 	const router = useRouter();
 	const subElement = useRef<any>([]);
-	const isActive = (href: string): boolean => {
-		return href === "/" ? router.pathname === href : router.pathname.startsWith(href.substring(1), 1);
-	};
+	const isActive = useCallback(
+		(href: string): boolean => {
+			return href === "/" ? router.asPath === href : router.asPath.startsWith(href.substring(1), 1);
+		},
+		[router.asPath]
+	);
+
+	useEffect(() => {
+		menuItems.map((menuItem, index) => {
+			isActive("/" + menuItem.icon) ? setOpenIndex(index) : null;
+		});
+	}, [menuItems, isActive]);
 
 	return (
 		<>
 			{menuItems.map((menuItem, index) => (
 				<li key={index}>
-					{menuItem.href ? (
+					{menuItem.href !== null ? (
 						<Link
 							href={menuItem.href}
 							className={cls(

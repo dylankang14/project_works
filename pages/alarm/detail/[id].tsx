@@ -1,25 +1,19 @@
 import AlarmCriteria from "@/components/alarm-criteria";
 import Button from "@/components/button";
-
-import { cls } from "@/libs/client/utility";
+import { cls, saveAsPdf } from "@/libs/client/utility";
 import Image from "next/image";
 import { useRouter } from "next/router";
 
 export default function DetailReport() {
 	const router = useRouter();
+	const handlePdf = () => saveAsPdf("print", "test.pdf");
 	return (
 		<>
 			<div
 				id="printContainer"
-				className="mx-auto w-auto max-w-[794px] border border-gray-300 bg-white p-[2.5vw] shadow-md print:p-0 lg:mt-6 lg:py-6 lg:px-0"
+				className="mx-auto w-auto max-w-[794px] border border-gray-200 bg-white py-6 px-0 print:p-0 lg:mt-4"
 			>
-				<div
-					id="print"
-					className={cls(
-						"mx-auto my-0 h-[1047px] w-auto p-0 text-xs print:hidden sm:w-[718px]"
-						// !imgSrc || isLoading || device === "pc" ? "" : "hidden"
-					)}
-				>
+				<div id="print" className="mx-auto my-0 h-[1047px] w-[718px] p-0 text-xs">
 					<div className="flex h-full w-full flex-col flex-wrap gap-3">
 						<div className="relative text-center">
 							<span className="text-2xl font-semibold">알람보고서</span>
@@ -154,24 +148,6 @@ export default function DetailReport() {
 						</div>
 					</div>
 				</div>
-				{/* <div
-						className={cls(
-							"mx-auto h-auto max-w-[718px] print:block",
-							!imgSrc || isLoading || device === "pc" ? "hidden" : ""
-						)}
-					>
-						{imgSrc && (
-							<Image
-								src={imgSrc}
-								alt="report image"
-								width="0"
-								height="0"
-								sizes="100vw"
-								quality="100"
-								className="max-h-full w-auto"
-							/>
-						)}
-					</div> */}
 			</div>
 			<div className="mt-4 flex justify-center gap-2 print:hidden">
 				<Button
@@ -182,11 +158,10 @@ export default function DetailReport() {
 				>
 					뒤로가기
 				</Button>
-				<Button size="md" id="savePdf" icon="download">
+				<Button size="md" id="savePdf" icon="download" onClick={handlePdf}>
 					PDF
 				</Button>
 			</div>
-			<div className="fixed">123</div>
 		</>
 	);
 }

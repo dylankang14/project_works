@@ -13,6 +13,7 @@ export interface MenuTypes {
 
 export default function Nav() {
 	const { user } = useUser();
+	const id = 1;
 	const menuItemsForUser: MenuTypes[] = [
 		{
 			href: "/",
@@ -54,8 +55,8 @@ export default function Nav() {
 			title: "최고관리자",
 			icon: "admin",
 			submenu: [
-				{ href: `/admin/office/${1}/statistics`, title: "사업소 현황/통계" },
-				{ href: `/admin/user/${1}/statistics`, title: "유저 현황/통계" },
+				{ href: `/admin/office/${id}/statistics`, title: "사업소 현황/통계" },
+				{ href: `/admin/user/${id}/statistics`, title: "유저 현황/통계" },
 				{ href: "/admin/manage/office", title: "전체 사업소 관리" },
 				{ href: "/admin/manage/user", title: "전체 유저 관리" },
 			],

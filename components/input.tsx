@@ -47,7 +47,11 @@ export default function Input({
 					required={required}
 					disabled={disabled}
 					value={value}
-					className={cls("appearance-none border-slate-300", disabled ? "bg-gray-100" : "", className ? className : "")}
+					className={cls(
+						"appearance-none rounded border-slate-300",
+						disabled ? "bg-gray-100" : "",
+						className ? className : ""
+					)}
 					checked={checked}
 					{...rest}
 				/>
