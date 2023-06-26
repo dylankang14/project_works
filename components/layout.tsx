@@ -44,7 +44,7 @@ export default function Layout({ children }: ChildrenProp) {
 						device === "pc" ? (isDrawerOpen ? "-ml-0" : "-ml-[200px]") : ""
 					)}
 				>
-					<section className="mx-auto print:w-[794px] xl:max-w-[1000px]">{children}</section>
+					<section className="mx-auto print:w-[794px] lg:max-w-[1000px]">{children}</section>
 				</main>
 			</div>
 			<Footer />

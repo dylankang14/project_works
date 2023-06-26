@@ -1,3 +1,5 @@
+// import html2canvas from "node_modules/html2canvas";
+
 export function cls(...classnames: string[]) {
 	return classnames.join(" ");
 }
@@ -21,6 +23,14 @@ export function paginate<T>(items: T[], pageNumber: number, pageSize: number) {
 
 export function getType(target: any) {
 	return Object.prototype.toString.call(target).slice(8, -1);
+}
+
+export async function pageToImg(fn: any) {
+	const page = document.getElementById("print");
+	const html2canvas = (await import("node_modules/html2canvas")).default;
+	const canvas = await html2canvas(page!, { scale: 3 });
+	const imgSrc = canvas.toDataURL("image/jpeg", 0.98);
+	await fn(imgSrc);
 }
 
 export async function saveAsPdf(elementId: string, fileName: string) {

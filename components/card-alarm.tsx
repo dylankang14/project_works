@@ -32,17 +32,19 @@ export default function CardAlarm({ data: { id, priority, fixed } }: { data: Ala
 							alarmStyle.bg
 						)}
 					>
-						<div className="flex gap-x-2">
-							<span className="rounded border border-white px-1 text-sm">{priority === 0 ? "알람" : "즉시조치"}</span>
+						<div className="flex items-center gap-x-2">
+							<span className="flex h-7 items-center rounded border border-white px-1 text-sm">
+								{priority === 0 ? "알람" : "즉시조치"}
+							</span>
 							<span>
 								검측일시 <span className="font-[500]">2023-04-06 09:5{id}:12</span>
 							</span>
-							<span className="hidden rounded border border-white px-1 text-sm sm:block">
+							<span className="hidden h-7 items-center rounded border border-white px-1 text-sm print:flex sm:flex">
 								{fixed ? "조치완료" : "조치전"}
 							</span>
 						</div>
-						<div className="flex shrink-0 basis-full justify-between gap-1 sm:basis-auto">
-							<span className="flex items-center rounded border border-white px-1 text-sm sm:hidden">
+						<div className="flex shrink-0 basis-full justify-between gap-1 print:basis-auto sm:basis-auto">
+							<span className="flex items-center rounded border border-white px-1 text-sm print:hidden sm:hidden">
 								{fixed ? "조치완료" : "조치전"}
 							</span>
 							<div className="flex gap-x-2">
@@ -56,7 +58,7 @@ export default function CardAlarm({ data: { id, priority, fixed } }: { data: Ala
 						</div>
 						{/* <div>{isModalOpen ? "true" : "false"}</div> */}
 					</div>
-					<div className="grid grid-cols-1 justify-between gap-y-2 p-3 sm:grid-cols-[max-content_1fr]">
+					<div className="grid grid-cols-1 justify-between gap-y-2 p-3 print:grid-cols-[max-content_1fr] sm:grid-cols-[max-content_1fr]">
 						{/* <div className="grid auto-rows-max grid-cols-[max-content_1fr] gap-x-2">
 							<div className="font-[500]">검측항목</div>
 							<div>전차선 높이</div>
@@ -80,7 +82,7 @@ export default function CardAlarm({ data: { id, priority, fixed } }: { data: Ala
 							<div>5.85 mm</div>
 						</div>
 						{/* <div className="flex h-48 w-80 items-center justify-center bg-slate-300">image</div> */}
-						<div className="grid grid-cols-2 place-content-end gap-1 sm:grid-cols-[max-content_max-content]">
+						<div className="grid grid-cols-2 place-content-end gap-1 print:grid-cols-[max-content_max-content] sm:grid-cols-[max-content_max-content]">
 							<Image alt="rail" width={200} height={200} src="/rail_left.png" />
 							<Image alt="rail" width={200} height={200} src="/rail_right.png" />
 						</div>
