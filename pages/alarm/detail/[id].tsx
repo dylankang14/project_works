@@ -22,7 +22,7 @@ export default function DetailReport() {
 			{!imgSrc || isLoading ? <Loader isLoading={isLoading} /> : null}
 			<div
 				id="printContainer"
-				className="mx-auto w-auto max-w-[794px] border border-gray-200 bg-white p-[2.5vw] print:p-0 lg:py-6 lg:px-0"
+				className="mx-auto w-auto max-w-[794px] border border-gray-200 bg-white p-[2.5vw] print:border-none print:p-0 lg:py-6 lg:px-0"
 			>
 				<div id="print">
 					<div

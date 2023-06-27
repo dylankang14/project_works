@@ -31,9 +31,9 @@ function Login() {
 			<Head>
 				<title>Integrated Alarm Web service</title>
 			</Head>
-			<div id="wrap" className="flex h-screen items-center justify-center">
+			<div id="wrap" className="flex h-screen items-center justify-center p-3">
 				<div className="container flex max-w-xs flex-col items-center gap-1">
-					<div className="mb-3 text-center">
+					<div className="mb-3 w-[70%] text-center sm:w-auto">
 						<Image src={logo} alt="Logo" priority={true} />
 						<div className="py-2 text-lg font-medium">ITX 알람 웹서비스 로그인</div>
 					</div>

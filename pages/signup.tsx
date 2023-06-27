@@ -31,9 +31,9 @@ function SignUp() {
 				<meta name="viewport" content="width=device-width, initial-scale=1" />
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
-			<div id="wrap" className="flex min-h-screen items-center justify-center">
+			<div id="wrap" className="flex min-h-screen items-center justify-center p-3">
 				<div className="container flex max-w-md flex-col items-center gap-1">
-					<div className="mb-3 text-center">
+					<div className="mb-3 w-[70%] text-center sm:w-auto">
 						<Image src={logo} alt="Logo" priority={true} />
 						<div className="py-2 text-lg font-medium">ITX 알람 웹서비스 회원가입</div>
 					</div>
