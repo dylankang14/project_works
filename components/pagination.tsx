@@ -49,7 +49,7 @@ export default function Pagination({
 						key={pageNumber}
 						onClick={() => onPageChange(pageNumber as number)}
 						className={cls(
-							"flex aspect-square w-7 cursor-pointer select-none items-center justify-center rounded border bg-white hover:bg-slate-500 hover:text-white",
+							"flex aspect-square w-7 cursor-pointer select-none items-center justify-center rounded border hover:bg-slate-500 hover:text-white",
 							currentPage === pageNumber ? "bg-slate-600 text-white" : ""
 						)}
 					>
