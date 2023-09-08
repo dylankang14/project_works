@@ -11,6 +11,7 @@ import useWindowDimensions from "@/libs/client/useWindowDimensions";
 import ModalFilter from "@/components/modal-filter";
 import Input from "@/components/input";
 import HeaderFilter from "@/components/header-filter";
+import CardStatistics from "@/components/card-statistics";
 
 export default function Home() {
 	const [isDrawerOpen, setIsDrawerOpen] = useState(false);
@@ -33,6 +34,7 @@ export default function Home() {
 				<HeaderFilter />
 			</div>
 			<CardSummary />
+			<CardStatistics />
 			<Card className="p-4">
 				<StationRoute />
 			</Card>

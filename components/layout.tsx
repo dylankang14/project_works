@@ -30,9 +30,9 @@ export default function Layout({ children }: ChildrenProp) {
 		};
 	}, [device, router.events]);
 	return (
-		<div id="wrap" className="relative z-0 flex min-h-screen flex-col bg-slate-50 text-sm print:bg-white">
+		<div id="wrap" className="relative z-0 flex min-h-screen w-full flex-col bg-slate-50 text-sm print:bg-white">
 			<Header toggleDrawer={() => setIsDrawerOpen(!isDrawerOpen)} />
-			<div className="content relative flex flex-1">
+			<div className="content relative flex max-w-full flex-1">
 				{device === "pc" ? (
 					<Aside isDrawerOpen={isDrawerOpen} toggleDrawer={() => setIsDrawerOpen(!isDrawerOpen)} />
 				) : (
@@ -40,15 +40,15 @@ export default function Layout({ children }: ChildrenProp) {
 				)}
 				<main
 					className={cls(
-						"flex-1 px-4 py-3 transition-[margin] print:p-0",
+						"w-[calc(100%_-_200px)] flex-1 px-4 py-3 transition-[margin] print:p-0",
 						device === "pc" ? (isDrawerOpen ? "-ml-0" : "-ml-[200px]") : ""
 					)}
 				>
-					<section className="mx-auto print:w-[794px] lg:max-w-[1000px]">{children}</section>
+					<section className="mx-auto w-full print:w-[794px] lg:max-w-[1000px]">{children}</section>
 				</main>
 			</div>
 			<Footer />
-			<div className="fixed right-2 bottom-2 print:hidden">
+			<div className="fixed bottom-2 right-2 print:hidden">
 				<Button
 					size="none"
 					color="slate"

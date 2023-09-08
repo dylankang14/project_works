@@ -27,11 +27,11 @@ export default function DetailReport() {
 
 	return (
 		<>
-			<div className="flex flex-wrap items-center justify-between print:hidden">
+			{/* <div className="flex flex-wrap items-center justify-between print:hidden">
 				<HeaderFilter />
 				<RadioGroup items={radioItems} defaultChecked={radioDefault} onChangeRadio={(val) => setRadioDefault(val)} />
-			</div>
-			<div className="flex flex-wrap items-center print:hidden">
+			</div> */}
+			<div className="flex flex-wrap items-center">
 				<CardAlarmDetail data={data} />
 			</div>
 			{/* <div className="mt-4 flex justify-center gap-2 print:hidden">
