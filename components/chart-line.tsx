@@ -6,8 +6,8 @@ interface ChartDataTypes {
 
 export default function ChartLine({ data }: ChartDataTypes) {
 	return (
-		<div className="h-80 w-full">
-			<ResponsiveContainer>
+		<div className="h-80 w-full print:w-[99%]">
+			<ResponsiveContainer className="w-80 print:w-[99%]">
 				<LineChart data={data} margin={{ top: 20, right: 40, left: 0, bottom: 0 }}>
 					<CartesianGrid stroke="#ccc" />
 					<XAxis dataKey={"name"} />

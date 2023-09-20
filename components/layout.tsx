@@ -41,10 +41,10 @@ export default function Layout({ children }: ChildrenProp) {
 				<main
 					className={cls(
 						"w-[calc(100%_-_200px)] flex-1 px-4 py-3 transition-[margin] print:p-0",
-						device === "pc" ? (isDrawerOpen ? "-ml-0" : "-ml-[200px]") : ""
+						device === "pc" ? (isDrawerOpen ? "-ml-0" : "-ml-[200px] print:-ml-0") : ""
 					)}
 				>
-					<section className="mx-auto w-full print:w-[794px] lg:max-w-[1000px]">{children}</section>
+					<section className="mx-auto w-full lg:max-w-[1000px]">{children}</section>
 				</main>
 			</div>
 			<Footer />

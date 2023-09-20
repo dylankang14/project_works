@@ -25,7 +25,7 @@ export default function Activity() {
 	return (
 		<div className="max-w-full">
 			<Title title="로그인 내역" />
-			<div className="flex items-center justify-between">
+			<div className="flex items-center justify-between print:w-full">
 				<Filter type="date" />
 			</div>
 			<Card title="로그인 통계 그래프">
