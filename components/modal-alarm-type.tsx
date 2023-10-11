@@ -19,20 +19,13 @@ export default function ModalAlarmType({ isModalOpen, closeModal, className }: M
 	const { register } = useForm();
 	const [isAllChecked, setIsAllChecked] = useState(true);
 
-	// const alarmTypes = [
-	// 	{ id: 1, name: "검측항목-01" },
-	// 	{ id: 2, name: "검측항목-02" },
-	// 	{ id: 3, name: "검측항목-03" },
-	// 	{ id: 4, name: "검측항목-04" },
-	// 	{ id: 5, name: "검측항목-05" },
-	// 	{ id: 6, name: "검측항목-06" },
-	// 	{ id: 7, name: "검측항목-07" },
-	// 	{ id: 8, name: "검측항목-08" },
-	// 	{ id: 9, name: "검측항목-09" },
-	// 	{ id: 10, name: "검측항목-10" },
-	// 	{ id: 11, name: "검측항목-11" },
-	// 	{ id: 12, name: "검측항목-12" },
-	// ];
+	const alarmTypes = [
+		{ id: 1, name: "전차선 높이/편위/마모" },
+		{ id: 2, name: "판토그래프 거동 검측" },
+		{ id: 3, name: "강체전차선로(Tbar)" },
+		{ id: 4, name: "터널벽면 결함 검측" },
+		{ id: 5, name: "침목 및 체결구 탈락 검사" },
+	];
 	const handleCheck = (checkedId: number) => {
 		const newIds = alarmType?.includes(checkedId)
 			? alarmType?.filter((id) => id !== checkedId)
@@ -43,7 +36,7 @@ export default function ModalAlarmType({ isModalOpen, closeModal, className }: M
 	const toggleAllCheckbox = () => {
 		if (defaultAlarmType) {
 			if (!isAllChecked) {
-				const allIds = defaultAlarmType.map((item: any) => item.ALARMTYPE_ID);
+				const allIds = defaultAlarmType.map((item: any) => item.id);
 				onAlarmTypeChange(allIds);
 				setIsAllChecked(!isAllChecked);
 			} else {
@@ -71,7 +64,7 @@ export default function ModalAlarmType({ isModalOpen, closeModal, className }: M
 						className="my-1 select-none font-bold"
 						checked={isAllChecked}
 					/>
-					{defaultAlarmType?.map((alarmTypeItem: any) => (
+					{/* {defaultAlarmType?.map((alarmTypeItem: any) => (
 						<Input
 							key={alarmTypeItem.ALARMTYPE_ID}
 							label={alarmTypeItem.DESCRIPTION}
@@ -81,6 +74,18 @@ export default function ModalAlarmType({ isModalOpen, closeModal, className }: M
 							className="my-1 ml-3 select-none"
 							onChange={() => handleCheck(alarmTypeItem.ALARMTYPE_ID)}
 							checked={alarmType?.includes(alarmTypeItem.ALARMTYPE_ID)}
+						/>
+					))} */}
+					{alarmTypes?.map((alarmTypeItem: any) => (
+						<Input
+							key={alarmTypeItem.id}
+							label={alarmTypeItem.name}
+							type="checkbox"
+							value={alarmTypeItem.id}
+							name={alarmTypeItem.name}
+							className="my-1 ml-3 select-none"
+							onChange={() => handleCheck(alarmTypeItem.id)}
+							checked={alarmType?.includes(alarmTypeItem.id)}
 						/>
 					))}
 				</div>

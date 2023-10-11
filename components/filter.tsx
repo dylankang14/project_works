@@ -29,7 +29,7 @@ export default function Filter({ size, type, value, placeholder }: FilterProps) 
 			return (
 				<>
 					<div
-						className="relative flex cursor-pointer rounded border border-slate-300 bg-white py-1.5 pr-3 pl-2 text-sm"
+						className="relative flex cursor-pointer rounded border border-slate-300 bg-white py-1.5 pl-2 pr-3 text-sm"
 						onClick={() => {
 							setIsModalOpen(true);
 						}}
@@ -42,14 +42,14 @@ export default function Filter({ size, type, value, placeholder }: FilterProps) 
 							${trainStations?.find((station) => station.id === stationRange?.to)?.name}역`}
 						</span>
 					</div>
-					<ModalStation isModalOpen={isModalOpen} closeModal={() => setIsModalOpen(false)} className="max-w-[801px]" />
+					<ModalStation isModalOpen={isModalOpen} closeModal={() => setIsModalOpen(false)} className="" />
 				</>
 			);
 		case "alarmType":
 			return (
 				<>
 					<div
-						className="relative flex cursor-pointer rounded border border-slate-300 bg-white py-1.5 pr-3 pl-2 text-sm"
+						className="relative flex cursor-pointer rounded border border-slate-300 bg-white py-1.5 pl-2 pr-3 text-sm"
 						onClick={() => {
 							setIsModalOpen(true);
 						}}
@@ -73,7 +73,7 @@ export default function Filter({ size, type, value, placeholder }: FilterProps) 
 						<Icon type="search" className="h-5 w-5 text-slate-600" />
 					</div>
 					<input
-						className="w-full cursor-pointer rounded border-slate-300 py-1.5 pr-2 pl-8 text-sm"
+						className="w-full cursor-pointer rounded border-slate-300 py-1.5 pl-8 pr-2 text-sm"
 						type="text"
 						placeholder="search"
 						id="alarmType"

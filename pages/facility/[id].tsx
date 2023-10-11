@@ -7,8 +7,8 @@ export default function Facility() {
 	const dataType: string[] = ["순서", "번호", "위치", "내용", "상태"];
 	const data = Array.from(Array(15).keys()).map((i) => ({
 		id: i + 1,
-		no: i + 1,
-		location: `전철주-${i + 1}`,
+		no: `No ${i + 1}`,
+		location: `롱이어`,
 		alarmDetail: "-",
 		alarmType: "양호",
 	}));

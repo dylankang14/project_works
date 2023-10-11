@@ -58,7 +58,7 @@ export default function CardAlarm({ data: { id, priority, fixed } }: { data: Ala
 						</div>
 						{/* <div>{isModalOpen ? "true" : "false"}</div> */}
 					</div>
-					<div className="flex flex-col gap-x-2 px-3 pb-1 pt-2 md:flex-row">
+					<div className="flex flex-col gap-x-2 px-3 pb-1 pt-2">
 						{/* <div className="grid auto-rows-max grid-cols-[max-content_1fr] gap-x-2">
 							<div className="font-[500]">검측항목</div>
 							<div>전차선 높이</div>
@@ -73,19 +73,19 @@ export default function CardAlarm({ data: { id, priority, fixed } }: { data: Ala
 								<div className="flex flex-wrap justify-stretch gap-x-3 gap-y-1 px-1">
 									<div className="flex flex-grow flex-wrap gap-x-2">
 										<div className="font-[500]">알람 타입</div>
-										<div>선로변형 레일마모</div>
+										<div>전차선 높이/편위/마모</div>
 									</div>
-									<div className="flex flex-grow flex-wrap gap-x-2">
+									{/* <div className="flex flex-grow flex-wrap gap-x-2">
 										<div className="font-[500]">검측 노선</div>
 										<div>경부선 - 하1선</div>
-									</div>
+									</div> */}
 									<div className="flex flex-grow flex-wrap gap-x-2">
 										<div className="font-[500]">검측 구간</div>
-										<div>용산역 - 영등포역</div>
+										<div>수유역 - 쌍문역(상선)</div>
 									</div>
 									<div className="flex flex-grow flex-wrap gap-x-2">
-										<div className="font-[500]">전철주 구간</div>
-										<div>30021 - 30022</div>
+										<div className="font-[500]">애자번호</div>
+										<div>30021</div>
 									</div>
 									<div className="flex flex-grow flex-wrap gap-x-2">
 										<div className="font-[500]">킬로정</div>
@@ -97,20 +97,16 @@ export default function CardAlarm({ data: { id, priority, fixed } }: { data: Ala
 								<div className="mb-1.5 font-bold">알람 상세 정보</div>
 								<div className="flex flex-wrap justify-stretch gap-x-3 gap-y-1 px-1">
 									<div className="flex flex-grow flex-wrap gap-x-2">
-										<div className="font-[500]">좌측 편마모</div>
-										<div>9.96 mm</div>
+										<div className="font-[500]">전차선 높이</div>
+										<div>4,720 mm</div>
 									</div>
 									<div className="flex flex-grow flex-wrap gap-x-2">
-										<div className="font-[500]">좌측 수직마모</div>
-										<div>8.88 mm</div>
+										<div className="font-[500]">전차선 편위</div>
+										<div>210 mm</div>
 									</div>
 									<div className="flex flex-grow flex-wrap gap-x-2">
-										<div className="font-[500]">우측 편마모</div>
-										<div>6.59 mm</div>
-									</div>
-									<div className="flex flex-grow flex-wrap gap-x-2">
-										<div className="font-[500]">우측 수직마모</div>
-										<div>5.85 mm</div>
+										<div className="font-[500]">전차선 마모</div>
+										<div>80%</div>
 									</div>
 								</div>
 							</div>
@@ -118,14 +114,18 @@ export default function CardAlarm({ data: { id, priority, fixed } }: { data: Ala
 						{/* <div className="flex h-48 w-80 items-center justify-center bg-slate-300">image</div> */}
 						<div className="">
 							<div className="font-bold">알람 이미지 및 그래프</div>
-							<div className="flex flex-wrap justify-center gap-x-2 pt-2">
+							<div className="flex flex-col flex-wrap justify-center gap-x-2 pt-2">
 								<div className="flex-1 text-center">
-									<Image className="w-full" alt="rail" width={450} height={450} src="/rail_right.png" />
-									<div className="text-md pb-2 pt-1 font-[500]">좌측</div>
+									<Image className="w-auto" alt="rail" width={450} height={100} src="/line-height.jpg" />
+									<div className="text-md pb-2 pt-1 font-[500]">전차선 높이</div>
 								</div>
 								<div className="flex-1 text-center">
-									<Image className="w-full" alt="rail" width={450} height={450} src="/rail_right.png" />
-									<div className="text-md pb-2 pt-1 font-[500]">우측</div>
+									<Image className="w-auto" alt="rail" width={450} height={100} src="/line-height.jpg" />
+									<div className="text-md pb-2 pt-1 font-[500]">전차선 편위</div>
+								</div>
+								<div className="flex-1 text-center">
+									<Image className="w-auto" alt="rail" width={450} height={100} src="/line-height.jpg" />
+									<div className="text-md pb-2 pt-1 font-[500]">전차선 마모</div>
 								</div>
 							</div>
 						</div>

@@ -9,15 +9,15 @@ export default function DropdownRouteDirection() {
 	const { routeDirection } = useFilterData();
 	const { onRouteDirectionChange } = useFilterAPI();
 	const routeDirectionList = [
-		{ id: 1, name: "상행" },
-		{ id: 2, name: "하행" },
+		{ id: 1, name: "상선" },
+		{ id: 2, name: "하선" },
 	];
 
 	return (
 		<>
 			<div
 				ref={ref}
-				className="relative flex cursor-pointer rounded border border-slate-300 bg-white py-1.5 pr-3 pl-2 text-sm"
+				className="relative flex cursor-pointer rounded border border-slate-300 bg-white py-1.5 pl-2 pr-3 text-sm"
 				onClick={toggleDropdown}
 			>
 				<span className="" id="alarmPriority">

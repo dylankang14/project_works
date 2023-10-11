@@ -3,6 +3,7 @@ import { cls } from "@/libs/client/utility";
 import { useEffect, useRef, useState } from "react";
 import BadgeAlarm from "./badge-alarm";
 import Icon from "./icon";
+import useWindowDimensions from "@/libs/client/useWindowDimensions";
 
 interface StationRangeType {
 	from: number | null;
@@ -18,6 +19,7 @@ export default function StationRoute() {
 	const { stationRange, trainRoute } = useFilterData();
 	const { trainStations, trainRoutes } = useDefaultData();
 	const [firstIndex, setFirstIndex] = useState<number | null>();
+	// const { width } = useWindowDimensions();
 
 	const selectStation = (index: number) => {
 		if (!firstIndex) {
@@ -37,6 +39,7 @@ export default function StationRoute() {
 		const observer = new ResizeObserver((entries) => {
 			for (const entry of entries) {
 				const { width, height } = entry.contentRect;
+				console.log(entry.contentRect);
 
 				if (width < 321) {
 					setNumColumns(1);
@@ -50,7 +53,7 @@ export default function StationRoute() {
 				} else if (width < 780) {
 					setNumColumns(4);
 					setBasisColumns("basis-1/4");
-				} else if (width < 1200) {
+				} else {
 					setNumColumns(5);
 					setBasisColumns("basis-1/5");
 				}
@@ -69,9 +72,15 @@ export default function StationRoute() {
 		};
 	}, []);
 
+	// useEffect(() => {
+	// 	if (trainRoute && trainRoutes && trainStations) {
+	// 		const trainRouteIds = trainRoutes[trainRoute].edgeIds.split(",").map((i) => parseInt(i));
+	// 		setTrainRouteStations(trainStations.filter((station) => trainRouteIds.includes(station.id)));
+	// 	}
+	// }, [trainRoute, trainRoutes, trainStations]);
 	useEffect(() => {
 		if (trainRoute && trainRoutes && trainStations) {
-			const trainRouteIds = trainRoutes[trainRoute].edgeIds.split(",").map((i) => parseInt(i));
+			const trainRouteIds = trainRoutes;
 			setTrainRouteStations(trainStations.filter((station) => trainRouteIds.includes(station.id)));
 		}
 	}, [trainRoute, trainRoutes, trainStations]);
@@ -128,7 +137,7 @@ export default function StationRoute() {
 														: "opacity-60"
 												)}
 											/>
-											<div className="relative my-[5px] h-2 w-full border-t border-b border-slate-600"></div>
+											<div className="relative my-[5px] h-2 w-full border-b border-t border-slate-600"></div>
 											<BadgeAlarm
 												className={cls(
 													!stationRange?.from ||

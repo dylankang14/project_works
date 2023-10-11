@@ -29,7 +29,7 @@ export default function Header({ toggleDrawer }: HeaderProps) {
 						<Icon type="menu" />
 					</div>
 				</div>
-				{device !== "mobile" ? <Breadcrumbs /> : null}
+				{/* {device !== "mobile" ? <Breadcrumbs /> : null} */}
 			</div>
 			{device === "mobile" ? (
 				<Link href="/" className="logo relative cursor-pointer select-none px-2">
