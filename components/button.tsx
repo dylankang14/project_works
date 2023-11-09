@@ -12,6 +12,7 @@ interface ButtonProps {
 	hasContentInMobile?: string;
 	isWide?: boolean;
 	preventDefault?: boolean;
+	className?: string;
 	[key: string]: any;
 }
 interface Sizes {
@@ -60,7 +61,7 @@ export default function Button({
 				iconPosition === "right" ? "flex-row-reverse" : "",
 				isWide ? "w-full" : "",
 				children ? "gap-1 " : "",
-				className
+				className ? className : ""
 			)}
 			onClick={(e) => {
 				{

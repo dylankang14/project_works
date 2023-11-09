@@ -30,15 +30,9 @@ export default function Home() {
 
 	return (
 		<>
-			<div className="flex flex-wrap items-center justify-between print:hidden">
+			<div className="print:hidden">
 				<HeaderFilter />
 			</div>
-			<CardSummary />
-			<CardStatistics />
-			<Card className="p-4">
-				<StationRoute />
-			</Card>
-			<CardAlarmType />
 		</>
 	);
 }

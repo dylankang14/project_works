@@ -35,13 +35,13 @@ function Login() {
 				<div className="container flex max-w-xs flex-col items-center gap-1">
 					<div className="mb-3 w-[70%] text-center sm:w-auto">
 						<Image src={logo} alt="Logo" priority={true} />
-						<div className="py-2 text-lg font-medium">ITX 알람 웹서비스 로그인</div>
+						<div className="py-2 text-lg font-medium">전차선 보호 모니터링 알람 웹서비스</div>
 					</div>
 					<form
 						onSubmit={handleSubmit(onValid)}
 						className="flex w-full flex-col gap-4 rounded-md border border-slate-300 bg-gray-50 px-5 pb-3 pt-5"
 					>
-						<Input className="w-full" register={register("id")} label="이메일" name="id" type="text" required />
+						<Input className="w-full" register={register("id")} label="아이디" name="id" type="text" required />
 						<Input
 							className="w-full"
 							register={register("password")}
@@ -54,14 +54,6 @@ function Login() {
 							로그인
 						</Button>
 					</form>
-					<div className="mt-2 flex w-full flex-wrap">
-						<Link
-							href="/signup"
-							className="flex-1 cursor-pointer rounded-md border border-slate-300 bg-gray-50 p-2 text-center text-blue-700 hover:bg-blue-600 hover:text-white"
-						>
-							<span className="text-sm font-bold">회원가입</span>
-						</Link>
-					</div>
 				</div>
 			</div>
 		</>

@@ -29,7 +29,7 @@ export default function Filter({ size, type, value, placeholder }: FilterProps) 
 			return (
 				<>
 					<div
-						className="relative flex cursor-pointer rounded border border-slate-300 bg-white py-1.5 pr-3 pl-2 text-sm"
+						className="relative flex cursor-pointer rounded border border-slate-300 bg-white py-1.5 pl-2 pr-3 text-sm"
 						onClick={() => {
 							setIsModalOpen(true);
 						}}
@@ -38,8 +38,9 @@ export default function Filter({ size, type, value, placeholder }: FilterProps) 
 							<Icon type="station" className="mr-1.5 h-5 w-5 text-slate-600" />
 						</div>
 						<span id="station">
-							{`${trainStations?.find((station) => station.id === stationRange?.from)?.name}역 - 
-							${trainStations?.find((station) => station.id === stationRange?.to)?.name}역`}
+							검측소 : 모두
+							{/* {`${trainStations?.find((station) => station.id === stationRange?.from)?.name}역 - 
+							${trainStations?.find((station) => station.id === stationRange?.to)?.name}역`} */}
 						</span>
 					</div>
 					<ModalStation isModalOpen={isModalOpen} closeModal={() => setIsModalOpen(false)} className="max-w-[801px]" />
@@ -49,7 +50,7 @@ export default function Filter({ size, type, value, placeholder }: FilterProps) 
 			return (
 				<>
 					<div
-						className="relative flex cursor-pointer rounded border border-slate-300 bg-white py-1.5 pr-3 pl-2 text-sm"
+						className="relative flex cursor-pointer rounded border border-slate-300 bg-white py-1.5 pl-2 pr-3 text-sm"
 						onClick={() => {
 							setIsModalOpen(true);
 						}}
@@ -57,7 +58,7 @@ export default function Filter({ size, type, value, placeholder }: FilterProps) 
 						<div className="text-slate-700">
 							<Icon type="alarm" className="mr-1.5 h-5 w-5 text-slate-600" />
 						</div>
-						<span id="alarmType">{`${alarmType?.length} 개 항목`}</span>
+						<span id="alarmType">{`알람 검측항목 : ${alarmType?.length}`}</span>
 					</div>
 					<ModalAlarmType isModalOpen={isModalOpen} closeModal={() => setIsModalOpen(false)} />
 				</>
@@ -73,9 +74,23 @@ export default function Filter({ size, type, value, placeholder }: FilterProps) 
 						<Icon type="search" className="h-5 w-5 text-slate-600" />
 					</div>
 					<input
-						className="w-full cursor-pointer rounded border-slate-300 py-1.5 pr-2 pl-8 text-sm"
+						className="w-full cursor-pointer rounded border-slate-300 py-1.5 pl-8 pr-2 text-sm"
 						type="text"
 						placeholder="search"
+						id="alarmType"
+					/>
+				</label>
+			);
+		case "trainNumber":
+			return (
+				<label className="relative cursor-pointer" htmlFor="search">
+					<div className="absolute left-1.5 top-1/2 -translate-y-1/2 text-slate-700">
+						<Icon type="search" className="h-5 w-5 text-slate-600" />
+					</div>
+					<input
+						className="w-full cursor-pointer rounded border-slate-300 py-1.5 pl-8 pr-2 text-sm"
+						type="text"
+						placeholder="모든 차량"
 						id="alarmType"
 					/>
 				</label>
