@@ -20,16 +20,16 @@ export default function Nav() {
 			title: "검측 알람",
 			icon: "alarm",
 		},
-		{
-			href: "/fixed",
-			title: "조치완료 리스트",
-			icon: "document_check",
-		},
 		// {
-		// 	href: "/facility",
-		// 	title: "시설물 관리",
-		// 	icon: "facility",
+		// 	href: "/fixed",
+		// 	title: "조치완료 리스트",
+		// 	icon: "document_check",
 		// },
+		{
+			href: "/facility",
+			title: "시설물 관리",
+			icon: "facility",
+		},
 		// {
 		// 	href: null,
 		// 	title: "계정 관리",
@@ -41,6 +41,16 @@ export default function Nav() {
 		// 		{ href: "/user/security", title: "비밀번호 변경" },
 		// 	],
 		// },
+		{
+			href: `/office/${id}`,
+			title: "계정 관리",
+			icon: "admin",
+			// submenu: [
+			// 	{ href: "/office/statistics", title: "사업소 현황/통계" },
+			// 	{ href: "/office/user/list", title: "유저리스트" },
+			// 	{ href: "/office/info", title: "사업소 정보" },
+			// ],
+		},
 		{
 			href: `/office/${id}`,
 			title: "관리소 관리",
@@ -65,19 +75,19 @@ export default function Nav() {
 	// 	},
 	// ];
 	const menuItemsForAdmin: MenuTypes[] = [
-		{
-			href: null,
-			title: "최고관리자",
-			icon: "admin",
-			submenu: [
-				{ href: `/admin/office/${id}/statistics`, title: "시설물 관리" },
-				{ href: "/admin/security", title: "비밀번호 변경" },
-				{ href: `/admin/office/statistics`, title: "관리자 현황/통계" },
-				// { href: `/admin/user/${id}/statistics`, title: "유저 현황/통계" },
-				{ href: "/admin/office/log", title: "로그인 기록" },
-				// { href: "/admin/manage/user", title: "전체 유저 관리" },
-			],
-		},
+		// {
+		// 	href: null,
+		// 	title: "최고관리자",
+		// 	icon: "admin",
+		// 	submenu: [
+		// 		{ href: `/admin/office/${id}/statistics`, title: "시설물 관리" },
+		// 		{ href: "/admin/security", title: "비밀번호 변경" },
+		// 		{ href: `/admin/office/statistics`, title: "관리자 현황/통계" },
+		// 		{ href: `/admin/user/${id}/statistics`, title: "유저 현황/통계" },
+		// 		{ href: "/admin/office/log", title: "로그인 기록" },
+		// 		{ href: "/admin/manage/user", title: "전체 유저 관리" },
+		// 	],
+		// },
 	];
 	const menuItems = [
 		...menuItemsForOffice,

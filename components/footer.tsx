@@ -13,9 +13,9 @@ export default function Footer() {
 				"
 				/>
 			</div>
-			<div className="co-detail flex gap-4 text-sm">
+			{/* <div className="co-detail flex gap-4 text-sm">
 				<div>2ISYS 검측 알람 웹서비스</div>
-			</div>
+			</div> */}
 		</footer>
 	);
 }

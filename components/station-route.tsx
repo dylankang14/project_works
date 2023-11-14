@@ -97,7 +97,7 @@ export default function StationRoute() {
 								></div>
 							</div>
 							{/* <ul className={cls("flex flex-1 flex-wrap", (i / 5) % 2 ? "flex-row-reverse" : "")}> */}
-							<ul className={"flex grow flex-wrap py-1.5 group-even:flex-row-reverse"}>
+							<ul className={"flex grow flex-wrap py-3 group-even:flex-row-reverse"}>
 								{trainRouteStations.slice(index, index + numColumns).map((innerItem, innerIndex) => (
 									<li
 										key={innerItem.id}
@@ -123,35 +123,15 @@ export default function StationRoute() {
 											>
 												{innerItem.name}역
 											</div>
-											{/* <Icon
-												type="arrowLeft"
-												className="absolute -right-2 bottom-auto h-2.5 w-2.5 translate-y-1 text-slate-600 group-last:group-odd:group-last/row:hidden"
-											/> */}
 										</div>
 										<div className="relative flex min-w-[80px] items-center justify-center group-last:group-last/row:invisible">
-											{/* <BadgeAlarm
-												className={cls(
-													!stationRange?.from ||
-														(innerItem.id >= stationRange?.from! && innerItem.id < stationRange?.to!)
-														? ""
-														: "opacity-60"
-												)}
-											/> */}
 											<div className="relative my-[5px] h-px w-full border-t border-slate-600"></div>
-											{/* <BadgeAlarm
-												className={cls(
-													!stationRange?.from ||
-														(innerItem.id >= stationRange?.from! && innerItem.id < stationRange?.to!)
-														? ""
-														: "opacity-60"
-												)}
-											/> */}
 										</div>
 									</li>
 								))}
 							</ul>
-							<div className="relative flex items-end group-odd:-scale-y-100 group-last:group-odd:invisible">
-								<div className="h-1/2 w-4 rounded-tr-full border-r border-t border-slate-600"></div>
+							<div className="relative flex group-odd:-scale-y-100 group-last:group-odd:invisible">
+								<div className="h-1/2 w-4 rounded border-r border-t border-slate-600"></div>
 							</div>
 						</li>
 					);
