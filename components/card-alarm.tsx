@@ -17,6 +17,7 @@ export default function CardAlarm({ data: { id, priority, fixed } }: { data: Ala
 	const alarmStyle = useAlarmStyle(priority, fixed);
 	const [isModalOpen, setIsModalOpen] = useState(false);
 	const [isValModalOpen, setIsValModalOpen] = useState(false);
+	const [isHide, setIsHide] = useState(true);
 
 	return (
 		<>
@@ -37,7 +38,7 @@ export default function CardAlarm({ data: { id, priority, fixed } }: { data: Ala
 								{priority === 0 ? "알람" : "즉시조치"}
 							</span> */}
 							<span className="hidden h-7 items-center rounded border border-white px-1.5 text-sm font-[500] print:flex sm:flex">
-								{priority === 0 && !fixed ? "알람" : "조치"}
+								{priority === 0 && !fixed ? "알람" : "조치됨"}
 							</span>
 							<span className="text-base">
 								<span className="pr-1 text-base">검측일시</span> 2023-04-06 09:5{id}:12
@@ -51,8 +52,13 @@ export default function CardAlarm({ data: { id, priority, fixed } }: { data: Ala
 								<Button color="slate" size="none" className="px-2 py-1 text-sm" onClick={() => setIsModalOpen(true)}>
 									조치입력
 								</Button>
-								<Button color="slate" size="none" className="px-2 py-1 text-sm" onClick={() => setIsValModalOpen(true)}>
-									숨기기
+								<Button
+									color="slate"
+									size="none"
+									className={cls("px-2 py-1 text-sm", !isHide ? "bg-gray-500" : "")}
+									onClick={() => setIsHide(!isHide)}
+								>
+									{isHide ? "숨기기" : "숨겨짐"}
 								</Button>
 							</div>
 						</div>

@@ -29,15 +29,18 @@ export default function Header({ toggleDrawer }: HeaderProps) {
 						<Icon type="menu" />
 					</div>
 				</div>
-				{device !== "mobile" ? <Breadcrumbs /> : null}
+				{/* {device !== "mobile" ? <Breadcrumbs /> : null} */}
 			</div>
 			{device === "mobile" ? (
 				<Link href="/" className="logo relative cursor-pointer select-none px-2">
 					<Image src={logo} alt="Logo" priority={true} className="h-auto w-28" />
 				</Link>
 			) : null}
-			<div className="">
-				<button className="h-12 w-12 p-3" tabIndex={0}>
+			<div className="flex flex-wrap gap-x-2 p-3">
+				<button className="aspect-square h-6 w-6 rounded-full bg-blue-600 text-white hover:bg-blue-800" tabIndex={0}>
+					i
+				</button>
+				<button className="" tabIndex={0}>
 					<DropdownUser />
 				</button>
 			</div>

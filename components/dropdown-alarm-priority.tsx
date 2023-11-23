@@ -9,16 +9,15 @@ export default function DropdownAlarmPriority() {
 	const { alarmPriority } = useFilterData();
 	const { onAlarmPriorityChange } = useFilterAPI();
 	const alarmPriorityList = [
-		{ id: 1, name: "알람" },
-		{ id: 2, name: "즉시조치" },
-		{ id: 3, name: "조치완료" },
+		{ id: 1, name: "미조치" },
+		{ id: 2, name: "조치" },
 	];
 
 	return (
 		<>
 			<div
 				ref={ref}
-				className="relative flex cursor-pointer rounded border border-slate-300 bg-white py-1.5 pr-3 pl-2 text-sm"
+				className="relative flex cursor-pointer rounded border border-slate-300 bg-white py-1.5 pl-2 pr-3 text-sm"
 				onClick={toggleDropdown}
 			>
 				<span className="" id="alarmPriority">

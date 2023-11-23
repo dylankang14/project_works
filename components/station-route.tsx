@@ -9,8 +9,12 @@ interface StationRangeType {
 	from: number | null;
 	to: number | null;
 }
+interface StationRouteProps {
+	isStationRangeAll: boolean;
+	setIsStationRangeAll: () => void;
+}
 
-export default function StationRoute() {
+export default function StationRoute({ isStationRangeAll, setIsStationRangeAll }: StationRouteProps) {
 	const containerRef = useRef<HTMLUListElement>(null);
 	const [numColumns, setNumColumns] = useState<number>(5);
 	const [basisColumns, setBasisColumns] = useState<string>("basis-1/5");
@@ -22,7 +26,7 @@ export default function StationRoute() {
 	// const { width } = useWindowDimensions();
 
 	const selectStation = (index: number) => {
-		if (!firstIndex) {
+		if (!firstIndex && firstIndex !== 0) {
 			setFirstIndex(index);
 			onStationRangeChange({ from: index, to: null });
 		} else {
@@ -84,6 +88,15 @@ export default function StationRoute() {
 			setTrainRouteStations(trainStations.filter((station) => trainRouteIds.includes(station.id)));
 		}
 	}, [trainRoute, trainRoutes, trainStations]);
+	useEffect(() => {
+		if (isStationRangeAll && trainStations) {
+			onStationRangeChange({ from: 0, to: trainStations.length - 1 });
+			setIsStationRangeAll();
+		}
+
+		return () => {};
+	}, [isStationRangeAll, setIsStationRangeAll, trainStations, onStationRangeChange]);
+
 	return (
 		<ul className="flex flex-col" ref={containerRef}>
 			{trainRouteStations?.map((i, index) => {
@@ -91,10 +104,7 @@ export default function StationRoute() {
 					return (
 						<li key={index} className="group relative flex flex-1 items-stretch">
 							<div className="relative flex items-end group-first:invisible group-odd:-scale-y-100 group-last:group-even:invisible">
-								<div className={"h-[calc(50%+4px)] w-4 border-l border-t border-slate-600"}></div>
-								<div
-									className={"absolute bottom-0 right-0 h-[calc(50%-3px)] w-[9PX] border-l border-t border-slate-600"}
-								></div>
+								<div className="h-1/2 w-4 rounded-tl-full border-l border-t border-slate-600"></div>
 							</div>
 							{/* <ul className={cls("flex flex-1 flex-wrap", (i / 5) % 2 ? "flex-row-reverse" : "")}> */}
 							<ul className={"flex grow flex-wrap py-3 group-even:flex-row-reverse"}>
@@ -131,7 +141,7 @@ export default function StationRoute() {
 								))}
 							</ul>
 							<div className="relative flex group-odd:-scale-y-100 group-last:group-odd:invisible">
-								<div className="h-1/2 w-4 rounded border-r border-t border-slate-600"></div>
+								<div className="h-1/2 w-4 rounded-br-full border-b border-r border-slate-600"></div>
 							</div>
 						</li>
 					);
