@@ -9,8 +9,8 @@ interface StationRangeType {
 	to: number | null;
 }
 interface StationRangeProps {
-	isStationRangeAll: boolean;
-	setIsStationRangeAll: () => void;
+	isStationRangeAll?: boolean;
+	setIsStationRangeAll?: () => void;
 }
 
 export default function StationRoute({ isStationRangeAll, setIsStationRangeAll }: StationRangeProps) {
