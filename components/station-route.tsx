@@ -80,7 +80,7 @@ export default function StationRoute({ isStationRangeAll, setIsStationRangeAll }
 		}
 	}, [trainRoute, trainRoutes, trainStations]);
 	useEffect(() => {
-		if (isStationRangeAll && trainStations) {
+		if (isStationRangeAll && trainStations && setIsStationRangeAll) {
 			onStationRangeChange({ from: 0, to: trainStations.length - 1 });
 			setIsStationRangeAll();
 		}

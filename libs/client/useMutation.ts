@@ -21,6 +21,8 @@ export default function useMutation<T = any>(url: string): UseMutationResult<T> 
 				"Content-Type": "application/json",
 			},
 			body: JSON.stringify(data),
+			// mode: "cors",
+			credentials: "include",
 		})
 			.then((response) => response.json())
 			.then((data) => setState((prev) => ({ ...prev, data, loading: false })))

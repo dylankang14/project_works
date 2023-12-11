@@ -4,7 +4,7 @@ import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { ReactElement } from "react";
+import { ReactElement, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import logo from "../public/logo.svg";
 import useMutation from "@/libs/client/useMutation";
@@ -17,14 +17,16 @@ interface LoginForm {
 function Login() {
 	const router = useRouter();
 	const { register, handleSubmit } = useForm<LoginForm>();
-	const [login, { loading, data, error }] = useMutation("http://192.168.0.204:8080/users/login");
+	const [login, { loading, data, error }] = useMutation("http://localhost:8080/users/login");
 	const onValid = (loginForm: LoginForm) => {
 		if (loading) return;
 		login(loginForm);
-		console.log(data, error);
-
-		// router.push("/");
 	};
+	useEffect(() => {
+		if (data?.ok) {
+			router.push("/");
+		}
+	}, [data, router]);
 
 	return (
 		<>
@@ -51,7 +53,7 @@ function Login() {
 							required
 						/>
 						<Button preventDefault={false} type="submit">
-							로그인
+							{loading ? "로그인중..." : "로그인"}
 						</Button>
 					</form>
 					<div className="mt-2 flex w-full flex-wrap">
