@@ -4,27 +4,29 @@ import { useForm } from "react-hook-form";
 import Input from "./input";
 
 interface InitialCheckbox {
-	id: number;
+	id?: number;
 	[key: string]: any;
 }
 
 interface CheckboxProps {
 	initialState: number[];
 	initialCheckbox: InitialCheckbox[];
+	uniqueId: "id" | string;
 	onChangeHandler: (param: any) => void;
 	hasAllCheck: boolean;
 	className?: string;
 }
 
-export default function CheckboxGroup({
+export default function CheckboxContext({
 	initialState,
 	initialCheckbox,
+	uniqueId = "id",
 	onChangeHandler,
 	hasAllCheck,
 	className,
 }: CheckboxProps) {
 	const { register } = useForm();
-	const [onAllChecked, setOnAllChecked] = useState(true);
+	const [isAllChecked, setIsAllChecked] = useState(true);
 
 	const handleCheck = (checkedId: number) => {
 		const newIds = initialState?.includes(checkedId)
@@ -34,13 +36,13 @@ export default function CheckboxGroup({
 		// handleSubmit(onValid)();
 	};
 	const toggleAllCheckbox = () => {
-		if (!onAllChecked) {
+		if (!isAllChecked) {
 			const allIds = initialCheckbox.map((item) => item.id);
 			onChangeHandler(allIds);
-			setOnAllChecked(!onAllChecked);
+			setIsAllChecked(!isAllChecked);
 		} else {
 			onChangeHandler([]);
-			setOnAllChecked(!onAllChecked);
+			setIsAllChecked(!isAllChecked);
 		}
 	};
 
@@ -54,20 +56,20 @@ export default function CheckboxGroup({
 						name="toggleAllCheckbox"
 						onChange={toggleAllCheckbox}
 						className="my-1 select-none font-bold"
-						checked={onAllChecked}
+						checked={isAllChecked}
 					/>
 				) : null}
 				{initialCheckbox.map((alarmTypeItem) => (
 					<Input
-						key={alarmTypeItem.id}
+						key={alarmTypeItem[uniqueId]}
 						register={register("selectedAlarmTypes")}
 						label={alarmTypeItem.name}
 						type="checkbox"
-						value={alarmTypeItem.id}
-						name={alarmTypeItem.id.toString()}
+						value={alarmTypeItem[uniqueId]}
+						name={alarmTypeItem[uniqueId].toString()}
 						className={cls("my-1 select-none", hasAllCheck ? "ml-3" : "")}
-						onChange={() => handleCheck(alarmTypeItem.id)}
-						checked={initialState.includes(alarmTypeItem.id)}
+						onChange={() => handleCheck(alarmTypeItem[uniqueId])}
+						checked={initialState.includes(alarmTypeItem[uniqueId])}
 					/>
 				))}
 			</div>
