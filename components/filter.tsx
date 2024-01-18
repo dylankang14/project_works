@@ -7,13 +7,9 @@ import Icon from "./icon";
 import ModalAlarmType from "./modal-alarm-type";
 import ModalStation from "./modal-station";
 import DropdownOffice from "./dropdown-office";
-<<<<<<< HEAD
 import DropdownInspectionPoint from "./dropdown-inspection-point";
 import DropdownAlarmType from "./dropdown-alarm-type";
 import DateTimeRangePicker from "./date-time-range-picker";
-=======
-import DateTimeRangePicker from "./date-time-range-picker";
->>>>>>> f4c82bb (Feature: 날짜선택 인풋 - 시간선택기능 추가)
 
 interface FilterProps {
 	size?: string;
