@@ -113,13 +113,17 @@ export default function CardTable({ title, data, dataType, hasLink = false, path
 					</tbody>
 				</table>
 			</div>
-			<Pagination
-				totalCount={data.length}
-				pageSize={pageSize}
-				currentPage={currentPage}
-				onPageChange={onPageChange}
-				className="pt-1 pb-4"
-			/>
+			{data.length <= pageSize ? (
+				""
+			) : (
+				<Pagination
+					totalCount={data.length}
+					pageSize={pageSize}
+					currentPage={currentPage}
+					onPageChange={onPageChange}
+					className="pb-4 pt-1"
+				/>
+			)}
 		</Card>
 	);
 }

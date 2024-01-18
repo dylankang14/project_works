@@ -72,12 +72,12 @@ export default function ModalStation({ isModalOpen, closeModal, className }: Mod
 						className="my-1 select-none font-bold"
 						checked={isAllChecked}
 					/>
-					{defaultAlarmType?.map((alarmTypeItem: any) => (
+					{defaultAlarmType?.map((alarmTypeItem: any, i) => (
 						<Input
 							key={alarmTypeItem.ALARMTYPE_ID}
 							label={alarmTypeItem.DESCRIPTION}
 							type="checkbox"
-							value={alarmTypeItem.ALARMTYPE_ID}
+							value={i}
 							name={alarmTypeItem.DESCRIPTION}
 							className="my-1 ml-3 select-none"
 							onChange={() => handleCheck(alarmTypeItem.ALARMTYPE_ID)}

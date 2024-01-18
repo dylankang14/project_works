@@ -14,7 +14,6 @@ interface FilterFormType {
 export default function HeaderFilter() {
 	const { width } = useWindowDimensions();
 	const [isDrawerOpen, setIsDrawerOpen] = useState(false);
-	const { register, handleSubmit } = useForm<FilterFormType>();
 	const [filter, { loading, data, error }] = useMutation("http://192.168.0.160:22080/API/alarm");
 	const onValid = (filterForm: FilterFormType) => {
 		if (loading) return;
@@ -25,19 +24,19 @@ export default function HeaderFilter() {
 		<div>
 			{width! >= 768 ? (
 				<Card className="p-4">
-					<div className="flex justify-between gap-1">
-						<form className="flex gap-1">
+					<form className="flex justify-between gap-1">
+						<div className="flex gap-1">
 							<Filter type="dateRange" />
-							<Filter type="station" />
+							<Filter type="inspectionPoint" />
 							<Filter type="alarmType" />
 							<Filter type="trainNumber" />
-						</form>
+						</div>
 						<div>
 							<Button size="sm" type="submit">
 								검색
 							</Button>
 						</div>
-					</div>
+					</form>
 					<div className="mt-2 border-t pt-2">
 						<span className="font-semibold">검색결과 : </span>
 						전체 50건의 알람이 검색되었습니다.

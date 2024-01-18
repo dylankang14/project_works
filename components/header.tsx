@@ -24,10 +24,14 @@ export default function Header() {
 							<Image src={logo} alt="Logo" priority={true} className="h-auto w-28" />
 						</Link>
 					) : null} */}
-					<Link href="/" className="logo relative flex flex-1 cursor-pointer select-none items-center gap-x-4 px-2">
-						<Image src={logo} alt="Logo" priority={true} className="h-auto w-28 " />
-						<div className="font-semibold">전차선 보호 모니터링</div>
-					</Link>
+					{device !== "mobile" ? (
+						<Link href="/" className="logo relative flex flex-1 cursor-pointer select-none items-center gap-x-4 px-2">
+							<Image src={logo} alt="Logo" priority={true} className="h-auto w-28 " />
+							<div className="font-semibold">전차선 보호 모니터링</div>
+						</Link>
+					) : (
+						""
+					)}
 					{/* <div
 						className="h-12 w-12 cursor-pointer select-none p-3 text-slate-600 hover:text-slate-800"
 						onClick={toggleDrawer}

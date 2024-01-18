@@ -1,6 +1,7 @@
 import Layout from "@/components/layout";
 import { FilterProvider } from "@/contexts/filterContext";
 import "@/styles/globals.css";
+import { request } from "http";
 import { NextPage } from "next";
 import type { AppProps } from "next/app";
 import Head from "next/head";
@@ -27,7 +28,11 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
 					<link rel="icon" href="/favicon.ico" />
 				</Head>
 				<FilterProvider>
-					<SWRConfig value={{ fetcher: (url: string) => fetch(url).then((response) => response.json()) }}>
+					<SWRConfig
+						value={{
+							fetcher: (url: string) => fetch(url, { credentials: "include" }).then((response) => response.json()),
+						}}
+					>
 						<Layout>{page}</Layout>
 					</SWRConfig>
 				</FilterProvider>

@@ -22,6 +22,8 @@ function Login() {
 		if (loading) return;
 		login(loginForm);
 	};
+	console.log(data);
+
 	useEffect(() => {
 		if (data?.ok) {
 			router.push("/");

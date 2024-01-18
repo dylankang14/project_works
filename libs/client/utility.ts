@@ -4,15 +4,21 @@ export function cls(...classnames: string[]) {
 	return classnames.join(" ");
 }
 
-export function filterValue(list: { id: number; [key: string]: any }[], value: number[], isText = false) {
+interface FilterValueType {
+	list: { id?: number; [key: string]: any }[];
+	value: number[];
+	uniqueId?: "id" | string;
+	isText?: boolean;
+}
+export function filterValue({ list, value, uniqueId = "id", isText = false }: FilterValueType) {
 	if (list.length === value.length) {
 		return "모두";
 	} else if (value.length === 0) {
 		return "없음";
 	} else if (isText) {
-		return list.filter((item) => value.includes(item.id)).map((item) => item.name);
+		return list.filter((item) => value.includes(item[uniqueId])).map((item) => item.name);
 	} else {
-		return list.filter((item) => value.includes(item.id)).length;
+		return list.filter((item) => value.includes(item[uniqueId])).length;
 	}
 }
 

@@ -5,9 +5,19 @@ import Link from "next/link";
 import CheckboxGroup from "./checkbox-group";
 import Dropdown from "./dropdown";
 import Icon from "./icon";
+import useMutation from "@/libs/client/useMutation";
+import { useEffect } from "react";
+import { useRouter } from "next/router";
 
 export default function DropdownUser() {
+	const router = useRouter();
 	const { ref, dropdownRef, toggleDropdown, isDropdownOpen, position } = useDropdown();
+	const [logout, { loading, data, error }] = useMutation("http://localhost:8080/users/logout");
+	const onLogout = () => {
+		logout({ id: "keri" });
+	};
+
+	console.log(data);
 
 	return (
 		<>
@@ -17,17 +27,11 @@ export default function DropdownUser() {
 			<Dropdown isDropdownOpen={isDropdownOpen} position={position} dropdownRef={dropdownRef} direction={"left"}>
 				<div className="flex flex-col gap-2">
 					<Link href={"/user/info"}>
-						<div className="hover:font-bold"> 계정 정보</div>
+						<div className="hover:font-bold">서울사업소</div>
 					</Link>
-					<Link href={"/user/activity"}>
-						<div className="hover:font-bold"> 로그인 내역</div>
-					</Link>
-					<Link href={"/user/work/fixed"}>
-						<div className="hover:font-bold"> 조치완료 내역</div>
-					</Link>
-					<Link href={"/user/security"}>
-						<div className="hover:font-bold"> 비밀번호 변경</div>
-					</Link>
+					<div onClick={onLogout} className="cursor-pointer">
+						<div className="hover:font-bold">로그아웃</div>
+					</div>
 				</div>
 			</Dropdown>
 		</>
