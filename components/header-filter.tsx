@@ -11,7 +11,7 @@ export default function HeaderFilter() {
 		<>
 			{width! >= 768 ? (
 				<div className="flex gap-1">
-					<Filter type="dateRange" />
+					<Filter type="dateTimeRange" />
 					<Filter type="station" />
 					<Filter type="alarmType" />
 					<Filter type="alarmPriority" />
