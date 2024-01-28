@@ -26,7 +26,7 @@ export default function HeaderFilter() {
 				<Card className="p-4">
 					<form className="flex justify-between gap-1">
 						<div className="flex gap-1">
-							<Filter type="dateRange" />
+							<Filter type="dateTimeRange" />
 							<Filter type="inspectionPoint" />
 							<Filter type="alarmType" />
 							<Filter type="trainNumber" />

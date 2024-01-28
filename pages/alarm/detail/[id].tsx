@@ -58,7 +58,7 @@ export default function DetailReport() {
 				<RadioGroup items={radioItems} defaultChecked={radioDefault} onChangeRadio={(val) => setRadioDefault(val)} />
 			</div> */}
 			<Card>
-				<div className="grid grid-flow-col">
+				<div className="grid grid-flow-col text-center">
 					<div className="">
 						<div className="border-b px-2 py-3 pl-4 font-semibold">검측일시</div>
 						<div className="px-2 py-3 pl-4">2023.01.01 12:23:40</div>
