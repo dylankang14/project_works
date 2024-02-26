@@ -1,54 +1,89 @@
-import AlarmCriteria from "@/components/alarm-criteria";
-import Button from "@/components/button";
 import Card from "@/components/card";
-import CardAlarmDetail from "@/components/card-alarm-detail";
 import CardTable from "@/components/card-table";
-import HeaderFilter from "@/components/header-filter";
+import CardTableAlarmDetail from "@/components/card-table-alarm-detail";
 import Icon from "@/components/icon";
-import Loader from "@/components/loader";
-import RadioGroup from "@/components/radio-group";
 import useWindowDimensions from "@/libs/client/useWindowDimensions";
-import { cls, pageToImg, saveAsPdf } from "@/libs/client/utility";
-import Image from "next/image";
+import { calculateDecimal, getType } from "@/libs/client/utility";
 import { useRouter } from "next/router";
 import { useEffect, useRef, useState } from "react";
+import useSWR, { useSWRConfig } from "swr";
 
 export default function DetailReport() {
 	const router = useRouter();
 	const { device } = useWindowDimensions();
+	const { data, isLoading, error } = useSWR(`http://192.168.0.204:8080/alarm/detail/5708`);
+	const {
+		data: point_event,
+		isLoading: pointIsLoading,
+		error: pointError,
+	} = useSWR(`http://192.168.0.204:8080/alarm/5708`);
+
+	// const { cache } = useSWRConfig();
+	// console.log("cache : ", cache);
+
 	const radioItems = [
 		{ text: <Icon type="queue" />, value: "queue" },
 		{ text: <Icon type="list" />, value: "list" },
 	];
-	const [radioDefault, setRadioDefault] = useState("queue");
-	const data = {
-		id: 1,
-		priority: 1,
-		fixed: false,
-	};
 
-	const alarmData = Array.from(Array(5).keys()).map((i) => ({
-		title: `${i + 1}`,
-		x: "-0.24",
-		y: "0.01",
-		z: "0.41",
-		wear: "0.02",
-		protector: "0.00",
-		guidehorn: "0.02",
-		panto: "32.25",
-		press: "36.25",
-	}));
+	const point_data = !pointIsLoading &&
+		point_event &&
+		point_event.ok && { ...point_event.hstation_event, json_DATA: JSON.parse(point_event.hstation_event.json_DATA) };
+
+	const alarmDetailData =
+		!isLoading &&
+		data &&
+		data.ok &&
+		data.result.map((i: any) => {
+			const json_DATA = JSON.parse(i.json_DATA);
+			console.log(json_DATA);
+
+			let alarmCode = {};
+			const temp =
+				json_DATA &&
+				Object.entries(json_DATA.Data.ItemIDMap).map(([k, v], i) => {
+					Object.entries(v as object).map(([key, val]) => {
+						json_DATA.Data.ItemIDMap[k][key] = calculateDecimal(val);
+					});
+					return v;
+				});
+			alarmCode = Object.assign(alarmCode, ...temp);
+			const alarmPriority = json_DATA.Data.StateMap;
+
+			const date = new Date(i.dev_EVENT_TIME);
+			const obj = {
+				id: i.log_ID,
+				priority: i.priority,
+				// datetime: date.toLocaleString(),
+				datetime: date,
+				fileName: i.report_FILENAME && i.report_FILENAME.replace(".pdf", ""),
+				alarmCode,
+				alarmPriority,
+			};
+			// const result = Object.assign(obj, d);
+			// console.log(result);
+
+			return obj;
+		});
+	// console.log(alarmDetailData);
+
+	const [radioDefault, setRadioDefault] = useState("queue");
+	// const data = {
+	// 	id: 1,
+	// 	priority: 1,
+	// 	fixed: false,
+	// };
 
 	const dataType: string[] = [
-		"No",
 		"X축",
 		"Y축",
 		"Z축",
-		"주습판마모",
-		"프로텍터 결함",
-		"가이드혼 결함",
-		"판토중심 편위",
-		"비접촉식 압상량",
+		"주습판체 파손/결함",
+		"프로텍터 결함 L",
+		"가이드혼 결함 L",
+		"프로텍터 결함 R",
+		"가이드혼 결함 R",
+		"타흔검사",
 	];
 
 	return (
@@ -58,34 +93,46 @@ export default function DetailReport() {
 				<RadioGroup items={radioItems} defaultChecked={radioDefault} onChangeRadio={(val) => setRadioDefault(val)} />
 			</div> */}
 			<Card>
-				<div className="grid grid-flow-col text-center">
-					<div className="">
-						<div className="border-b px-2 py-3 pl-4 font-semibold">검측일시</div>
-						<div className="px-2 py-3 pl-4">2023.01.01 12:23:40</div>
+				<div className="flex flex-wrap py-2 text-center md:py-0">
+					<div className="flex flex-grow flex-row flex-wrap md:flex-col">
+						<div className="px-3 py-1 font-semibold md:border-b md:py-3">검측일시</div>
+						<div className="px-3 py-1 md:py-3">{new Date(point_data.dev_EVENT_TIME).toLocaleString()}</div>
 					</div>
-					<div className="">
-						<div className="border-b px-2 py-3 font-semibold">검측소</div>
-						<div className="px-2 py-3">금정 상선</div>
+					<div className="flex flex-grow flex-row flex-wrap md:flex-col">
+						<div className="px-3 py-1 font-semibold md:border-b md:py-3">검측소</div>
+						<div className="px-3 py-1 md:py-3">{point_data.json_DATA?.Data.ContainerName}</div>
 					</div>
-					<div className="">
-						<div className="border-b px-2 py-3 font-semibold">열차번호</div>
-						<div className="px-2 py-3">456001</div>
+					<div className="flex flex-grow flex-row flex-wrap md:flex-col">
+						<div className="px-3 py-1 font-semibold md:border-b md:py-3">열차번호</div>
+						<div className="px-3 py-1 md:py-3">{point_data.json_DATA?.Data.TrainNumber}</div>
 					</div>
-					<div className="">
-						<div className="border-b px-2 py-3 font-semibold">차량속도</div>
-						<div className="px-2 py-3">80.12 km/h</div>
+					<div className="flex flex-grow flex-row flex-wrap md:flex-col">
+						<div className="px-3 py-1 font-semibold md:border-b md:py-3">차량속도</div>
+						<div className="px-3 py-1 md:py-3">{point_data.json_DATA?.Data.Speed} km/h</div>
 					</div>
-					<div className="">
-						<div className="border-b px-2 py-3 font-semibold">판토수</div>
-						<div className="px-2 py-3">6</div>
+					<div className="flex flex-grow flex-row flex-wrap md:flex-col">
+						<div className="px-3 py-1 font-semibold md:border-b md:py-3">판토수</div>
+						<div className="px-3 py-1 md:py-3">{point_data.count1}</div>
 					</div>
-					<div className="">
-						<div className="border-b px-2 py-3 pr-4 font-semibold">알람갯수</div>
-						<div className="px-2 py-3 pr-4">3</div>
+					<div className="flex flex-grow flex-row flex-wrap md:flex-col">
+						<div className="px-3 py-1 font-semibold md:border-b md:py-3">알람갯수</div>
+						<div className="px-3 py-1 md:py-3">{point_data.count2}</div>
 					</div>
 				</div>
 			</Card>
-			<CardTable hasLink={true} pathname={`alarm/detail/`} data={alarmData} dataType={dataType} pageSize={20} />
+			{!isLoading && data.ok && alarmDetailData ? (
+				<CardTableAlarmDetail
+					hasLink={true}
+					pathname={`alarm/report`}
+					data={alarmDetailData}
+					dataType={dataType}
+					pageSize={20}
+				/>
+			) : (
+				<Card className="select-none py-8 text-center text-base font-medium">
+					해당 조건에 해당하는 알람이 없습니다.
+				</Card>
+			)}
 			{/* <div className="flex flex-wrap items-center">
 				<CardAlarmDetail data={data} />
 			</div> */}

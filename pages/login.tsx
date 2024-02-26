@@ -11,13 +11,13 @@ import useMutation from "@/libs/client/useMutation";
 
 interface LoginForm {
 	id: string;
-	pass: string;
+	password: string;
 }
 
 function Login() {
 	const router = useRouter();
 	const { register, handleSubmit } = useForm<LoginForm>();
-	const [login, { loading, data, error }] = useMutation("http://localhost:8080/users/login");
+	const [login, { loading, data, error }] = useMutation("http://192.168.0.204:8080/users/login");
 	const onValid = (loginForm: LoginForm) => {
 		if (loading) return;
 		login(loginForm);
@@ -25,7 +25,7 @@ function Login() {
 	console.log(data);
 
 	useEffect(() => {
-		if (data?.ok) {
+		if (data?.OK) {
 			router.push("/");
 		}
 	}, [data, router]);
@@ -39,7 +39,7 @@ function Login() {
 				<div className="container flex max-w-xs flex-col items-center gap-1">
 					<div className="mb-3 w-[70%] text-center sm:w-auto">
 						<Image src={logo} alt="Logo" priority={true} />
-						<div className="py-2 text-lg font-medium">전차선 보호 모니터링 알람 웹서비스</div>
+						<div className="break-words py-2 text-lg font-medium">전차선 보호 모니터링 알람 웹서비스</div>
 					</div>
 					<form
 						onSubmit={handleSubmit(onValid)}
@@ -48,9 +48,9 @@ function Login() {
 						<Input className="w-full" register={register("id")} label="아이디" name="id" type="text" required />
 						<Input
 							className="w-full"
-							register={register("pass")}
+							register={register("password")}
 							label="비밀번호"
-							name="pass"
+							name="password"
 							type="password"
 							required
 						/>

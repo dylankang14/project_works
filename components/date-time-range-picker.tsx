@@ -1,16 +1,19 @@
-import React, { forwardRef, useState } from "react";
+import React, { forwardRef, useCallback, useEffect, useState } from "react";
 import { ko } from "date-fns/locale";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.min.css";
 import { addDays, subDays } from "date-fns";
 import Icon from "./icon";
 import { useFilterAPI, useFilterData } from "@/contexts/filterContext";
+import { updateSearchParamsType } from "@/libs/client/useAlarmList";
+import useWindowDimensions from "@/libs/client/useWindowDimensions";
 
 interface CustomDateInputProps {
 	[key: string]: any;
 }
 
-export default function DateTimeRangePicker() {
+export default function DateTimeRangePicker({ updateSearchParams }: updateSearchParamsType) {
+	const { width } = useWindowDimensions();
 	const { dateRange } = useFilterData();
 	const { onDateRangeChange } = useFilterAPI();
 	// const [startDate, endDate] = dateRange;
@@ -18,35 +21,45 @@ export default function DateTimeRangePicker() {
 		// onDateRangeChange(dates);
 		console.log(date);
 	};
-	console.log(dateRange);
+	// const paramHandler = useCallback((e) => {
+	// 	console.log("333" + e);
+	// }, []);
 
-	const [startDate, setStartDate] = useState(dateRange[0]);
-	const [endDate, setEndDate] = useState(dateRange[1]);
+	const [startDate, setStartDate] = useState(dateRange.startDate);
+	const [endDate, setEndDate] = useState(dateRange.endDate);
 
-	const limitRange = endDate || addDays(startDate, 4) > new Date() ? new Date() : addDays(startDate, 4);
+	// const limitRange = endDate || addDays(startDate, 4) > new Date() ? new Date() : addDays(startDate, 4);
 
 	const CustomStartDateInput = forwardRef<HTMLDivElement, CustomDateInputProps>((props, ref) => {
 		return (
-			<div className="relative flex cursor-pointer py-1.5 pl-2 pr-2 text-sm" onClick={props.onClick} ref={ref}>
+			<div className="relative flex cursor-pointer py-1.5 pl-3 pr-3 text-sm" onClick={props.onClick} ref={ref}>
 				<span>{props.value}</span>
 			</div>
 		);
 	});
 	const CustomEndDateInput = forwardRef<HTMLDivElement, CustomDateInputProps>((props, ref) => {
 		return (
-			<div className="relative flex cursor-pointer py-1.5 pl-2 pr-3 text-sm" onClick={props.onClick} ref={ref}>
+			<div className="relative flex cursor-pointer py-1.5 pl-3 pr-3 text-sm" onClick={props.onClick} ref={ref}>
 				<span className="">{props.value}</span>
 			</div>
 		);
 	});
 	CustomStartDateInput.displayName = "CustomStartDateInput";
 	CustomEndDateInput.displayName = "CustomEndDateInput";
+	useEffect(() => {
+		onDateRangeChange({ startDate, endDate });
+	}, [onDateRangeChange, startDate, endDate]);
+	// useEffect(() => {
+	// 	console.log(startDate, endDate);
+	// 	paramHandler(startDate);
+	// }, [startDate, endDate, paramHandler]);
+
 	return (
-		<div className="relative flex cursor-pointer flex-wrap items-center rounded border border-slate-300 bg-white text-sm">
+		<div className="relative flex flex-shrink-0 cursor-pointer flex-wrap items-center rounded border border-slate-300 bg-white text-sm">
 			<div className="pl-2 text-slate-700">
 				<Icon type="date" className="h-5 w-5 text-slate-600" />
 			</div>
-			<div className="flex">
+			<div className="flex flex-grow">
 				<DatePicker
 					selected={startDate}
 					selectsStart
@@ -55,14 +68,15 @@ export default function DateTimeRangePicker() {
 					locale={ko}
 					showTimeSelect
 					onChange={(date) => setStartDate(date!)}
-					dateFormat="yyyy-MM-dd aa h:mm"
-					maxDate={limitRange}
+					dateFormat="yyyy-MM-dd 시간 HH:mm"
+					// maxDate={limitRange}
 					customInput={<CustomStartDateInput />}
-					// withPortal={device === "mobile"}
+					withPortal={width !== null && width < 768}
 				/>
 			</div>
-			<div className="flex h-full items-center border-l border-r px-1.5 font-bold">-</div>
-			<div className="flex">
+			<div className="hidden h-full items-center border-l border-r px-1.5 font-bold md:flex">-</div>
+			<div className="flex pl-2.5">
+				<div className="flex items-center px-1.5 font-bold md:hidden">-</div>
 				<DatePicker
 					selected={endDate}
 					selectsEnd
@@ -71,10 +85,10 @@ export default function DateTimeRangePicker() {
 					locale={ko}
 					showTimeSelect
 					onChange={(date) => setEndDate(date!)}
-					dateFormat="yyyy-MM-dd aa h:mm"
-					maxDate={limitRange}
+					dateFormat="yyyy-MM-dd 시간 HH:mm"
+					// maxDate={limitRange}
 					customInput={<CustomEndDateInput />}
-					// withPortal={device === "mobile"}
+					withPortal={width !== null && width < 768}
 				/>
 			</div>
 		</div>

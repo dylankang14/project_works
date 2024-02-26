@@ -17,8 +17,6 @@ export default function DropdownUser() {
 		logout({ id: "keri" });
 	};
 
-	console.log(data);
-
 	return (
 		<>
 			<div ref={ref} className="relative cursor-pointer" onClick={toggleDropdown}>
@@ -26,9 +24,9 @@ export default function DropdownUser() {
 			</div>
 			<Dropdown isDropdownOpen={isDropdownOpen} position={position} dropdownRef={dropdownRef} direction={"left"}>
 				<div className="flex flex-col gap-2">
-					<Link href={"/user/info"}>
+					{/* <Link href={"/user/info"}>
 						<div className="hover:font-bold">서울사업소</div>
-					</Link>
+					</Link> */}
 					<div onClick={onLogout} className="cursor-pointer">
 						<div className="hover:font-bold">로그아웃</div>
 					</div>

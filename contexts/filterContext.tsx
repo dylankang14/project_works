@@ -28,44 +28,48 @@ interface TrainRouteType {
 }
 interface DefaultInspectionPoint {
 	WORKCLASSTYPE_FK: number;
-	ALARMTYPE_ID: number;
+	CONTAINER_FK: number;
 	DESCRIPTION: string;
 	name: string;
 }
 interface DefaultData {
-	dateRange: Date[];
+	dateRange: { startDate: Date; endDate: Date };
 	trainStations?: DefaultTrainStation[];
 	alarmType?: DefaultAlarmType[];
 	alarmPriority?: number[];
 	trainRoutes?: TrainRouteType[];
 	inspectionPoint: DefaultInspectionPoint[];
+	trainNumber: string | null;
 }
 interface FilterData {
-	dateRange: Date[];
+	dateRange: { startDate: Date; endDate: Date };
 	stationRange?: { from: number | null; to: number | null };
 	alarmType: number[];
 	alarmPriority?: number[];
 	routeDirection?: number[];
 	trainRoute: number;
 	inspectionPoint: number[];
+	trainNumber: string | null;
 }
 
 interface FilterAPI {
-	onDateRangeChange: (date: Date[]) => void;
-	onStationRangeChange: (stationRange: { from: number | null; to: number | null }) => void;
+	onDateRangeChange: (date: { startDate: Date; endDate: Date }) => void;
+	// onStationRangeChange: (stationRange: { from: number | null; to: number | null }) => void;
 	onAlarmTypeChange: (alarmType: number[]) => void;
 	onAlarmPriorityChange: (alarmPriority: number[]) => void;
 	onRouteDirectionChange: (routeDirection: number[]) => void;
 	onInspectionPointChange: (routeDirection: number[]) => void;
+	onTrainNumberChange: (trainNumber: string) => void;
 }
 
 type Actions =
-	| { type: "updateDateRange"; dateRange: Date[] }
-	| { type: "updateStationRange"; stationRange: { from: number | null; to: number | null } }
+	| { type: "updateDateRange"; dateRange: { startDate: Date; endDate: Date } }
+	// | { type: "updateStationRange"; stationRange: { from: number | null; to: number | null } }
 	| { type: "updateAlarmType"; alarmType: number[] }
 	| { type: "updateAlarmPriority"; alarmPriority: number[] }
 	| { type: "updateRouteDirection"; routeDirection: number[] }
-	| { type: "updateInspectionPoint"; inspectionPoint: number[] };
+	| { type: "updateInspectionPoint"; inspectionPoint: number[] }
+	| { type: "updateTrainNumber"; trainNumber: string };
 
 export const DefaultDataContext = createContext<DefaultData>({} as DefaultData);
 export const FilterDataContext = createContext<FilterData>({} as FilterData);
@@ -75,8 +79,8 @@ const reducer = (state: FilterData, action: Actions): FilterData => {
 	switch (action.type) {
 		case "updateDateRange":
 			return { ...state, dateRange: action.dateRange };
-		case "updateStationRange":
-			return { ...state, stationRange: action.stationRange };
+		// case "updateStationRange":
+		// 	return { ...state, stationRange: action.stationRange };
 		case "updateAlarmType":
 			return { ...state, alarmType: action.alarmType };
 		case "updateAlarmPriority":
@@ -85,14 +89,26 @@ const reducer = (state: FilterData, action: Actions): FilterData => {
 			return { ...state, routeDirection: action.routeDirection };
 		case "updateInspectionPoint":
 			return { ...state, inspectionPoint: action.inspectionPoint };
+		case "updateTrainNumber":
+			return { ...state, trainNumber: action.trainNumber };
 		default:
 			return state;
 	}
 };
 
 export function FilterProvider({ children }: { children: ReactNode }) {
-	const defaultDate = new Date();
-	defaultDate.setDate(defaultDate.getDate() - 1);
+	// const today = new Date();
+	const today = new Date("2023-12-15T23:00:00.000+09:00");
+	// today.setHours(0, 0, 0, 0);
+	// const yesterday = new Date(today);
+	const yesterday = new Date("2023-12-08T00:00:00.000+09:00");
+	// yesterday.setDate(yesterday.getDate() - 1);
+	// yesterday.setHours(0, 0, 0, 0);
+	const defaultDate = {
+		startDate: yesterday,
+		endDate: today,
+	};
+
 	const fetcher = (url: string) => fetch(url).then((response) => response.json());
 	// const { data: defaultAlarmType } = useSWR<DefaultAlarmType[]>(
 	// 	"http://192.168.0.160:22080/API/Master/CommonProcedureResult?procedureName=proc_getAlarmType",
@@ -106,7 +122,7 @@ export function FilterProvider({ children }: { children: ReactNode }) {
 	// );
 	const defaultInspectionPoint = Array.from(Array(6).keys()).map((i) => ({
 		WORKCLASSTYPE_FK: i,
-		ALARMTYPE_ID: i,
+		CONTAINER_FK: 42000 + i,
 		DESCRIPTION: inspect.locale[i],
 		name: inspect.locale[i],
 	}));
@@ -180,12 +196,13 @@ export function FilterProvider({ children }: { children: ReactNode }) {
 	];
 
 	const defaultData: DefaultData = {
-		dateRange: [defaultDate, defaultDate],
+		dateRange: defaultDate,
 		// trainStations: defaultTrainStations,
 		alarmType: defaultAlarmType,
 		alarmPriority: [1, 2, 3],
 		// trainRoutes: trainRoutes,
 		inspectionPoint: defaultInspectionPoint,
+		trainNumber: null,
 	};
 
 	const [state, dispatch] = useReducer(reducer, {
@@ -196,14 +213,15 @@ export function FilterProvider({ children }: { children: ReactNode }) {
 		routeDirection: [1, 2],
 		trainRoute: 1,
 		inspectionPoint: [0, 1, 2, 3, 4, 5],
+		trainNumber: null,
 	} as FilterData);
 	const api = useMemo(() => {
-		const onDateRangeChange = (dateRange: Date[]) => {
+		const onDateRangeChange = (dateRange: { startDate: Date; endDate: Date }) => {
 			dispatch({ type: "updateDateRange", dateRange });
 		};
-		const onStationRangeChange = (stationRange: { from: number | null; to: number | null }) => {
-			dispatch({ type: "updateStationRange", stationRange });
-		};
+		// const onStationRangeChange = (stationRange: { from: number | null; to: number | null }) => {
+		// 	dispatch({ type: "updateStationRange", stationRange });
+		// };
 		const onAlarmTypeChange = (alarmType: number[]) => {
 			dispatch({ type: "updateAlarmType", alarmType });
 		};
@@ -216,13 +234,17 @@ export function FilterProvider({ children }: { children: ReactNode }) {
 		const onInspectionPointChange = (inspectionPoint: number[]) => {
 			dispatch({ type: "updateInspectionPoint", inspectionPoint });
 		};
+		const onTrainNumberChange = (trainNumber: string) => {
+			dispatch({ type: "updateTrainNumber", trainNumber });
+		};
 		return {
 			onDateRangeChange,
-			onStationRangeChange,
+			// onStationRangeChange,
 			onAlarmTypeChange,
 			onAlarmPriorityChange,
 			onRouteDirectionChange,
 			onInspectionPointChange,
+			onTrainNumberChange,
 		};
 	}, []);
 

@@ -7,32 +7,27 @@ import Card from "./card";
 import { useForm } from "react-hook-form";
 import useMutation from "@/libs/client/useMutation";
 
-interface FilterFormType {
-	[key: string]: string;
+interface HeaderFilterProps {
+	[key: string]: any;
 }
 
-export default function HeaderFilter() {
+export default function HeaderFilter({ updateSearchParams, search }: HeaderFilterProps) {
 	const { width } = useWindowDimensions();
 	const [isDrawerOpen, setIsDrawerOpen] = useState(false);
-	const [filter, { loading, data, error }] = useMutation("http://192.168.0.160:22080/API/alarm");
-	const onValid = (filterForm: FilterFormType) => {
-		if (loading) return;
-		filter(filterForm);
-		console.log(filterForm);
-	};
+
 	return (
 		<div>
 			{width! >= 768 ? (
 				<Card className="p-4">
 					<form className="flex justify-between gap-1">
 						<div className="flex gap-1">
-							<Filter type="dateTimeRange" />
-							<Filter type="inspectionPoint" />
-							<Filter type="alarmType" />
-							<Filter type="trainNumber" />
+							<Filter type="dateTimeRange" updateSearchParams={updateSearchParams} />
+							<Filter type="inspectionPoint" updateSearchParams={updateSearchParams} />
+							{/* <Filter type="alarmType" /> */}
+							<Filter type="trainNumber" updateSearchParams={updateSearchParams} />
 						</div>
-						<div>
-							<Button size="sm" type="submit">
+						<div className="flex-shrink-0">
+							<Button size="md" type="submit" onClick={search}>
 								검색
 							</Button>
 						</div>
@@ -43,11 +38,15 @@ export default function HeaderFilter() {
 					</div>
 				</Card>
 			) : (
-				<div className="flex gap-1">
-					<Button size="sm" color="blue" icon="filter" onClick={() => setIsDrawerOpen(true)}>
+				<div className="flex">
+					<Button size="sm" color="blue" icon="filter" onClick={() => setIsDrawerOpen(true)} className="ml-auto">
 						필터옵션
 					</Button>
-					<ModalFilter isModalOpen={isDrawerOpen} closeModal={() => setIsDrawerOpen(false)} />
+					<ModalFilter
+						isModalOpen={isDrawerOpen}
+						updateSearchParams={updateSearchParams}
+						closeModal={() => setIsDrawerOpen(false)}
+					/>
 				</div>
 			)}
 		</div>

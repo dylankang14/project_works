@@ -10,6 +10,7 @@ export interface ModalProps {
 	className?: string;
 	containerClass?: string;
 	stopPropagation?: boolean;
+	updateSearchParams?: () => void;
 }
 
 export default function Modal({
@@ -52,7 +53,7 @@ export default function Modal({
 				<div
 					ref={nodeRef}
 					className={cls(
-						"fixed top-0 left-0 flex h-full w-full justify-center overflow-y-auto py-5 text-sm",
+						"fixed left-0 top-0 flex h-full w-full justify-center overflow-y-auto py-5 text-sm",
 						containerClass ? containerClass : "items-center"
 					)}
 				>

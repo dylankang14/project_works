@@ -14,11 +14,10 @@ export const config = {
 };
 
 export function middleware(req: NextRequest) {
-	if (!req.url.includes("/login") && !req.cookies.has("AccessToken")) {
-		const url = req.nextUrl.clone();
-		url.pathname = "/login";
-		url.search = "";
-
-		return NextResponse.redirect(url);
-	}
+	// if (!req.url.includes("/login") && !req.cookies.has("AccessToken")) {
+	// 	const url = req.nextUrl.clone();
+	// 	url.pathname = "/login";
+	// 	url.search = "";
+	// 	return NextResponse.redirect(url);
+	// }
 }

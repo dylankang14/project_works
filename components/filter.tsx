@@ -10,15 +10,17 @@ import DropdownOffice from "./dropdown-office";
 import DropdownInspectionPoint from "./dropdown-inspection-point";
 import DropdownAlarmType from "./dropdown-alarm-type";
 import DateTimeRangePicker from "./date-time-range-picker";
+import InputTrainNumber from "./input-train-number";
 
 interface FilterProps {
 	size?: string;
 	type: string;
 	value?: string;
 	placeholder?: string;
+	[key: string]: any;
 }
 
-export default function Filter({ size, type, value, placeholder }: FilterProps) {
+export default function Filter({ size, type, value, placeholder, updateSearchParams }: FilterProps) {
 	const [isModalOpen, setIsModalOpen] = useState(false);
 	const { trainStations } = useDefaultData();
 	const { dateRange, stationRange, alarmType, alarmPriority, routeDirection } = useFilterData();
@@ -28,9 +30,9 @@ export default function Filter({ size, type, value, placeholder }: FilterProps) 
 		case "dateRange":
 			return <DateRangePicker />;
 		case "dateTimeRange":
-			return <DateTimeRangePicker />;
+			return <DateTimeRangePicker updateSearchParams={updateSearchParams} />;
 		case "inspectionPoint":
-			return <DropdownInspectionPoint />;
+			return <DropdownInspectionPoint updateSearchParams={updateSearchParams} />;
 		// case "inspectionPoint":
 		// 	return (
 		// 		<>
@@ -86,19 +88,7 @@ export default function Filter({ size, type, value, placeholder }: FilterProps) 
 				</label>
 			);
 		case "trainNumber":
-			return (
-				<label className="relative cursor-pointer" htmlFor="search">
-					<div className="absolute left-1.5 top-1/2 -translate-y-1/2 text-slate-700">
-						<Icon type="search" className="h-5 w-5 text-slate-600" />
-					</div>
-					<input
-						className="w-full cursor-pointer rounded border-slate-300 py-1.5 pl-8 pr-2 text-sm"
-						type="text"
-						placeholder="모든 차량"
-						id="alarmType"
-					/>
-				</label>
-			);
+			return <InputTrainNumber updateSearchParams={updateSearchParams} />;
 		case "office":
 			return <DropdownOffice />;
 	}
