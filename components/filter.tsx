@@ -23,16 +23,16 @@ interface FilterProps {
 export default function Filter({ size, type, value, placeholder, updateSearchParams }: FilterProps) {
 	const [isModalOpen, setIsModalOpen] = useState(false);
 	const { trainStations } = useDefaultData();
-	const { dateRange, stationRange, alarmType, alarmPriority, routeDirection } = useFilterData();
+	// const { dateRange, stationRange, alarmType, alarmPriority, routeDirection } = useFilterData();
 	// const { onDateRangeChange, onStationRangeChange, onAlarmTypeChange, onAlarmPriorityChange, onRouteDirectionChange } =
 	// useFilterAPI();
 	switch (type) {
 		case "dateRange":
 			return <DateRangePicker />;
 		case "dateTimeRange":
-			return <DateTimeRangePicker updateSearchParams={updateSearchParams} />;
+			return <DateTimeRangePicker />;
 		case "inspectionPoint":
-			return <DropdownInspectionPoint updateSearchParams={updateSearchParams} />;
+			return <DropdownInspectionPoint />;
 		// case "inspectionPoint":
 		// 	return (
 		// 		<>
@@ -88,7 +88,7 @@ export default function Filter({ size, type, value, placeholder, updateSearchPar
 				</label>
 			);
 		case "trainNumber":
-			return <InputTrainNumber updateSearchParams={updateSearchParams} />;
+			return <InputTrainNumber />;
 		case "office":
 			return <DropdownOffice />;
 	}

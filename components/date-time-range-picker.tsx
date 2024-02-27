@@ -5,14 +5,13 @@ import "react-datepicker/dist/react-datepicker.min.css";
 import { addDays, subDays } from "date-fns";
 import Icon from "./icon";
 import { useFilterAPI, useFilterData } from "@/contexts/filterContext";
-import { updateSearchParamsType } from "@/libs/client/useAlarmList";
 import useWindowDimensions from "@/libs/client/useWindowDimensions";
 
 interface CustomDateInputProps {
 	[key: string]: any;
 }
 
-export default function DateTimeRangePicker({ updateSearchParams }: updateSearchParamsType) {
+export default function DateTimeRangePicker() {
 	const { width } = useWindowDimensions();
 	const { dateRange } = useFilterData();
 	const { onDateRangeChange } = useFilterAPI();
@@ -47,6 +46,8 @@ export default function DateTimeRangePicker({ updateSearchParams }: updateSearch
 	CustomStartDateInput.displayName = "CustomStartDateInput";
 	CustomEndDateInput.displayName = "CustomEndDateInput";
 	useEffect(() => {
+		console.log("wow");
+
 		onDateRangeChange({ startDate, endDate });
 	}, [onDateRangeChange, startDate, endDate]);
 	// useEffect(() => {

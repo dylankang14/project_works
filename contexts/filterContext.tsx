@@ -97,8 +97,8 @@ const reducer = (state: FilterData, action: Actions): FilterData => {
 };
 
 export function FilterProvider({ children }: { children: ReactNode }) {
-	// const today = new Date();
-	const today = new Date("2023-12-15T23:00:00.000+09:00");
+	const today = new Date();
+	// const today = new Date("2023-12-08T23:00:00.000+09:00");
 	// today.setHours(0, 0, 0, 0);
 	// const yesterday = new Date(today);
 	const yesterday = new Date("2023-12-08T00:00:00.000+09:00");
@@ -108,6 +108,8 @@ export function FilterProvider({ children }: { children: ReactNode }) {
 		startDate: yesterday,
 		endDate: today,
 	};
+
+	console.log("d", defaultDate);
 
 	const fetcher = (url: string) => fetch(url).then((response) => response.json());
 	// const { data: defaultAlarmType } = useSWR<DefaultAlarmType[]>(
@@ -212,7 +214,7 @@ export function FilterProvider({ children }: { children: ReactNode }) {
 		alarmPriority: [1, 2, 3],
 		routeDirection: [1, 2],
 		trainRoute: 1,
-		inspectionPoint: [0, 1, 2, 3, 4, 5],
+		inspectionPoint: [42000, 42001, 42002, 42003, 42004, 42005],
 		trainNumber: null,
 	} as FilterData);
 	const api = useMemo(() => {

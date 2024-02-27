@@ -11,7 +11,7 @@ interface HeaderFilterProps {
 	[key: string]: any;
 }
 
-export default function HeaderFilter({ updateSearchParams, search }: HeaderFilterProps) {
+export default function HeaderFilter({ updateSearchParams, search, totalCount }: HeaderFilterProps) {
 	const { width } = useWindowDimensions();
 	const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
@@ -32,9 +32,11 @@ export default function HeaderFilter({ updateSearchParams, search }: HeaderFilte
 							</Button>
 						</div>
 					</form>
-					<div className="mt-2 border-t pt-2">
-						<span className="font-semibold">검색결과 : </span>
-						전체 50건의 알람이 검색되었습니다.
+					<div className="mt-2 flex items-center rounded border border-red-400 bg-red-100 px-2 py-1.5 text-red-600">
+						<span className="pr-1 font-semibold">검색결과 : </span>
+						<span>
+							전체 <span className="font-semibold">{totalCount}건</span>의 알람이 검색되었습니다.
+						</span>
 					</div>
 				</Card>
 			) : (

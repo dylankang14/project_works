@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useReducer, useState } from "react";
 import useSWR, { mutate } from "swr";
-import { fetcher } from "./utility";
+import { fetcher, getType } from "./utility";
+import { useFilterData } from "@/contexts/filterContext";
 
 export interface updateSearchParamsType {
 	[key: string]: any;
@@ -11,39 +12,71 @@ interface PointType {
 interface SearchParamsType {
 	startDate: string;
 	endDate: string;
-	train: string;
+	train: string | null;
+	page: number;
+	limit: number;
 	[key: string]: any;
 }
-export default function useAlarmList(defaultSearchParams: updateSearchParamsType) {
-	const points = defaultSearchParams.inspectionPoint.map((i: any) => i.CONTAINER_FK);
+type Actions = { type: "updateQuery" };
+
+export default function useAlarmList() {
+	const { dateRange, inspectionPoint, trainNumber } = useFilterData();
+
+	// const points = defaultSearchParams.inspectionPoint.map((i: any) => i.CONTAINER_FK);
+	const points = inspectionPoint;
 	const pointParams = new URLSearchParams();
 	points.forEach((value: any) => pointParams.append("point", value));
 	const pointQueryString = `${pointParams.toString()}`;
 
-	const [searchParams, setSearchParams] = useState<SearchParamsType>({
-		startDate: encodeURIComponent(defaultSearchParams.dateRange.startDate.toISOString()),
-		endDate: encodeURIComponent(defaultSearchParams.dateRange.endDate.toISOString()),
-		train: defaultSearchParams.trainNumber,
+	const reducer = (state: SearchParamsType, action: Actions) => {
+		switch (action.type) {
+			case "updateQuery":
+				return {
+					...state,
+					startDate: dateRange.startDate.toISOString(),
+					endDate: dateRange.endDate.toISOString(),
+					pointQueryString,
+					train: trainNumber,
+					page: 1,
+					limit: 20,
+				};
+		}
+	};
+	const initialFilterState = {
+		startDate: dateRange.startDate.toISOString(),
+		endDate: dateRange.endDate.toISOString(),
+		pointQueryString,
+		train: trainNumber,
+		page: 1,
+		limit: 20,
+	};
+	const [state, dispatch] = useReducer(reducer, initialFilterState);
+	// const [searchParams, setSearchParams] = useState<SearchParamsType>({
+	// 	startDate: dateRange.startDate.toISOString(),
+	// 	endDate: dateRange.endDate.toISOString(),
+	// 	train: trainNumber,
+	// 	page: 1,
+	// 	limit: 20,
+	// });
+	console.log("params", state);
+	let queryStrings = "";
+	Object.entries(state).map(([key, value], index) => {
+		queryStrings += `${index !== 0 ? "&" : ""}${key === "pointQueryString" ? value : key + "=" + value}`;
 	});
-	console.log(searchParams);
-	let queryStrings = pointQueryString;
-	Object.entries(searchParams).map(([key, value], index) => {
-		queryStrings += `&${key}=${value}`;
-	});
-	console.log(queryStrings);
+	console.log("q", queryStrings);
 
 	const key = queryStrings ? `http://192.168.0.204:8080/alarm/list?${queryStrings}` : null;
 	const { data, isLoading, error, mutate } = useSWR(key, fetcher);
 	const performSearch = () => {
-		mutate();
+		updateSearchParams();
+		// mutate();
 	};
-	const updateSearchParams = (param: updateSearchParamsType) => {
-		setSearchParams((prevParams: SearchParamsType) => ({ ...prevParams, ...param }));
+	const updateSearchParams = () => {
+		dispatch({ type: "updateQuery" });
 	};
 
 	return {
-		searchParams,
-		updateSearchParams,
+		state,
 		search: performSearch,
 		data,
 		isLoading,

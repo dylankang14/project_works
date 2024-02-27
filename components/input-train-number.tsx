@@ -1,7 +1,20 @@
-import { updateSearchParamsType } from "@/libs/client/useAlarmList";
+import { useFilterAPI } from "@/contexts/filterContext";
 import Icon from "./icon";
+import React, { useCallback, useEffect, useState } from "react";
 
-export default function InputTrainNumber({ updateSearchParams }: updateSearchParamsType) {
+export default function InputTrainNumber() {
+	const { onTrainNumberChange } = useFilterAPI();
+	const [trainNumber, setTrainNumber] = useState("");
+	const handleChange = useCallback(
+		(e: React.ChangeEvent<HTMLInputElement>) => {
+			setTrainNumber(e.target.value);
+		},
+		[setTrainNumber]
+	);
+	useEffect(() => {
+		onTrainNumberChange(trainNumber);
+	}, [trainNumber, onTrainNumberChange]);
+
 	return (
 		<label className="relative flex flex-auto cursor-pointer" htmlFor="search">
 			<div className="absolute left-2.5 top-1/2 -translate-y-1/2 text-slate-700">
@@ -12,6 +25,8 @@ export default function InputTrainNumber({ updateSearchParams }: updateSearchPar
 				type="text"
 				placeholder="모든 차량"
 				id="alarmType"
+				value={trainNumber}
+				onChange={handleChange}
 			/>
 		</label>
 	);

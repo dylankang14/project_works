@@ -4,9 +4,8 @@ import { filterValue } from "@/libs/client/utility";
 import CheckboxGroup from "./checkbox-group";
 import Dropdown from "./dropdown";
 import Icon from "./icon";
-import { updateSearchParamsType } from "@/libs/client/useAlarmList";
 
-export default function DropdownInspectionPoint({ updateSearchParams }: updateSearchParamsType) {
+export default function DropdownInspectionPoint() {
 	const { ref, dropdownRef, toggleDropdown, isDropdownOpen, position } = useDropdown();
 
 	const { inspectionPoint } = useFilterData();
@@ -22,8 +21,7 @@ export default function DropdownInspectionPoint({ updateSearchParams }: updateSe
 			>
 				<span className="flex items-center gap-x-2">
 					<Icon type="station" className="h-5 w-5" />
-					검측소 :{" "}
-					{filterValue({ list: defaultInspectionPoint!, value: inspectionPoint, uniqueId: "WORKCLASSTYPE_FK" })}
+					검측소 : {filterValue({ list: defaultInspectionPoint!, value: inspectionPoint, uniqueId: "CONTAINER_FK" })}
 				</span>
 			</div>
 			<Dropdown isDropdownOpen={isDropdownOpen} position={position} dropdownRef={dropdownRef}>
@@ -31,7 +29,7 @@ export default function DropdownInspectionPoint({ updateSearchParams }: updateSe
 					hasAllCheck={true}
 					initialState={inspectionPoint}
 					initialCheckbox={defaultInspectionPoint!}
-					uniqueId="WORKCLASSTYPE_FK"
+					uniqueId="CONTAINER_FK"
 					onChangeHandler={onInspectionPointChange}
 				/>
 			</Dropdown>
