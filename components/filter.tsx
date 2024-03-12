@@ -20,7 +20,7 @@ interface FilterProps {
 	[key: string]: any;
 }
 
-export default function Filter({ size, type, value, placeholder, updateSearchParams }: FilterProps) {
+export default function Filter({ size, type, value, placeholder }: FilterProps) {
 	const [isModalOpen, setIsModalOpen] = useState(false);
 	const { trainStations } = useDefaultData();
 	// const { dateRange, stationRange, alarmType, alarmPriority, routeDirection } = useFilterData();

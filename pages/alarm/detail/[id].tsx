@@ -36,7 +36,7 @@ export default function DetailReport() {
 		data.ok &&
 		data.result.map((i: any) => {
 			const json_DATA = JSON.parse(i.json_DATA);
-			console.log(json_DATA);
+			// console.log(json_DATA);
 
 			let alarmCode = {};
 			const temp =

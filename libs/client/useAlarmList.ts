@@ -1,9 +1,9 @@
-import { useReducer, useState } from "react";
+import { useMemo, useReducer, useState } from "react";
 import useSWR, { mutate } from "swr";
 import { fetcher, getType } from "./utility";
 import { useFilterData } from "@/contexts/filterContext";
 
-export interface updateSearchParamsType {
+export interface updateQueryParamsType {
 	[key: string]: any;
 }
 interface PointType {
@@ -13,15 +13,14 @@ interface SearchParamsType {
 	startDate: string;
 	endDate: string;
 	train: string | null;
-	page: number;
-	limit: number;
+	take: number;
+	skip: number;
 	[key: string]: any;
 }
-type Actions = { type: "updateQuery" };
+type Actions = { type: "updateQuery"; queryParams?: { [key: string]: any } };
 
 export default function useAlarmList() {
 	const { dateRange, inspectionPoint, trainNumber } = useFilterData();
-
 	// const points = defaultSearchParams.inspectionPoint.map((i: any) => i.CONTAINER_FK);
 	const points = inspectionPoint;
 	const pointParams = new URLSearchParams();
@@ -37,8 +36,7 @@ export default function useAlarmList() {
 					endDate: dateRange.endDate.toISOString(),
 					pointQueryString,
 					train: trainNumber,
-					page: 1,
-					limit: 20,
+					...action.queryParams,
 				};
 		}
 	};
@@ -47,8 +45,8 @@ export default function useAlarmList() {
 		endDate: dateRange.endDate.toISOString(),
 		pointQueryString,
 		train: trainNumber,
-		page: 1,
-		limit: 20,
+		take: 20,
+		skip: 0,
 	};
 	const [state, dispatch] = useReducer(reducer, initialFilterState);
 	// const [searchParams, setSearchParams] = useState<SearchParamsType>({
@@ -58,25 +56,26 @@ export default function useAlarmList() {
 	// 	page: 1,
 	// 	limit: 20,
 	// });
-	console.log("params", state);
 	let queryStrings = "";
 	Object.entries(state).map(([key, value], index) => {
 		queryStrings += `${index !== 0 ? "&" : ""}${key === "pointQueryString" ? value : key + "=" + value}`;
 	});
-	console.log("q", queryStrings);
 
 	const key = queryStrings ? `http://192.168.0.204:8080/alarm/list?${queryStrings}` : null;
 	const { data, isLoading, error, mutate } = useSWR(key, fetcher);
 	const performSearch = () => {
-		updateSearchParams();
+		updateQueryParams();
 		// mutate();
 	};
-	const updateSearchParams = () => {
-		dispatch({ type: "updateQuery" });
-	};
+	const updateQueryParams = useMemo(() => {
+		return (queryParams?: { [key: string]: any }) => {
+			dispatch({ type: "updateQuery", queryParams });
+		};
+	}, []);
 
 	return {
 		state,
+		updateQueryParams,
 		search: performSearch,
 		data,
 		isLoading,

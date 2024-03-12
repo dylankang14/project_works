@@ -14,6 +14,9 @@ export const config = {
 };
 
 export function middleware(req: NextRequest) {
+	console.log(req);
+	console.log(req.cookies.get("refreshToken"));
+
 	// if (!req.url.includes("/login") && !req.cookies.has("AccessToken")) {
 	// 	const url = req.nextUrl.clone();
 	// 	url.pathname = "/login";

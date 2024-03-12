@@ -16,13 +16,6 @@ export default function DateTimeRangePicker() {
 	const { dateRange } = useFilterData();
 	const { onDateRangeChange } = useFilterAPI();
 	// const [startDate, endDate] = dateRange;
-	const onChange = (date: Date) => {
-		// onDateRangeChange(dates);
-		console.log(date);
-	};
-	// const paramHandler = useCallback((e) => {
-	// 	console.log("333" + e);
-	// }, []);
 
 	const [startDate, setStartDate] = useState(dateRange.startDate);
 	const [endDate, setEndDate] = useState(dateRange.endDate);
@@ -31,14 +24,14 @@ export default function DateTimeRangePicker() {
 
 	const CustomStartDateInput = forwardRef<HTMLDivElement, CustomDateInputProps>((props, ref) => {
 		return (
-			<div className="relative flex cursor-pointer py-1.5 pl-3 pr-3 text-sm" onClick={props.onClick} ref={ref}>
+			<div className="relative flex cursor-pointer pl-3 pr-3 text-sm" onClick={props.onClick} ref={ref}>
 				<span>{props.value}</span>
 			</div>
 		);
 	});
 	const CustomEndDateInput = forwardRef<HTMLDivElement, CustomDateInputProps>((props, ref) => {
 		return (
-			<div className="relative flex cursor-pointer py-1.5 pl-3 pr-3 text-sm" onClick={props.onClick} ref={ref}>
+			<div className="relative flex cursor-pointer pl-3 pr-3 text-sm" onClick={props.onClick} ref={ref}>
 				<span className="">{props.value}</span>
 			</div>
 		);
@@ -46,8 +39,6 @@ export default function DateTimeRangePicker() {
 	CustomStartDateInput.displayName = "CustomStartDateInput";
 	CustomEndDateInput.displayName = "CustomEndDateInput";
 	useEffect(() => {
-		console.log("wow");
-
 		onDateRangeChange({ startDate, endDate });
 	}, [onDateRangeChange, startDate, endDate]);
 	// useEffect(() => {
@@ -56,7 +47,7 @@ export default function DateTimeRangePicker() {
 	// }, [startDate, endDate, paramHandler]);
 
 	return (
-		<div className="relative flex flex-shrink-0 cursor-pointer flex-wrap items-center rounded border border-slate-300 bg-white text-sm">
+		<div className="relative flex flex-shrink-0 cursor-pointer flex-wrap items-center gap-y-1.5 rounded border border-slate-300 bg-white py-1.5 text-sm md:gap-y-0 md:py-0">
 			<div className="pl-2 text-slate-700">
 				<Icon type="date" className="h-5 w-5 text-slate-600" />
 			</div>
@@ -76,7 +67,7 @@ export default function DateTimeRangePicker() {
 				/>
 			</div>
 			<div className="hidden h-full items-center border-l border-r px-1.5 font-bold md:flex">-</div>
-			<div className="flex pl-2.5">
+			<div className="flex justify-center pl-2.5 md:pl-0">
 				<div className="flex items-center px-1.5 font-bold md:hidden">-</div>
 				<DatePicker
 					selected={endDate}

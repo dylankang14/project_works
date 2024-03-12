@@ -37,13 +37,15 @@ export default function CardTableAlarmDetail({
 	dataType,
 	hasLink = false,
 	pathname,
-	pageSize = 15,
+	pageSize = 10,
 }: DataProps) {
 	const router = useRouter();
 	const [currentPage, setCurrentPage] = useState(1);
 	const onPageChange = (page: number) => setCurrentPage(page);
 	const paginatedData = paginate(data, currentPage, pageSize);
 	const onLink = ({ date, fileName }: QueryParamsType) => {
+		console.log("d", date);
+
 		// pathname && router.push(`http://192.168.0.204:8080/${pathname}?date=20231211&filename=${fileName}`);
 		// pathname && router.push(`/${pathname}?date=${getFormatDate(date)}&fileName=${fileName}`);
 		openReportPDF({
@@ -52,7 +54,7 @@ export default function CardTableAlarmDetail({
 		});
 	};
 	const { device } = useWindowDimensions();
-	console.log(paginatedData);
+	// console.log("@", paginatedData);
 
 	return (
 		<Card title={title}>
@@ -74,7 +76,8 @@ export default function CardTableAlarmDetail({
 							// if (device !== "mobile") {
 							return (
 								<tr
-									key={data.id}
+									// key={data.id}
+									key={index}
 									onClick={() => {
 										hasLink && data.fileName ? onLink({ date: data.datetime, fileName: data.fileName }) : undefined;
 									}}

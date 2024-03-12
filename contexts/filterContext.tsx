@@ -69,7 +69,7 @@ type Actions =
 	| { type: "updateAlarmPriority"; alarmPriority: number[] }
 	| { type: "updateRouteDirection"; routeDirection: number[] }
 	| { type: "updateInspectionPoint"; inspectionPoint: number[] }
-	| { type: "updateTrainNumber"; trainNumber: string };
+	| { type: "updateTrainNumber"; trainNumber: string | null };
 
 export const DefaultDataContext = createContext<DefaultData>({} as DefaultData);
 export const FilterDataContext = createContext<FilterData>({} as FilterData);
@@ -108,8 +108,6 @@ export function FilterProvider({ children }: { children: ReactNode }) {
 		startDate: yesterday,
 		endDate: today,
 	};
-
-	console.log("d", defaultDate);
 
 	const fetcher = (url: string) => fetch(url).then((response) => response.json());
 	// const { data: defaultAlarmType } = useSWR<DefaultAlarmType[]>(
@@ -237,7 +235,7 @@ export function FilterProvider({ children }: { children: ReactNode }) {
 			dispatch({ type: "updateInspectionPoint", inspectionPoint });
 		};
 		const onTrainNumberChange = (trainNumber: string) => {
-			dispatch({ type: "updateTrainNumber", trainNumber });
+			dispatch({ type: "updateTrainNumber", trainNumber: trainNumber.trim().length === 0 ? null : trainNumber });
 		};
 		return {
 			onDateRangeChange,

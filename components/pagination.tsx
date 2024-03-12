@@ -20,7 +20,8 @@ export default function Pagination({
 	className = "",
 }: PaginationProps) {
 	const paginationRange = usePagination({ totalCount, pageSize, siblingCount, currentPage });
-	let lastPage = paginationRange![paginationRange?.length! - 1];
+
+	let lastPage = paginationRange && paginationRange[paginationRange?.length! - 1];
 
 	if (currentPage === 0 && paginationRange?.length! < 2) return null;
 	return (
@@ -47,7 +48,7 @@ export default function Pagination({
 				return (
 					<div
 						key={pageNumber}
-						onClick={() => onPageChange(pageNumber as number)}
+						onClick={() => onPageChange(+pageNumber)}
 						className={cls(
 							"flex aspect-square w-7 cursor-pointer select-none items-center justify-center rounded border hover:bg-slate-500 hover:text-white",
 							currentPage === pageNumber ? "bg-slate-600 text-white" : ""

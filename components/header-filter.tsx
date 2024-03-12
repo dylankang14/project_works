@@ -11,7 +11,7 @@ interface HeaderFilterProps {
 	[key: string]: any;
 }
 
-export default function HeaderFilter({ updateSearchParams, search, totalCount }: HeaderFilterProps) {
+export default function HeaderFilter({ search, totalCount }: HeaderFilterProps) {
 	const { width } = useWindowDimensions();
 	const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
@@ -21,10 +21,10 @@ export default function HeaderFilter({ updateSearchParams, search, totalCount }:
 				<Card className="p-4">
 					<form className="flex justify-between gap-1">
 						<div className="flex gap-1">
-							<Filter type="dateTimeRange" updateSearchParams={updateSearchParams} />
-							<Filter type="inspectionPoint" updateSearchParams={updateSearchParams} />
+							<Filter type="dateTimeRange" />
+							<Filter type="inspectionPoint" />
 							{/* <Filter type="alarmType" /> */}
-							<Filter type="trainNumber" updateSearchParams={updateSearchParams} />
+							<Filter type="trainNumber" />
 						</div>
 						<div className="flex-shrink-0">
 							<Button size="md" type="submit" onClick={search}>
@@ -44,11 +44,7 @@ export default function HeaderFilter({ updateSearchParams, search, totalCount }:
 					<Button size="sm" color="blue" icon="filter" onClick={() => setIsDrawerOpen(true)} className="ml-auto">
 						필터옵션
 					</Button>
-					<ModalFilter
-						isModalOpen={isDrawerOpen}
-						updateSearchParams={updateSearchParams}
-						closeModal={() => setIsDrawerOpen(false)}
-					/>
+					<ModalFilter onSearch={search} isModalOpen={isDrawerOpen} closeModal={() => setIsDrawerOpen(false)} />
 				</div>
 			)}
 		</div>

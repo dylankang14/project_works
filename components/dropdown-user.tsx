@@ -12,7 +12,7 @@ import { useRouter } from "next/router";
 export default function DropdownUser() {
 	const router = useRouter();
 	const { ref, dropdownRef, toggleDropdown, isDropdownOpen, position } = useDropdown();
-	const [logout, { loading, data, error }] = useMutation("http://localhost:8080/users/logout");
+	const [logout, { loading, data, error }] = useMutation("http://192.168.0.204:8081/users/logout");
 	const onLogout = () => {
 		logout({ id: "keri" });
 	};

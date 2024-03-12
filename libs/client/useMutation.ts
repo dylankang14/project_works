@@ -21,7 +21,7 @@ export default function useMutation<T = any>(url: string): UseMutationResult<T> 
 				"Content-Type": "application/json",
 			},
 			body: JSON.stringify(data),
-			// mode: "cors",
+			mode: "cors",
 			credentials: "include",
 		})
 			.then((response) => response.json())

@@ -11,6 +11,7 @@ export interface ModalProps {
 	containerClass?: string;
 	stopPropagation?: boolean;
 	updateSearchParams?: () => void;
+	[key: string]: any;
 }
 
 export default function Modal({

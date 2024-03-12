@@ -29,13 +29,10 @@ export default function Home() {
 	const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 	const { width } = useWindowDimensions();
 
-	// const { data, error, isLoading } = useSWR<AlarmType[]>(
-	// 	"http://localhost:8080/Alarm/LogAlarm?workclass=0&priority=1,3&startDate=2023-03-19 10:39:36.910&endDate=2023-12-20 10:39:38.910&size=10&page=1"
-	// );
+	const takeSize = 20;
+	const skipSize = 0;
 
-	const { searchParams, search, data, isLoading, error } = useAlarmList();
-
-	console.log(data && data.result.map((i: any) => JSON.parse(i.json_DATA)));
+	const { state, updateQueryParams, search, data, isLoading, error } = useAlarmList();
 
 	const alarmData =
 		data &&
@@ -52,7 +49,6 @@ export default function Home() {
 				totalPanto: 10,
 				totalAlarm: 2,
 			};
-			console.log(obj);
 
 			return obj;
 		});
@@ -63,22 +59,17 @@ export default function Home() {
 	return (
 		<>
 			<div className="print:hidden">
-				<HeaderFilter search={search} totalCount={data?.count} />
-				{/* <div className="p-4">
-					<Link
-						href={`http://192.168.0.204:8080/alarm/report?date=20231211&filename=20231211_105819_42000_4200020001_F00002_0_0_1`} target="_blank"
-					>
-						테스트 링크
-					</Link>
-				</div> */}
+				<HeaderFilter search={search} totalCount={data?.totalCount} />
 			</div>
-			{!isLoading && data?.ok && alarmData ? (
-				<CardTable hasLink={true} pathname={`/alarm/detail/`} data={alarmData} dataType={dataType} pageSize={20} />
-			) : (
-				<Card className="select-none py-8 text-center text-base font-medium">
-					해당 조건에 해당하는 알람이 없습니다.
-				</Card>
-			)}
+			<CardTable
+				hasLink={true}
+				pathname={`/alarm/detail/`}
+				data={alarmData}
+				dataType={dataType}
+				pageSize={takeSize}
+				totalCount={data?.totalCount}
+				updateQueryParams={updateQueryParams}
+			/>
 		</>
 	);
 }
