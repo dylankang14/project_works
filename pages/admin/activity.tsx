@@ -23,7 +23,7 @@ export default function Activity() {
 					<div className="flex h-52 items-center justify-center bg-gray-100">그래프 이미지</div>
 				</div>
 			</Card>
-			<CardTable title="로그인 내역" data={data} dataType={dataType} />
+			{/* <CardTable title="로그인 내역" data={data} dataType={dataType} /> */}
 		</div>
 	);
 }

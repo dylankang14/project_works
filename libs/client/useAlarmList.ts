@@ -61,8 +61,8 @@ export default function useAlarmList() {
 		queryStrings += `${index !== 0 ? "&" : ""}${key === "pointQueryString" ? value : key + "=" + value}`;
 	});
 
-	const key = queryStrings ? `http://192.168.0.204:8080/alarm/list?${queryStrings}` : null;
-	const { data, isLoading, error, mutate } = useSWR(key, fetcher);
+	const key = queryStrings ? `http://121.139.31.25:5411/alarm/list?${queryStrings}` : null;
+	const { data, isLoading, error, mutate } = useSWR(key);
 	const performSearch = () => {
 		updateQueryParams();
 		// mutate();

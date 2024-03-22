@@ -1,4 +1,4 @@
-import { cls, getFormatDate, getType, openReportPDF, paginate } from "@/libs/client/utility";
+import { cls, formatDate, getFormatDate, getType, openReportPDF, paginate } from "@/libs/client/utility";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { Fragment, useState } from "react";
@@ -44,12 +44,8 @@ export default function CardTableAlarmDetail({
 	const onPageChange = (page: number) => setCurrentPage(page);
 	const paginatedData = paginate(data, currentPage, pageSize);
 	const onLink = ({ date, fileName }: QueryParamsType) => {
-		console.log("d", date);
-
-		// pathname && router.push(`http://192.168.0.204:8080/${pathname}?date=20231211&filename=${fileName}`);
-		// pathname && router.push(`/${pathname}?date=${getFormatDate(date)}&fileName=${fileName}`);
 		openReportPDF({
-			apiUrl: `http://192.168.0.204:8080/${pathname}?date=20231211&filename=${fileName}`,
+			apiUrl: `http://121.139.31.25:5411/${pathname}?date=${formatDate(date)}&filename=${fileName}`,
 			filename: fileName,
 		});
 	};

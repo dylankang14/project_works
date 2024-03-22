@@ -2,7 +2,7 @@ import { useFilterAPI } from "@/contexts/filterContext";
 import useSWR from "swr";
 
 export default function useFetchDefault(url: string, payload: string) {
-	const { onAlarmPriorityChange, onAlarmTypeChange, onDateRangeChange, onRouteDirectionChange, onStationRangeChange } =
+	const { onAlarmPriorityChange, onAlarmTypeChange, onDateRangeChange, onRouteDirectionChange } =
 		useFilterAPI();
 	const fetcher = (url: string) => fetch(url).then((response) => response.json());
 	const { data } = useSWR(url, fetcher, {

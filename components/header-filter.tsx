@@ -35,7 +35,7 @@ export default function HeaderFilter({ search, totalCount }: HeaderFilterProps) 
 					<div className="mt-2 flex items-center rounded border border-red-400 bg-red-100 px-2 py-1.5 text-red-600">
 						<span className="pr-1 font-semibold">검색결과 : </span>
 						<span>
-							전체 <span className="font-semibold">{totalCount}건</span>의 알람이 검색되었습니다.
+							전체 <span className="font-semibold">{totalCount}건</span>의 차량검사 결과가 검색되었습니다.
 						</span>
 					</div>
 				</Card>

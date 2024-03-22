@@ -46,8 +46,8 @@ export default function Home() {
 				locale: json_DATA.Data.ContainerName,
 				trainNumber: i.pt_NUMBER,
 				trainSpeed: json_DATA.Data.Speed,
-				totalPanto: 10,
-				totalAlarm: 2,
+				totalPanto: i.param1,
+				totalAlarm: i.count1 + i.count2,
 			};
 
 			return obj;
@@ -63,7 +63,7 @@ export default function Home() {
 			</div>
 			<CardTable
 				hasLink={true}
-				pathname={`/alarm/detail/`}
+				pathname={`/alarm/detail`}
 				data={alarmData}
 				dataType={dataType}
 				pageSize={takeSize}

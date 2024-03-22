@@ -10,13 +10,15 @@ import useSWR, { useSWRConfig } from "swr";
 
 export default function DetailReport() {
 	const router = useRouter();
+	console.log(router);
+	
 	const { device } = useWindowDimensions();
-	const { data, isLoading, error } = useSWR(`http://192.168.0.204:8080/alarm/detail/5708`);
+	const { data, isLoading, error } = useSWR(`http://121.139.31.25:5411/alarm/detail/${router.query.id}`);
 	const {
 		data: point_event,
 		isLoading: pointIsLoading,
 		error: pointError,
-	} = useSWR(`http://192.168.0.204:8080/alarm/5708`);
+	} = useSWR(`http://121.139.31.25:5411/alarm/${router.query.id}`);
 
 	// const { cache } = useSWRConfig();
 	// console.log("cache : ", cache);
@@ -96,31 +98,31 @@ export default function DetailReport() {
 				<div className="flex flex-wrap py-2 text-center md:py-0">
 					<div className="flex flex-grow flex-row flex-wrap md:flex-col">
 						<div className="px-3 py-1 font-semibold md:border-b md:py-3">검측일시</div>
-						<div className="px-3 py-1 md:py-3">{new Date(point_data.dev_EVENT_TIME).toLocaleString()}</div>
+						<div className="px-3 py-1 md:py-3">{new Date(point_data?.dev_EVENT_TIME).toLocaleString()}</div>
 					</div>
 					<div className="flex flex-grow flex-row flex-wrap md:flex-col">
 						<div className="px-3 py-1 font-semibold md:border-b md:py-3">검측소</div>
-						<div className="px-3 py-1 md:py-3">{point_data.json_DATA?.Data.ContainerName}</div>
+						<div className="px-3 py-1 md:py-3">{point_data?.json_DATA?.Data.ContainerName}</div>
 					</div>
 					<div className="flex flex-grow flex-row flex-wrap md:flex-col">
 						<div className="px-3 py-1 font-semibold md:border-b md:py-3">열차번호</div>
-						<div className="px-3 py-1 md:py-3">{point_data.json_DATA?.Data.TrainNumber}</div>
+						<div className="px-3 py-1 md:py-3">{point_data?.json_DATA?.Data.TrainNumber}</div>
 					</div>
 					<div className="flex flex-grow flex-row flex-wrap md:flex-col">
 						<div className="px-3 py-1 font-semibold md:border-b md:py-3">차량속도</div>
-						<div className="px-3 py-1 md:py-3">{point_data.json_DATA?.Data.Speed} km/h</div>
+						<div className="px-3 py-1 md:py-3">{point_data?.json_DATA?.Data.Speed} km/h</div>
 					</div>
 					<div className="flex flex-grow flex-row flex-wrap md:flex-col">
 						<div className="px-3 py-1 font-semibold md:border-b md:py-3">판토수</div>
-						<div className="px-3 py-1 md:py-3">{point_data.count1}</div>
+						<div className="px-3 py-1 md:py-3">{point_data?.param1}</div>
 					</div>
 					<div className="flex flex-grow flex-row flex-wrap md:flex-col">
 						<div className="px-3 py-1 font-semibold md:border-b md:py-3">알람갯수</div>
-						<div className="px-3 py-1 md:py-3">{point_data.count2}</div>
+						<div className="px-3 py-1 md:py-3">{point_data?.count1 + point_data?.count2}</div>
 					</div>
 				</div>
 			</Card>
-			{!isLoading && data.ok && alarmDetailData ? (
+			{!isLoading && data?.ok && alarmDetailData ? (
 				<CardTableAlarmDetail
 					hasLink={true}
 					pathname={`alarm/report`}

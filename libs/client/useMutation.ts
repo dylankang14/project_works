@@ -4,17 +4,15 @@ interface UseMutationState<T> {
 	data?: T;
 	error?: object;
 }
-type UseMutationResult<T> = [(data: any) => void, UseMutationState<T>];
+type UseMutationResult<T> = [(data?: any) => void, UseMutationState<T>];
 export default function useMutation<T = any>(url: string): UseMutationResult<T> {
 	const [state, setState] = useState({
 		loading: false,
 		data: undefined,
 		error: undefined,
 	});
-	function mutation(data: any) {
+	function mutation(data?: any) {
 		setState((prev) => ({ ...prev, loading: true }));
-		console.log("mutation : ", JSON.stringify(data));
-
 		fetch(url, {
 			method: "POST",
 			headers: {

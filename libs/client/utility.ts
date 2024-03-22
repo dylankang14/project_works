@@ -90,9 +90,19 @@ export async function openReportPDF({ apiUrl, filename }: OpenReportPDFParamType
 // 		console.error(error);
 // 	}
 // }
+export const paddTo2Digits = (num:number) => num.toString().padStart(2,'0');
+export const formatDate = (date: Date) => {
+	return [
+		date.getFullYear(),
+		paddTo2Digits(date.getMonth() + 1),
+		paddTo2Digits(date.getDate())
+	].join('');
+};
 
 export const fetcher = async (url: string) => {
-	const response = await fetch(url);
+	const response = await fetch(url, {credentials: 'include'});
+	console.log('r',response);
+	
 	if (!response.ok) {
 		throw new Error("Error fetching data");
 	}

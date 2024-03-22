@@ -5,6 +5,7 @@ import { Fragment, useCallback, useEffect, useState } from "react";
 import Card from "./card";
 import Pagination from "./pagination";
 import useWindowDimensions from "@/libs/client/useWindowDimensions";
+import {useSearchParams} from "next/navigation"
 
 interface DataProp {
 	id?: number;
@@ -32,15 +33,15 @@ export default function CardTable({
 	updateQueryParams,
 }: DataProps) {
 	const router = useRouter();
+	const pageParam = useSearchParams()
 	const [currentPage, setCurrentPage] = useState<number>(1);
 	const onPageChange = useCallback(
 		(page: number) => {
 			setCurrentPage(page);
-			console.log("p", currentPage, page);
+			router.push({query: {page}})
 		},
 		[currentPage]
 	);
-	// const paginatedData = paginate(data, currentPage, pageSize);
 	const paginatedData = data;
 	const onLink = (link: any) => {
 		pathname ? router.push(`${pathname}/${link}`) : router.push(`${router.pathname}/${link}`);
@@ -49,6 +50,19 @@ export default function CardTable({
 	useEffect(() => {
 		updateQueryParams({ skip: (currentPage - 1) * 20 });
 	}, [updateQueryParams, currentPage]);
+	
+	
+	useEffect(() => {
+		console.log(router.query.page);
+		const {page} = router.query;
+		if (page && !Array.isArray(page)) {
+			const parsedPage = parseInt(page, 10);
+			if (parsedPage !== currentPage) {
+				setCurrentPage(parseInt(page, 10));
+			}
+		}
+	}, [router.query.page])
+	
 
 	return (
 		<>
