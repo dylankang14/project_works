@@ -23,7 +23,7 @@ export default function DropdownOffice() {
 		<>
 			<div
 				ref={ref}
-				className="relative flex cursor-pointer rounded border border-slate-300 bg-white py-1.5 pr-3 pl-2 text-sm"
+				className="relative flex cursor-pointer rounded border border-slate-300 bg-white py-1.5 pl-2 pr-3 text-sm"
 				onClick={toggleDropdown}
 			>
 				<span className="flex items-center gap-x-2">
@@ -41,4 +41,3 @@ export default function DropdownOffice() {
 		</>
 	);
 }
-0;

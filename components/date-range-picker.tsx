@@ -13,17 +13,17 @@ interface CustomDateInputProps {
 export default function DateRangePicker() {
 	const { dateRange } = useFilterData();
 	const { onDateRangeChange } = useFilterAPI();
-	const [startDate, endDate] = dateRange;
-	const onChange = (dates: [Date, Date]) => {
+	const { startDate, endDate } = dateRange;
+	const onChange = (dates: { startDate: Date; endDate: Date }) => {
 		onDateRangeChange(dates);
 	};
 
-	const limitRange = endDate || addDays(startDate, 4) > new Date() ? new Date() : addDays(startDate, 4);
+	// const limitRange = endDate || addDays(startDate, 4) > new Date() ? new Date() : addDays(startDate, 4);
 
 	const CustomDateInput = forwardRef<HTMLDivElement, CustomDateInputProps>((props, ref) => {
 		return (
 			<div
-				className="relative flex cursor-pointer rounded border border-slate-300 bg-white py-1.5 pr-3 pl-2 text-sm"
+				className="relative flex cursor-pointer rounded border border-slate-300 bg-white py-1.5 pl-2 pr-3 text-sm"
 				onClick={props.onClick}
 				ref={ref}
 			>
@@ -42,9 +42,9 @@ export default function DateRangePicker() {
 				startDate={startDate}
 				endDate={endDate}
 				locale={ko}
-				onChange={onChange}
+				onChange={() => onChange({ startDate, endDate })}
 				dateFormat="yyyy-MM-dd"
-				maxDate={limitRange}
+				// maxDate={limitRange}
 				customInput={<CustomDateInput />}
 				// withPortal={device === "mobile"}
 			/>

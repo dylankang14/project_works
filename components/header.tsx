@@ -7,29 +7,39 @@ import DropdownUser from "./dropdown-user";
 import Icon from "./icon";
 import useWindowDimensions from "@/libs/client/useWindowDimensions";
 
-interface HeaderProps {
-	toggleDrawer: () => void;
-}
+// interface HeaderProps {
+// 	toggleDrawer: () => void;
+// }
 
-export default function Header({ toggleDrawer }: HeaderProps) {
+// export default function Header({ toggleDrawer }: HeaderProps) {
+export default function Header() {
 	const { device } = useWindowDimensions();
 	return (
 		<header className="sticky top-0 z-10 flex w-full items-center justify-between border-b bg-white px-2 py-1 print:hidden lg:z-20">
 			<div className="flex items-center">
-				<div className="flex w-auto items-center px-2 lg:w-[200px]">
-					{device !== "mobile" ? (
+				<div className="flex w-auto items-center px-2">
+					{/* <div className="flex w-auto items-center px-2 lg:w-[200px]"> */}
+					{/* {device !== "mobile" ? (
 						<Link href="/" className="logo relative flex-1 cursor-pointer select-none px-2">
 							<Image src={logo} alt="Logo" priority={true} className="h-auto w-28" />
 						</Link>
-					) : null}
-					<div
+					) : null} */}
+					{device !== "mobile" ? (
+						<Link href="/" className="logo relative flex flex-1 cursor-pointer select-none items-center gap-x-4 px-2">
+							<Image src={logo} alt="Logo" priority={true} className="h-auto w-28 " />
+							<div className="font-semibold">전차선 보호 모니터링</div>
+						</Link>
+					) : (
+						""
+					)}
+					{/* <div
 						className="h-12 w-12 cursor-pointer select-none p-3 text-slate-600 hover:text-slate-800"
 						onClick={toggleDrawer}
 					>
 						<Icon type="menu" />
-					</div>
+					</div> */}
 				</div>
-				{device !== "mobile" ? <Breadcrumbs /> : null}
+				{/* {device !== "mobile" ? <Breadcrumbs /> : null} */}
 			</div>
 			{device === "mobile" ? (
 				<Link href="/" className="logo relative cursor-pointer select-none px-2">
