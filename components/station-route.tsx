@@ -8,12 +8,8 @@ interface StationRangeType {
 	from: number | null;
 	to: number | null;
 }
-interface StationRangeProps {
-	isStationRangeAll?: boolean;
-	setIsStationRangeAll?: () => void;
-}
 
-export default function StationRoute({ isStationRangeAll, setIsStationRangeAll }: StationRangeProps) {
+export default function StationRoute() {
 	const containerRef = useRef<HTMLUListElement>(null);
 	const [numColumns, setNumColumns] = useState<number>(5);
 	const [basisColumns, setBasisColumns] = useState<string>("basis-1/5");
@@ -79,14 +75,6 @@ export default function StationRoute({ isStationRangeAll, setIsStationRangeAll }
 			setTrainRouteStations(trainStations.filter((station) => trainRouteIds.includes(station.id)));
 		}
 	}, [trainRoute, trainRoutes, trainStations]);
-	useEffect(() => {
-		if (isStationRangeAll && trainStations && setIsStationRangeAll) {
-			onStationRangeChange({ from: 0, to: trainStations.length - 1 });
-			setIsStationRangeAll();
-		}
-
-		return () => {};
-	}, [isStationRangeAll, setIsStationRangeAll, trainStations, onStationRangeChange]);
 	return (
 		<ul className="flex flex-col" ref={containerRef}>
 			{trainRouteStations?.map((i, index) => {
@@ -140,7 +128,7 @@ export default function StationRoute({ isStationRangeAll, setIsStationRangeAll }
 														: "opacity-60"
 												)}
 											/>
-											<div className="relative my-[5px] h-2 w-full border-b border-t border-slate-600"></div>
+											<div className="relative my-[5px] h-2 w-full border-t border-b border-slate-600"></div>
 											<BadgeAlarm
 												className={cls(
 													!stationRange?.from ||
