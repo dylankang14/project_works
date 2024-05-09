@@ -11,20 +11,18 @@ export default function CardSummary() {
 				>
 					<div className="text-center font-semibold">
 						전체 알람
-						<div>
-							<span className="text-3xl">33</span>건
-						</div>
+						<span className="ml-2 text-3xl">50</span>건
 					</div>
-					<div className="mt-1 justify-between">
+					<div className="flex gap-x-2">
 						<div className="text-center font-semibold">
-							조치완료 <span className="text-2xl">18</span>건
+							조치완료 <span className="text-2xl">35</span>건
 						</div>
 						<div className="text-center font-semibold">
-							조치율 <span className="text-2xl">54.5</span>%
+							조치율 <span className="text-2xl">70</span>%
 						</div>
 					</div>
 				</Link>
-				<Link
+				{/* <Link
 					href={`/alarm/list/${1}?type=${0}`}
 					className="flex flex-1 shrink-0 basis-full items-end justify-around rounded bg-amber-500 px-6 py-3 sm:basis-0"
 				>
@@ -42,8 +40,8 @@ export default function CardSummary() {
 							조치율 <span className="text-2xl">56</span>%
 						</div>
 					</div>
-				</Link>
-				<Link
+				</Link> */}
+				{/* <Link
 					href={`/alarm/list/${1}?type=${1}`}
 					className="flex flex-1 shrink-0 basis-full items-end justify-around rounded bg-red-500 px-6 py-3 sm:basis-0"
 				>
@@ -61,7 +59,7 @@ export default function CardSummary() {
 							조치율 <span className="text-2xl">50</span>%
 						</div>
 					</div>
-				</Link>
+				</Link> */}
 			</div>
 		</Card>
 	);

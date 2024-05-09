@@ -21,10 +21,10 @@ export default function ModalAlarmType({ isModalOpen, closeModal, className }: M
 
 	const alarmTypes = [
 		{ id: 1, name: "전차선 높이/편위/마모" },
-		{ id: 2, name: "판토그래프 거동 검측" },
-		{ id: 3, name: "강체전차선로(Tbar)" },
-		{ id: 4, name: "터널벽면 결함 검측" },
-		{ id: 5, name: "침목 및 체결구 탈락 검사" },
+		{ id: 2, name: "팬터그래프 충격" },
+		{ id: 3, name: "전차선로" },
+		{ id: 4, name: "유도배수동판" },
+		{ id: 5, name: "침목 및 체결구 검사" },
 	];
 	const handleCheck = (checkedId: number) => {
 		const newIds = alarmType?.includes(checkedId)

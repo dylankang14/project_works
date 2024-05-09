@@ -21,7 +21,7 @@ export default function DetailReport() {
 	const [radioDefault, setRadioDefault] = useState("queue");
 	const data = {
 		id: 1,
-		priority: 1,
+		priority: 0,
 		fixed: false,
 	};
 

@@ -17,7 +17,7 @@ export default function AlarmList() {
 	const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 	const data = Array.from(Array(50).keys()).map((i) => ({
 		id: i,
-		priority: i % 2,
+		priority: 0,
 		fixed: i % 3 > 1,
 	}));
 	const dataForTable = Array.from(Array(50).keys()).map((i) => ({

@@ -34,10 +34,10 @@ export default function Home() {
 				<HeaderFilter />
 			</div>
 			<CardSummary />
-			<CardStatistics />
-			<Card className="p-4">
+			{/* <CardStatistics /> */}
+			{/* <Card className="p-4">
 				<StationRoute />
-			</Card>
+			</Card> */}
 			<CardAlarmType />
 		</>
 	);

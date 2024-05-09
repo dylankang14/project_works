@@ -107,10 +107,10 @@ export default function StationRoute() {
 										}}
 									>
 										<div className="relative flex min-w-0 flex-1 items-center">
-											<Icon
+											{/* <Icon
 												type="arrowRight"
 												className="absolute -left-2 top-auto h-2.5 w-2.5 -translate-y-1 text-slate-600 group-first:group-first/row:hidden group-last:group-even:group-last/row:hidden"
-											/>
+											/> */}
 											<div
 												className={cls(
 													"min-w-[64px] flex-1 cursor-pointer select-none truncate rounded px-1.5 py-1.5 text-white hover:bg-blue-600",
@@ -123,36 +123,35 @@ export default function StationRoute() {
 											>
 												{innerItem.name}역
 											</div>
-											<Icon
+											{/* <Icon
 												type="arrowLeft"
 												className="absolute -right-2 bottom-auto h-2.5 w-2.5 translate-y-1 text-slate-600 group-last:group-odd:group-last/row:hidden"
-											/>
+											/> */}
 										</div>
-										<div className="relative flex min-w-[80px] flex-1 flex-col items-center justify-center group-last:group-last/row:invisible">
-											<BadgeAlarm
+										<div className="relative flex min-w-[80px] items-center justify-center group-last:group-last/row:invisible">
+											{/* <BadgeAlarm
 												className={cls(
 													!stationRange?.from ||
 														(innerItem.id >= stationRange?.from! && innerItem.id < stationRange?.to!)
 														? ""
 														: "opacity-60"
 												)}
-											/>
-											<div className="relative my-[5px] h-2 w-full border-b border-t border-slate-600"></div>
-											<BadgeAlarm
+											/> */}
+											<div className="relative my-[5px] h-px w-full border-t border-slate-600"></div>
+											{/* <BadgeAlarm
 												className={cls(
 													!stationRange?.from ||
 														(innerItem.id >= stationRange?.from! && innerItem.id < stationRange?.to!)
 														? ""
 														: "opacity-60"
 												)}
-											/>
+											/> */}
 										</div>
 									</li>
 								))}
 							</ul>
-							<div className="relative flex rotate-180 items-end group-odd:-scale-y-100 group-last:group-odd:invisible">
-								<div className="h-[calc(50%+4px)] w-4 border-l border-t border-slate-600"></div>
-								<div className="absolute bottom-0 right-0 h-[calc(50%-3px)] w-[9PX] border-l border-t border-slate-600"></div>
+							<div className="relative flex items-end group-odd:-scale-y-100 group-last:group-odd:invisible">
+								<div className="h-1/2 w-4 rounded-tr-full border-r border-t border-slate-600"></div>
 							</div>
 						</li>
 					);

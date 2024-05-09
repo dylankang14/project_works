@@ -35,7 +35,7 @@ function Login() {
 				<div className="container flex max-w-xs flex-col items-center gap-1">
 					<div className="mb-3 w-[70%] text-center sm:w-auto">
 						<Image src={logo} alt="Logo" priority={true} />
-						<div className="py-2 text-lg font-medium">4호선 알람 웹서비스 로그인</div>
+						<div className="py-2 text-lg font-medium">검측 알람 보고서</div>
 					</div>
 					<form
 						onSubmit={handleSubmit(onValid)}
